@@ -71,6 +71,7 @@ static void parse_current_line(char *line, t_data *scene_data)
         parse_sphere(scene_data);
     else if (ft_strlen(info_split[0] == 2) && info_split[0][0] == 'p' && info_split[0][1] == 'l')
         parse_plane(scene_data);
+        
     else if (ft_strlen(info_split[0] == 2) && info_split[0][0] == 'c' && info_split[0][1] == 'y')
         parse_cylinder(scene_data);                          
     free_memmory(info_split);
