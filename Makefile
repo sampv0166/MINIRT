@@ -1,4 +1,5 @@
-SRCS  = main.c
+SRCS  = main.c \
+		parser/parser.C
 
 OBJS = ${SRCS:.c=.o}
 
