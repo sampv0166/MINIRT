@@ -61,7 +61,18 @@ static void parse_current_line(char *line, t_data *scene_data)
         print_error_msg_and_exit("DUPLICATE IDENTIFIER", scene_data);
         free_memmory(info_split);
     }
-    
+    if (info_split[0][0] == 'A')
+        parse_ambient_lighting(scene_data);
+    else if (info_split[0][0] == 'C')
+        parse_camera(scene_data);
+    else if (info_split[0][0] == 'L')
+        parse_light(scene_data);
+    else if (ft_strlen(info_split[0] == 2) && info_split[0][0] == 's' && info_split[0][1] == 'p')
+        parse_sphere(scene_data);
+    else if (ft_strlen(info_split[0] == 2) && info_split[0][0] == 'p' && info_split[0][1] == 'l')
+        parse_plane(scene_data);
+    else if (ft_strlen(info_split[0] == 2) && info_split[0][0] == 'c' && info_split[0][1] == 'y')
+        parse_cylinder(scene_data);                          
     free_memmory(info_split);
 }
 
