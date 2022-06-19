@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "./includes/minirt.h"
 
 size_t	get_current_line_size(char *saved_line)
 {

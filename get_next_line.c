@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "./includes/minirt.h"
 
 static char	*ft_strjoin_get(char *saved_line, char *buffer)
 {

@@ -53,15 +53,18 @@ void parse_scene();
 
 // getnextline functions
 char	*get_next_line(int fd);
-static char	*get_current_line(char *saved_line, char *line);
 char	*free_memmory(char **ptr);
 char	*ft_strchr(const char *str, int c);
 size_t	get_current_line_size(char *saved_line);
 
 //parser functions
-
 void parse_scene(char *file_name, t_data *data);
-
+void parse_ambient_lighting(char **info, t_data *scene_data);
+void parse_camera(char **info, t_data *scene_data);
+void parse_light(char **info, t_data *scene_data);
+void parse_sphere(char **info, t_data *scene_data);
+void parse_plane(char **info, t_data *scene_data);
+void parse_cylinder(char **info, t_data *scene_data);
 
 //FREE FUNCTIONS
 void free_scene_data();
@@ -69,5 +72,10 @@ void free_scene_data();
 
 // ERROR FUNCTIONS
 void print_error_msg_and_exit(char *error_msg, t_data *scene_data);
+
+//UTILS
+int get_2darray_size(char **arr);
+double parse_double(char *str);
+void parse_color(char *str, t_data *scene_data, t_color *colors);
 
 #endif
