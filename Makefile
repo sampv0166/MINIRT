@@ -1,16 +1,4 @@
-SRCS  = main.c \
-		parser/parser.c \
-		parser/parse_ambient_lighting.c \
-		parser/parse_camera.c \
-		parser/parse_cylinder.c \
-		parser/parse_light.c \
-		parser/parse_plane.c \
-		parser/parse_sphere.c \
-		utils/utils.c \
-		error/error.c \
-		free/free_scene_data.c \
-		get_next_line.c \
-		get_next_line_utils.c
+SRCS = $(wildcard *.c) $(wildcard */*.c)
 
 OBJS = ${SRCS:.c=.o}
 
