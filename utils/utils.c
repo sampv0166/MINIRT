@@ -6,7 +6,7 @@ int get_2darray_size(char **arr)
 
     i = 0;
     while (arr[i])
-        i++;
+        i++;  
     return (i);    
 }
 
@@ -34,18 +34,20 @@ double parse_double(char *str)
     double res;
     int sign;
 
-    res = ft_atoi(str);
+    res = atoi(str);
     sign = 1;
     if (res < 0  || *str == '-')
     {
         str++;
         sign = -1;
     }
+   
     while (ft_isdigit(*str))
         str++;
     if (*str != '.')
         return (res);
     str++;
+    
     return (get_decimal_point(res, str) * sign);
 }
 int is_str_not_digit(char *str)

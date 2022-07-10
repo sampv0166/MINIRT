@@ -37,14 +37,26 @@ typedef struct s_light
 
 }               t_light;
 
+// camera information
+
+typedef struct s_camera
+{
+    t_vector pos;
+    t_vector norm_vector;
+    double fov;
+
+}               t_camera;
+
 // main struct
 typedef struct s_data
 {
-    t_list  *lights;
+    //CAMERA
+    t_camera camera;
 
-
+    //AMBIENCE
     t_color amb_color;
     double  amb_ratio;
+    int     amb_set;
 }       t_data;
 
 // PARSE FUNCTIONS
@@ -68,6 +80,7 @@ void parse_cylinder(char **info, t_data *scene_data);
 
 //FREE FUNCTIONS
 void free_scene_data();
+
 
 
 // ERROR FUNCTIONS

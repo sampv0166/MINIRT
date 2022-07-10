@@ -28,26 +28,34 @@ static int check_file_name(char *file_name)
     return (0);        
 }
 
-static int check_for_duplicate_identifier (char **arr)
-{
-    int i;
-    int j;
+// static int check_for_duplicate_identifier (char **arr)
+// {
+//     int i;
+//     int j;
+//     int count;
 
-    i = 0;
-    j = 0;
-    while (arr[i])
-    {
-        j = 0;
-        while (arr[j])
-        {
-            if (arr[i][0] == arr[j][0])
-                return (1);
-            j++;
-        }
-        i++;
-    }
-    return (0);
-}
+//     i = 0;
+//     j = 0;
+//     while (arr[i])
+//     {
+//         j = 0;
+//         count = 0;
+//         while (arr[j])
+//         {
+//             if (arr[i][0] == arr[j][0])
+//             {
+//                 printf("%c = %c",arr[i][0] , arr[j][0]  );
+//                 count++;
+//             }
+//             j++;
+//         }
+//         if (count > 1)
+//             return (1);
+//         i++;
+//     }
+//     exit(0);
+//     return (0);
+// }
 
 static void parse_current_line(char *line, t_data *scene_data)
 {
@@ -56,11 +64,7 @@ static void parse_current_line(char *line, t_data *scene_data)
     info_split = NULL;
     remove_extra_spaces(line);
     info_split = ft_split(line, ' ');
-    if (check_for_duplicate_identifier(info_split))
-    {
-        print_error_msg_and_exit("DUPLICATE IDENTIFIER", scene_data);
-        free_memmory(info_split);
-    }
+
     if (info_split[0][0] == 'A')
         parse_ambient_lighting(info_split, scene_data);
     else if (info_split[0][0] == 'C')
@@ -72,7 +76,7 @@ static void parse_current_line(char *line, t_data *scene_data)
     else if (ft_strlen(info_split[0]) == 2 && info_split[0][0] == 'p' && info_split[0][1] == 'l')
         parse_plane(info_split,scene_data);
     else if (ft_strlen(info_split[0]) == 2 && info_split[0][0] == 'c' && info_split[0][1] == 'y')
-        parse_cylinder(info_split,scene_data);                          
+        parse_cylinder(info_split,scene_data);                        
     free_memmory(info_split);
 }
 
