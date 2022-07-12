@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "../libs/libft/libft.h"
+#include "../libs/mlx_linux/mlx.h"
 
 //vector
 
@@ -47,9 +48,30 @@ typedef struct s_camera
 
 }               t_camera;
 
+
+typedef struct		s_mlx
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+}					t_mlx;
+
+typedef struct		s_img
+{
+	void			*img_ptr;
+ 	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
+	unsigned char	*data;
+}					t_img;
+
 // main struct
 typedef struct s_data
 {
+    //mlx
+    t_mlx		mlx;
+
+    t_img		*img;
+
     //CAMERA
     t_camera camera;
 
