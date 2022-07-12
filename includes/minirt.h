@@ -70,7 +70,7 @@ typedef struct s_data
     //mlx
     t_mlx		mlx;
 
-    t_img		*img;
+    t_img		img;
 
     //CAMERA
     t_camera camera;
