@@ -7,6 +7,36 @@
 #include <stdlib.h>
 #include "../libs/libft/libft.h"
 #include "../libs/mlx_linux/mlx.h"
+#define EPSILON 0.00001
+
+//ray
+
+typedef struct s_ray
+{
+	t_point		origin;
+	t_vector	direction;
+	float		tmin;
+	float		tmax;		
+}	t_ray;
+
+//tuple
+
+typedef struct s_tuple
+{
+	double	x;
+	double	y;
+	double	z;
+	double	w;
+}	t_tuple;
+
+//point
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_point;
 
 //vector
 
