@@ -5,19 +5,11 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <math.h>
 #include "../libs/libft/libft.h"
 #include "../libs/mlx_linux/mlx.h"
 #define EPSILON 0.00001
 
-//ray
-
-typedef struct s_ray
-{
-	t_point		origin;
-	t_vector	direction;
-	float		tmin;
-	float		tmax;		
-}	t_ray;
 
 //tuple
 
@@ -47,6 +39,15 @@ typedef struct s_vector
     double z;
 }              t_vector;
 
+//ray
+
+typedef struct s_ray
+{
+	t_point		origin;
+	t_vector	direction;
+	float		tmin;
+	float		tmax;		
+}	t_ray;
 
 //color
 

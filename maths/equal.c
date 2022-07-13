@@ -2,10 +2,9 @@
 
 int	equal(double a, double b)
 {
-	if (abs(a -b) < EPSILON)
+	if (fabs(a -b) < EPSILON)
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 int	tuple_equal(t_tuple a, t_tuple b)
@@ -15,6 +14,5 @@ int	tuple_equal(t_tuple a, t_tuple b)
 		if (a.w == b.w)
 			return (1);
 	}
-	else
-		return (0);
+	return (0);
 }

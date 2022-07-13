@@ -26,10 +26,9 @@ t_tuple	*point(t_point *dot)
 
 int	type(t_tuple *tp)
 {
-	if (tp->w = 1.0)
+	if (tp->w == 1.0)
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 t_tuple *add_tuple(t_tuple *a, t_tuple *b)
