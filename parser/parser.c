@@ -61,10 +61,11 @@ static void parse_current_line(char *line, t_data *scene_data)
 {
     char **info_split;
 
+
     info_split = NULL;
     remove_extra_spaces(line);
     info_split = ft_split(line, ' ');
-
+    
     if (info_split[0][0] == 'A')
         parse_ambient_lighting(info_split, scene_data);
     else if (info_split[0][0] == 'C')

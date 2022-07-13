@@ -34,22 +34,22 @@ double parse_double(char *str)
     double res;
     int sign;
 
-    res = atoi(str);
+    res = (double) atoi(str);
+    
     sign = 1;
     if (res < 0  || *str == '-')
     {
         str++;
         sign = -1;
     }
-   
     while (ft_isdigit(*str))
         str++;
     if (*str != '.')
         return (res);
     str++;
-    
     return (get_decimal_point(res, str) * sign);
 }
+
 int is_str_not_digit(char *str)
 {
     int i;
@@ -82,8 +82,7 @@ void parse_color(char *str, t_data *scene_data, t_color *colors)
     rgb = ft_split(str, ',');
     if (get_2darray_size(rgb) != 3)
         print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);
-    if (is_str_not_digit(rgb[0]) || is_str_not_digit(rgb[1]) || is_str_not_digit(rgb[1]))
-    {
+    if (is_str_not_digit(rgb[0]) || is_str_not_digit(rgb[1]) || is_str_not_digit(rgb[1])){
         print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);
     }
     c[0] = parse_double(rgb[0]);

@@ -64,6 +64,30 @@ typedef struct		s_img
 	unsigned char	*data;
 }					t_img;
 
+
+// typedef struct s_sphere
+// {
+//     t_list *sphere;    
+//     t_vector sphere_center;
+//     double diameter;
+//     t_color color;
+
+// }   t_sphere
+
+typedef struct s_sphere
+{
+	t_vector sp_center;
+    double diameter;
+    t_color color;
+
+}		       t_sphere;
+
+typedef struct sobj_list
+{
+	void		*content;
+	struct obj_list	*next;
+}		tobj_list;
+
 // main struct
 typedef struct s_data
 {
@@ -74,6 +98,12 @@ typedef struct s_data
 
     //CAMERA
     t_camera camera;
+
+    // light
+    t_light light_src;
+
+    //sphere
+    t_list *sphere_list;
 
     //AMBIENCE
     t_color amb_color;

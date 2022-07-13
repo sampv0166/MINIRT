@@ -27,7 +27,8 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(MLX_PATH)
 	$(MAKE) -C $(LIBFT_PATH)
-	$(CC) $(OBJS) $(MLX_FLAGS) $(LIBFT) $(CFLAGS) -o $(NAME)
+	$(MAKE) -C $(LIBFT_PATH) bonus
+	$(CC) $(OBJS) $(LIBFT) $(MLX_FLAGS)  $(CFLAGS) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C $(MLX_PATH)
