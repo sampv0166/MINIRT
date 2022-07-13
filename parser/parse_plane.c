@@ -1,6 +1,5 @@
 #include "../includes/minirt.h"
 
-
 void parse_plane(char **info, t_data *scene_data)
 {
     t_list *new;
@@ -14,8 +13,11 @@ void parse_plane(char **info, t_data *scene_data)
     color_split = ft_split(info[3], ',');
     
     plane = malloc (sizeof (t_plane));
-    if (get_2darray_size(info) != 3)
-        print_error_msg_and_exit("INVALID NUMBER OF VALUES FOR AMBIENT LIGHTING", scene_data);
+    if (get_2darray_size(info) != 4)
+    {
+        printf("here = %d",get_2darray_size(info)  );
+        print_error_msg_and_exit("INVALID NUMBER OF ", scene_data);
+    }
     plane->xyz.x = parse_double(point_split[0]);
     plane->xyz.y = parse_double(point_split[1]);
     plane->xyz.z = parse_double(point_split[2]);

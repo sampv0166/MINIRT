@@ -60,7 +60,61 @@ void print_parsed_values(t_data *scene_data)
 
 	printf("---------------------------------");
 
+      while (scene_data->plane_list)
+    {
+        t_plane *plane = scene_data->plane_list->content; 
 
+        printf("\n plane point xyz\n");
+        printf("%f\n", plane->xyz.x);
+        printf("%f\n",  plane->xyz.y);
+        printf("%f\n",  plane->xyz.z);
+
+        printf("\n norm vec\n");
+        printf("%f\n", plane->norm_vec.x);
+        printf("%f\n",  plane->norm_vec.y);
+        printf("%f\n",  plane->norm_vec.z);
+        
+        printf("\nplane color\n");
+        printf("%f\n", plane->color.r);
+        printf("%f\n",  plane->color.g);
+        printf("%f\n",  plane->color.b);
+
+
+        scene_data->plane_list = scene_data->plane_list->next;
+    }
+
+	printf("---------------------------------");
+
+    while (scene_data->cy_list)
+    {
+        t_cy *cy = scene_data->cy_list->content; 
+
+        printf("\n cy point xyz\n");
+        printf("%f\n", cy->xyz.x);
+        printf("%f\n",  cy->xyz.y);
+        printf("%f\n",  cy->xyz.z);
+
+        printf("\n norm vec\n");
+        printf("%f\n", cy->norm_vec.x);
+        printf("%f\n",  cy->norm_vec.y);
+        printf("%f\n",  cy->norm_vec.z);
+        
+        printf("\ncy color\n");
+        printf("%f\n", cy->color.r);
+        printf("%f\n",  cy->color.g);
+        printf("%f\n",  cy->color.b);
+
+
+      printf("\ncy diameter\n");
+        printf("%f\n", cy->diameter);
+
+
+            printf("\ncy height\n");
+        printf("%f\n", cy->height);
+        scene_data->cy_list = scene_data->cy_list->next;
+    }
+
+	printf("---------------------------------");
 }
 
 

@@ -89,6 +89,16 @@ typedef struct s_plane
     t_color color;
 }		       t_plane;
 
+typedef struct s_cy
+{
+	t_vector xyz;
+    t_vector norm_vec;
+    t_color color;
+
+    double diameter;
+    double height;
+}		       t_cy;
+
 typedef struct sobj_list
 {
 	void		*content;
@@ -106,7 +116,7 @@ typedef struct s_data
     //CAMERA
     t_camera camera;
 
-    // light
+    //light
     t_light light_src;
 
     //sphere
@@ -115,6 +125,9 @@ typedef struct s_data
     //plane
     t_list *plane_list;
 
+    //cy
+    t_list *cy_list;
+    
     //AMBIENCE
     t_color amb_color;
     double  amb_ratio;
