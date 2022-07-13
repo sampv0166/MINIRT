@@ -82,6 +82,13 @@ typedef struct s_sphere
 
 }		       t_sphere;
 
+typedef struct s_plane
+{
+	t_vector xyz;
+    t_vector norm_vec;
+    t_color color;
+}		       t_plane;
+
 typedef struct sobj_list
 {
 	void		*content;
@@ -104,6 +111,9 @@ typedef struct s_data
 
     //sphere
     t_list *sphere_list;
+
+    //plane
+    t_list *plane_list;
 
     //AMBIENCE
     t_color amb_color;

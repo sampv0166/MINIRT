@@ -39,6 +39,27 @@ void print_parsed_values(t_data *scene_data)
     printf("%f\n", scene_data->light_src.ratio);
 	printf("---------------------------------");
 
+    while (scene_data->sphere_list)
+    {
+        t_sphere *sphere = scene_data->sphere_list->content; 
+
+        printf("\n SPHERE CENTER POINT\n");
+        printf("%f\n", sphere->sp_center.x);
+        printf("%f\n",  sphere->sp_center.y);
+        printf("%f\n",  sphere->sp_center.z);
+
+        printf("\nsphere color\n");
+        printf("%f\n", sphere->color.r);
+        printf("%f\n",  sphere->color.g);
+        printf("%f\n",  sphere->color.b);
+
+        printf("\nradiance\n");
+        printf("%f\n", sphere->diameter);
+        scene_data->sphere_list = scene_data->sphere_list->next;
+    }
+
+	printf("---------------------------------");
+
 
 }
 
