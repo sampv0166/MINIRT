@@ -151,13 +151,13 @@ typedef struct s_data
     t_light light_src;
 
     //sphere
-    t_list *sphere_list;
+    tobj_list *sphere_list;
 
     //plane
-    t_list *plane_list;
+    tobj_list *plane_list;
 
     //cy
-    t_list *cy_list;
+    tobj_list *cy_list;
     
     //AMBIENCE
     t_color amb_color;
@@ -196,5 +196,19 @@ void print_error_msg_and_exit(char *error_msg, t_data *scene_data);
 int get_2darray_size(char **arr);
 double parse_double(char *str);
 void parse_color(char *str, t_data *scene_data, t_color *colors);
+
+//MATHS
+int			equal(double a, double b);
+int			tuple_equal(t_tuple *a, t_tuple *b);
+double		magnitude(t_vector *vec);
+t_vector	*normalize(t_vector *vec);
+double		dot_product(t_tuple *a, t_tuple *b);
+t_vector	*cross_product(t_vector *vec1, t_vector *vec2);
+t_vector	*negate_vector(t_vector *vec);
+t_tuple		*negate_tuple(t_tuple *tp);
+t_tuple		*scalar_mlp(t_tuple *tp, float num);
+t_tuple		*scalar_div(t_tuple *tp, float num);
+t_vector	*subtract_points(t_point *p1, t_point *p2);
+t_point		*subtract_vector(t_point *p, t_vector *vec);
 
 #endif

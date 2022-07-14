@@ -39,3 +39,11 @@ t_tuple	*add_tuple(t_tuple *a, t_tuple *b)
 	tp->w = (a->w + b->w);
 	return (tp);
 }
+
+double	dot_product(t_tuple *a, t_tuple *b)
+{
+	double	ret;
+
+	ret = a->x * b->x + a->y * b->y + a->z * b->z + a->w * b->w;
+	return (ret);
+}
