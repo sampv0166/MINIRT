@@ -136,13 +136,21 @@ int main (int argc, char **argv)
     unsigned char	*dst;
 
     while (h < 720)
-    {   
+    {  
         w = 0;
         while(w < 1080)
         {
+            // a = ray origin 
+            // b = ray direction
+            // r = radius
+            // t = hit distance
             color = 0;
             coord.x = (double) w / 1080;
             coord.y = (double) h / 720;
+
+            coord.x = coord.x * 2.0f - 1.0f;
+            coord.y = coord.y * 2.0f - 1.0f;
+
             dst =  scene_data.img.data + (h * scene_data.img.size_line +
             w * (scene_data.img.bits_per_pixel / 8));
             w++;
@@ -151,8 +159,6 @@ int main (int argc, char **argv)
             color = (int)coord.x << 16 | (int)coord.y << 8 | 0 ;
 	        *(unsigned int*)dst = color;   
         }
-        // if (h == 100)
-        //     break;
         h++;
     }
            
