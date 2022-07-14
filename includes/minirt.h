@@ -151,13 +151,13 @@ typedef struct s_data
     t_light light_src;
 
     //sphere
-    tobj_list *sphere_list;
+    t_list *sphere_list;
 
     //plane
-    tobj_list *plane_list;
+    t_list *plane_list;
 
     //cy
-    tobj_list *cy_list;
+    t_list *cy_list;
     
     //AMBIENCE
     t_color amb_color;

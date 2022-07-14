@@ -4,6 +4,7 @@ t_tuple	*vector(t_vector *vec)
 {
 	t_tuple	*tp;
 
+	tp = malloc(sizeof(t_tuple));
 	tp->x = vec->x;
 	tp->y = vec->y;
 	tp->z = vec->z;
@@ -15,6 +16,7 @@ t_tuple	*point(t_point *dot)
 {
 	t_tuple	*tp;
 
+	tp = malloc(sizeof(t_tuple));
 	tp->x = dot->x;
 	tp->y = dot->y;
 	tp->z = dot->z;
@@ -33,6 +35,7 @@ t_tuple	*add_tuple(t_tuple *a, t_tuple *b)
 {
 	t_tuple	*tp;
 
+	tp = malloc(sizeof(t_tuple));
 	tp->x = (a->x + b->x);
 	tp->y = (a->y + b->y);
 	tp->z = (a->z + b->z);
