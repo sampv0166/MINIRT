@@ -44,7 +44,7 @@ typedef struct s_vector
 typedef struct s_ray
 {
 	t_point		origin;
-	t_vector	direction;
+	t_tuple	direction;
 	float		tmin;
 	float		tmax;		
 }	t_ray;
@@ -63,7 +63,7 @@ typedef struct s_color
 
 typedef struct s_light
 {
-    t_vector pos;
+    t_tuple pos;
     t_color color;
     double  ratio;
 
@@ -73,8 +73,8 @@ typedef struct s_light
 
 typedef struct s_camera
 {
-    t_vector pos;
-    t_vector norm_vector;
+    t_tuple pos;
+    t_tuple norm_vector;
     double fov;
 
 }               t_camera;
@@ -105,9 +105,10 @@ typedef struct		s_img
 
 // }   t_sphere
 
+
 typedef struct s_sphere
 {
-	t_vector sp_center;
+	t_tuple sp_center;
     double diameter;
     t_color color;
 
@@ -115,15 +116,15 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_vector xyz;
-    t_vector norm_vec;
+	t_tuple xyz;
+    t_tuple norm_vec;
     t_color color;
 }		       t_plane;
 
 typedef struct s_cy
 {
-	t_vector xyz;
-    t_vector norm_vec;
+	t_tuple xyz;
+    t_tuple norm_vec;
     t_color color;
 
     double diameter;
@@ -163,6 +164,19 @@ typedef struct s_data
     t_color amb_color;
     double  amb_ratio;
     int     amb_set;
+
+    // screen info
+    int width;
+    int height;
+    double aspect_ratio;
+    double x0;
+    double x1;
+
+    double y0;
+    double y1;
+
+    double xstep;
+    double ystep;
 }       t_data;
 
 // PARSE FUNCTIONS
@@ -187,7 +201,8 @@ void parse_cylinder(char **info, t_data *scene_data);
 //FREE FUNCTIONS
 void free_scene_data();
 
-
+// RENDER FUNCTIONS
+void render_scene(t_data *scene_data);
 
 // ERROR FUNCTIONS
 void print_error_msg_and_exit(char *error_msg, t_data *scene_data);
@@ -197,18 +212,11 @@ int get_2darray_size(char **arr);
 double parse_double(char *str);
 void parse_color(char *str, t_data *scene_data, t_color *colors);
 
-//MATHS
-int			equal(double a, double b);
-int			tuple_equal(t_tuple *a, t_tuple *b);
-double		magnitude(t_vector *vec);
-t_vector	*normalize(t_vector *vec);
-double		dot_product(t_tuple *a, t_tuple *b);
-t_vector	*cross_product(t_vector *vec1, t_vector *vec2);
-t_vector	*negate_vector(t_vector *vec);
-t_tuple		*negate_tuple(t_tuple *tp);
-t_tuple		*scalar_mlp(t_tuple *tp, float num);
-t_tuple		*scalar_div(t_tuple *tp, float num);
-t_vector	*subtract_points(t_point *p1, t_point *p2);
-t_point		*subtract_vector(t_point *p, t_vector *vec);
+// tupple
+t_tuple	*point(t_point *dot);
+double	dot_product(t_tuple *a, t_tuple *b);
+
+//vector operations
+t_point	*subtract_vector(t_point *p, t_vector *vec);
 
 #endif

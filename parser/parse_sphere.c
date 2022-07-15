@@ -6,7 +6,6 @@ void parse_sphere(char **info, t_data *scene_data)
     t_sphere *sphere;
     char **point_split;
     char **color_split;
-
     point_split = ft_split(info[1], ',');
     color_split = ft_split(info[3], ',');
     sphere = malloc (sizeof (t_sphere));
@@ -22,5 +21,6 @@ void parse_sphere(char **info, t_data *scene_data)
     sphere->color.g = parse_double(color_split[1]);
     sphere->color.b = parse_double(color_split[2]);
     new = ft_lstnew(sphere);
-    ft_lstadd_back(&scene_data->sphere_list, new);
+    //ft_lstadd_back(&scene_data->sphere_list, new);
+    scene_data->sphere_list  = new;
 }
