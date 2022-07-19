@@ -7,9 +7,16 @@
 #include <stdlib.h>
 #include <math.h>
 #include "../libs/libft/libft.h"
-#include "../libs/mlx_linux/mlx.h"
+#include "../libs/mlx_mac/mlx.h"
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define EPSILON 0.00001
+#define	PI 4.0 * atan(1.0)
+#define HEIGHT 720
+#define WIDTH 1080
 
+//KEYS
+#define KEY_ESC 53
 
 //tuple
 
@@ -200,6 +207,8 @@ void parse_color(char *str, t_data *scene_data, t_color *colors);
 //MATHS
 int			equal(double a, double b);
 int			tuple_equal(t_tuple *a, t_tuple *b);
+t_tuple		*points(t_point *dot);
+t_tuple		*vectors(t_vector *vec);
 double		magnitude(t_vector *vec);
 t_vector	*normalize(t_vector *vec);
 double		dot_product(t_tuple *a, t_tuple *b);
@@ -210,5 +219,21 @@ t_tuple		*scalar_mlp(t_tuple *tp, float num);
 t_tuple		*scalar_div(t_tuple *tp, float num);
 t_vector	*subtract_points(t_point *p1, t_point *p2);
 t_point		*subtract_vector(t_point *p, t_vector *vec);
+double		**create_matrix(double *elem, int col);
+void		print_matrix(double **mat, int col);
+int			matrix_equality(double **mat1, double **mat2, int col);
+double		**matrix_multi(double **mat1, double **mat2);
+t_tuple		*matrix_multi_tp(double **mat, t_tuple *tp);
+double		**identity_matrix(void);
+double		**transpose(double **mat);
+double		**submatrix(double **mat, int size, int row, int col);
+double		minor(double **mat, int size, int row, int col);
+double		cofactor(double **mat, int size, int row, int col);
+double		determinant(double **mat, int size);
+int			invertible(double **mat, int size);
+double		**inverse(double **mat, int size);
+double		**translation(t_tuple *tp);
+double		**scaling(t_tuple *tp);
+double		**rotation_x(double rad);
 
 #endif

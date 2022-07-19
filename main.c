@@ -136,10 +136,10 @@ int main (int argc, char **argv)
     h = 0;
     unsigned char	*dst;
 
-    while (h < 720)
+    while (h < HEIGHT)
     {   
         w = 0;
-        while(w < 1080)
+        while(w < WIDTH)
         {
             dst =  scene_data.img.data + (h * scene_data.img.size_line +
             w * (scene_data.img.bits_per_pixel / 8));
@@ -149,7 +149,7 @@ int main (int argc, char **argv)
         h++;
     }
            
-    scene_data.mlx.win_ptr = mlx_new_window(scene_data.mlx.mlx_ptr, 1080, 720, "minirt");     
+    scene_data.mlx.win_ptr = mlx_new_window(scene_data.mlx.mlx_ptr, WIDTH, HEIGHT, "minirt");     
     if (argc != 2)
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
     parse_scene(argv[1], &scene_data);
