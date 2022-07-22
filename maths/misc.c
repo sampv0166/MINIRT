@@ -19,6 +19,7 @@ t_vector	*normalize(t_vector *vec)
 	t_vector	*ret;
 	double		mag;
 
+	ret = malloc (sizeof(t_vector));
 	mag = magnitude(vec);
 	ret = malloc(sizeof(t_vector));
 	ret->x = vec->x / mag;
