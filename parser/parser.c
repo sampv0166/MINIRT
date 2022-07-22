@@ -61,24 +61,37 @@ static void parse_current_line(char *line, t_data *scene_data)
 {
     char **info_split;
 
-
     info_split = NULL;
     remove_extra_spaces(line);
     info_split = ft_split(line, ' ');
-    
     if (info_split[0][0] == 'A')
+    {
+
         parse_ambient_lighting(info_split, scene_data);
+    }
     else if (info_split[0][0] == 'C')
+    {
         parse_camera(info_split,scene_data);
+
+    }
     else if (info_split[0][0] == 'L')
+    {
         parse_light(info_split,scene_data);
+
+    }
     else if (ft_strlen(info_split[0]) == 2 && info_split[0][0] == 's' && info_split[0][1] == 'p')
+    {
         parse_sphere(info_split,scene_data);
+    }
     else if (ft_strlen(info_split[0]) == 2 && info_split[0][0] == 'p' && info_split[0][1] == 'l')
+    {
         parse_plane(info_split,scene_data);
+
+     exit(0);  
+    }
     else if (ft_strlen(info_split[0]) == 2 && info_split[0][0] == 'c' && info_split[0][1] == 'y')
-        parse_cylinder(info_split,scene_data);                        
-    free_memmory(info_split);
+        parse_cylinder(info_split,scene_data);   
+    free_memmory(info_split);                       
 }
 
 void parse_scene(char *file_name, t_data *scene_data)
@@ -93,17 +106,19 @@ void parse_scene(char *file_name, t_data *scene_data)
     fd = open(file_name, O_RDONLY);
     if (fd < 0)
         print_error_msg_and_exit("ERROR OPENING FILE", scene_data);
+        
     while (1)
     {
         line = get_next_line(fd);
         if (line == NULL)
         {
-            free(line);        
+            //free(line);        
             break;
         }
         if (*line != '#')
             parse_current_line(line, scene_data);
-        free(line);
+        //free(line);
         line = NULL;    
+   
     }
 }
