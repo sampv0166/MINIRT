@@ -35,7 +35,7 @@ t_sphere	*sphere(void)
 	center.y = 0;
 	center.z = 0;
 	sp->sp_center = center;
-	sp->diameter = 2.0;
+	sp->radius = 1.0;
 	sp->id = id++;
 	return (sp);
 }

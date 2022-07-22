@@ -49,14 +49,14 @@ void	test3(void)
 	t_point		*p;
 	t_vector	*v;
 	t_sphere	*sp1;
-	// t_sphere	*sp2;
+	t_sphere	*sp2;
 	t_intersect	*xs;
 
 	ray = malloc(sizeof(t_ray));
 	p = malloc(sizeof(t_point));
 	v = malloc(sizeof(t_vector));
 	sp1 = malloc(sizeof(t_sphere));
-	// sp2 = malloc(sizeof(t_sphere));
+	sp2 = malloc(sizeof(t_sphere));
 	p->x = 0;
 	p->y = 0;
 	p->z = -5;
@@ -65,13 +65,13 @@ void	test3(void)
 	v->z = 1;
 	ray = create_ray(p, v);
 	sp1 = sphere();
-	// sp2 = sphere();
+	sp2 = sphere();
 	printf("sphere id: %d; center x: %lf, y: %lf, z: %lf; dia: %lf;\n",
 		sp1->id, sp1->sp_center.x, sp1->sp_center.y, sp1->sp_center.z,
-		sp1->diameter);
-	// printf("sphere id: %d; center x: %lf, y: %lf, z: %lf; dia: %lf;\n",
-	// 	sp2->id, sp2->sp_center.x, sp2->sp_center.y, sp2->sp_center.z,
-	// 	sp2->diameter);
+		sp1->radius);
+	printf("sphere id: %d; center x: %lf, y: %lf, z: %lf; dia: %lf;\n",
+		sp2->id, sp2->sp_center.x, sp2->sp_center.y, sp2->sp_center.z,
+		sp2->radius);
 	xs = intersect(sp1, ray);
 	printf("xs count: %d, value 1: %lf, value 2: %lf\n", 
 		xs->count, xs->value[0], xs->value[1]);

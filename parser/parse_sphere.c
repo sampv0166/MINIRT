@@ -15,7 +15,7 @@ void parse_sphere(char **info, t_data *scene_data)
     sphere->sp_center.y = parse_double(point_split[1]);
     sphere->sp_center.z = parse_double(point_split[2]);
     
-    sphere->diameter = parse_double(info[2]);
+    sphere->radius = parse_double(info[2]);
 
     sphere->color.r = parse_double(color_split[0]);
     sphere->color.g = parse_double(color_split[1]);
