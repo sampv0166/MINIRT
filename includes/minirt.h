@@ -125,7 +125,7 @@ typedef struct s_sphere
 {
 	int	id;
 	t_point sp_center;
-    double diameter;
+    double radius;
     t_color color;
 
 }		       t_sphere;

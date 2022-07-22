@@ -216,6 +216,7 @@ int main (int argc, char **argv)
 
 
     parse_scene(argv[1], &scene_data);
+
     // t_tuple origin;
     // t_tuple direction;
 
@@ -265,4 +266,5 @@ int main (int argc, char **argv)
     mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr, scene_data.img.img_ptr, 0, 0);                 
     mlx_loop(scene_data.mlx.mlx_ptr);  
     return (0);
+}
 }
