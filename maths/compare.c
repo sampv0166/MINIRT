@@ -2,7 +2,7 @@
 
 int	equal(double a, double b)
 {
-	if (fabs(a -b) < EPSILON)
+	if (fabs(a - b) < EPSILON)
 		return (1);
 	return (0);
 }

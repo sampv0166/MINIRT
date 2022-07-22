@@ -1,6 +1,6 @@
 #include "../includes/minirt.h"
 
-t_tuple	*vector(t_vector *vec)
+t_tuple	*vectors(t_vector *vec)
 {
 	t_tuple	*tp;
 
@@ -12,7 +12,7 @@ t_tuple	*vector(t_vector *vec)
 	return (tp);
 }
 
-t_tuple	*point(t_point *dot)
+t_tuple	*points(t_point *dot)
 {
 	t_tuple	*tp;
 

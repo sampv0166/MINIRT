@@ -176,6 +176,14 @@ int main (int argc, char **argv)
     w = 0;
     h = 0;
     unsigned char	*dst;
+
+
+    while (h < HEIGHT)
+    {   
+        w = 0;
+        while(w < WIDTH)
+        {
+
    
     if (argc != 2)
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);  
@@ -190,13 +198,22 @@ int main (int argc, char **argv)
             
             coord.x = coord.x * 2.0 - 1.0;
             coord.y = coord.y * 2.0 - 1.0;
+
             dst =  scene_data.img.data + (h * scene_data.img.size_line +
             w * (scene_data.img.bits_per_pixel / 8));
 			*(unsigned int*)dst  = perpixel(coord);
             w++;
 		}
         h++;
+
+    }
+           
+    scene_data.mlx.win_ptr = mlx_new_window(scene_data.mlx.mlx_ptr, WIDTH, HEIGHT, "minirt");     
+    if (argc != 2)
+        print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
+
 	}
+
 
     parse_scene(argv[1], &scene_data);
     // t_tuple origin;
