@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "../libs/libft/libft.h"
-#include "../libs/mlx_mac/mlx.h"
+#include "../libs/mlx_linux/mlx.h"
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define EPSILON 0.00001
@@ -50,11 +50,19 @@ typedef struct s_vector
 
 typedef struct s_ray
 {
-	t_point		origin;
-	t_vector	direction;
-	float		tmin;
-	float		tmax;		
+	t_point		*origin;
+	t_vector	*direction;
+	// float		tmin;
+	// float		tmax;
 }	t_ray;
+
+//intersection
+
+typedef struct s_intersect
+{
+	int		count;
+	double	value[2];
+}	t_intersect;
 
 //color
 
@@ -114,7 +122,8 @@ typedef struct		s_img
 
 typedef struct s_sphere
 {
-	t_vector sp_center;
+	int	id;
+	t_point sp_center;
     double diameter;
     t_color color;
 
@@ -212,6 +221,7 @@ t_tuple		*vectors(t_vector *vec);
 double		magnitude(t_vector *vec);
 t_vector	*normalize(t_vector *vec);
 double		dot_product(t_tuple *a, t_tuple *b);
+t_tuple		*add_tuple(t_tuple *a, t_tuple *b);
 t_vector	*cross_product(t_vector *vec1, t_vector *vec2);
 t_vector	*negate_vector(t_vector *vec);
 t_tuple		*negate_tuple(t_tuple *tp);
@@ -235,5 +245,12 @@ double		**inverse(double **mat, int size);
 double		**translation(t_tuple *tp);
 double		**scaling(t_tuple *tp);
 double		**rotation_x(double rad);
+double		**rotation_y(double rad);
+double		**rotation_z(double rad);
+t_tuple		*shearing(t_tuple *tp, double *coord);
+t_ray		*create_ray(t_point *p, t_vector *v);
+t_tuple		*position(t_ray *r, float num);
+t_sphere	*sphere(void);
+t_intersect	*intersect(t_sphere *s, t_ray *r);
 
 #endif

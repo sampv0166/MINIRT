@@ -104,7 +104,6 @@ void	test4(void)
 	transform = scaling(tp1);
 	res = matrix_multi_tp(transform, tp2);
 	printf("x: %lf, y: %lf, z: %lf\n", res->x, res->y, res->z);
-
 }
 
 void	test5(void)
