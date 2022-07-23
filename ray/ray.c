@@ -56,7 +56,7 @@ t_intersect	*intersect(t_sphere *s, t_ray *r)
 	tp1 = malloc(sizeof(t_tuple));
 	tp2 = malloc(sizeof(t_tuple));
 	inter = malloc(sizeof(t_intersect));
-	r2 = transform(r, s->transform);
+	r2 = transform(r, inverse(s->transform, 4));
 	printf("origin: %lf, %lf, %lf\n",
 		r2->origin->x, r2->origin->y, r2->origin->z);
 	printf("direction: %lf, %lf, %lf\n",
