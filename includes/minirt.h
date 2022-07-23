@@ -6,8 +6,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdarg.h>
 #include "../libs/libft/libft.h"
-#include "../libs/mlx_linux/mlx.h"
+#include "../libs/mlx_mac/mlx.h"
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define EPSILON 0.00001
@@ -17,6 +18,15 @@
 
 //KEYS
 #define KEY_ESC 53
+
+//object types
+
+enum type
+{
+	SP,
+	PL,
+	CN,
+};
 
 //tuple
 
@@ -55,14 +65,6 @@ typedef struct s_ray
 	// float		tmin;
 	// float		tmax;
 }	t_ray;
-
-//intersection
-
-typedef struct s_intersect
-{
-	int		count;
-	double	value[2];
-}	t_intersect;
 
 //color
 
@@ -123,10 +125,11 @@ typedef struct		s_img
 
 typedef struct s_sphere
 {
-	int	id;
+	int		id;
 	t_point sp_center;
-    double radius;
+    double	radius;
     t_color color;
+	double	**transform;
 
 }		       t_sphere;
 
@@ -152,6 +155,27 @@ typedef struct sobj_list
 	void		*content;
 	struct obj_list	*next;
 }		tobj_list;
+
+//intersection
+
+typedef struct s_intersect
+{
+	int		count;
+	double	value[2];
+}	t_intersect;
+
+// typedef struct s_obj
+// {
+// 	t_sphere	*sp;
+// 	int			obj_type;
+// }	t_obj;
+
+
+typedef	struct s_intersection
+{
+	double		t;
+	t_sphere	*object;
+}	t_intersection;
 
 // main struct
 typedef struct s_data
@@ -268,6 +292,12 @@ t_ray		*create_ray(t_point *p, t_vector *v);
 t_tuple		*position(t_ray *r, float num);
 t_sphere	*sphere(void);
 t_intersect	*intersect(t_sphere *s, t_ray *r);
+t_intersection	*intersection(double value, void *object);
+t_intersection	**intersections(t_intersection *i1, t_intersection *i2);
+t_intersection	**intersections2(int n, ...);
+t_intersection	*hit(t_intersection **xs);
+t_ray		*transform(t_ray *r, double **m);
+void		set_transform(t_sphere *s, double **t);
 
 t_tuple	*point(t_point *dot);
 double	dot_product(t_tuple *a, t_tuple *b);

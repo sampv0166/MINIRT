@@ -16,7 +16,7 @@ t_point	*subtract_vector(t_point *p, t_vector *vec)
 {
 	t_point	*ret;
 
-	ret = malloc(sizeof(t_vector));
+	ret = malloc(sizeof(t_point));
 	ret->x = p->x - vec->x;
 	ret->y = p->y - vec->y;
 	ret->z = p->z - vec->z;
