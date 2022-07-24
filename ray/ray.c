@@ -38,6 +38,7 @@ t_sphere	*sphere(void)
 	sp->radius = 1.0;
 	sp->id = id++;
 	sp->transform = identity_matrix();
+	material(&sp->material);
 	return (sp);
 }
 
