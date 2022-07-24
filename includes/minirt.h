@@ -6,17 +6,27 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdarg.h>
 #include "../libs/libft/libft.h"
-#include "../libs/mlx_linux/mlx.h"
-#define MAX(a,b) ((a) > (b) ? (a) : (b))
-#define MIN(a,b) ((a) < (b) ? (a) : (b))
-#define EPSILON 0.00001
-#define	PI 4.0 * atan(1.0)
-#define HEIGHT 720
-#define WIDTH 1080
+#include "../libs/mlx_mac/mlx.h"
+# define MAX(a,b) ((a) > (b) ? (a) : (b))
+# define MIN(a,b) ((a) < (b) ? (a) : (b))
+# define EPSILON 0.00001
+# define	PI 4.0 * atan(1.0)
+# define HEIGHT 300
+# define WIDTH 300
 
 //KEYS
-#define KEY_ESC 53
+# define KEY_ESC 53
+
+//object types
+
+enum
+{
+	SP,
+	PL,
+	CN,
+};
 
 //tuple
 
@@ -53,25 +63,6 @@ typedef struct s_ray
 	t_point		*origin;
 	t_vector	*direction;
 }	t_ray;
-
-//intersection
-typedef struct s_intersect
-{
-	int		count;
-	double	value[2];
-}	t_intersect;
-
-typedef struct s_intersection
-{
-    double t;
-    void  *obj;
-}         t_intersection;
-
-typedef struct s_intersection1
-{
-    int count;
-    t_intersection **ins;
-}         t_intersection1;
 
 //color
 
@@ -129,13 +120,23 @@ typedef struct		s_img
 
 // }   t_sphere
 
+typedef struct s_material
+{
+	t_color	color;
+	double	ambient;
+	double	diffuse;
+	double	specular;
+	double	shininess;
+}	t_material;
 
 typedef struct s_sphere
 {
-	int	id;
-	t_point sp_center;
-    double radius;
-    t_color color;
+	int			id;
+	t_point		sp_center;
+	double		radius;
+	t_color		color;
+	double		**transform;
+	t_material	material;
 
 }		       t_sphere;
 
@@ -161,6 +162,28 @@ typedef struct sobj_list
 	void		*content;
 	struct obj_list	*next;
 }		tobj_list;
+
+//intersection
+
+typedef struct s_intersect
+{
+	int		count;
+	double	value[2];
+}	t_intersect;
+
+// typedef struct s_obj
+// {
+// 	t_sphere	*sp;
+// 	int			obj_type;
+// }	t_obj;
+
+
+typedef	struct s_intersection
+{
+	double		t;
+	t_sphere	*object;
+}	t_intersection;
+
 
 // main struct
 typedef struct s_data
@@ -282,6 +305,17 @@ t_tuple		*shearing(t_tuple *tp, double *coord);
 t_ray		*create_ray(t_point *p, t_vector *v);
 t_tuple		*position(t_ray *r, float num);
 t_sphere	*sphere(void);
+t_intersect	*intersect(t_sphere *s, t_ray *r);
+t_intersection	*intersection(double value, void *object);
+t_intersection	**intersections(t_intersection *i1, t_intersection *i2);
+t_intersection	**intersections2(int n, ...);
+t_intersection	*hit(t_intersection **xs);
+t_ray		*transform(t_ray *r, double **m);
+void		set_transform(t_sphere *s, double **t);
+t_vector	*normal_at(t_sphere *s, t_point *p);
+t_vector	*reflect(t_vector *vec, t_vector *normal);
+void	point_light(t_point pos, t_color intensity, t_light *point);
+void	material(t_material *m);
 
 t_tuple	*point(t_point *dot);
 double	dot_product(t_tuple *a, t_tuple *b);
@@ -289,17 +323,4 @@ double	dot_product(t_tuple *a, t_tuple *b);
 //vector operations
 t_point	*subtract_vector(t_point *p, t_vector *vec);
 
-
-
-
-
-//
-
-t_intersection1	    *intersect(t_sphere *s, t_ray *r, t_intersect *inter);
-void    vector_to_tuple(t_vector *vec, t_tuple *tp);
-void    point_to_tuple(t_point *dot, t_tuple *tp);
-void	subtract_points_new(t_point *p1, t_point *p2, t_tuple *tp);
-t_intersection *intersection(double i, void *obj);
-t_intersection1 *intersections(int n,...);
-t_intersection *hit(t_intersection1 *inter_sects);
 #endif
