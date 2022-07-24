@@ -24,6 +24,22 @@ t_tuple	*points(t_point *dot)
 	return (tp);
 }
 
+void	vector_to_tuple(t_vector *vec, t_tuple *tp)
+{
+	tp->x = vec->x;
+	tp->y = vec->y;
+	tp->z = vec->z;
+	tp->w = 0.0;
+}
+
+void point_to_tuple(t_point *dot, t_tuple *tp)
+{
+	tp->x = dot->x;
+	tp->y = dot->y;
+	tp->z = dot->z;
+	tp->w = 1.0;
+}
+
 int	type(t_tuple *tp)
 {
 	if (tp->w == 1.0)

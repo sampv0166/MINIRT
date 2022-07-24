@@ -22,3 +22,12 @@ t_point	*subtract_vector(t_point *p, t_vector *vec)
 	ret->z = p->z - vec->z;
 	return (ret);
 }
+
+//A vector pointing from p2 to p1
+void	subtract_points_new(t_point *p1, t_point *p2, t_tuple *tp)
+{
+	tp->x = p1->x - p2->x;
+	tp->y = p1->y - p2->y;
+	tp->z = p1->z - p2->z;
+	tp->w = 0;
+}

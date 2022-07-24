@@ -169,50 +169,114 @@ int main (int argc, char **argv)
     t_data scene_data;
     setup_mlx(&scene_data);
 
-    // int color;  
-    t_tuple coord;
-    int w;
-    int h;
-    w = 0;
-    h = 0;
-    unsigned char	*dst;
+	// t_ray r;
+    // t_point p;
+    // t_vector v;
+
+	// v.x = 0;
+	// v.y = 0;
+	// v.z = 1;
+
+    // p.x = 0;
+    // p.y = 0;
+    // p.z = -5;
+    // r.origin =  &p;
+    // r.direction = &v;
+	t_sphere sp;
+	// sp.sp_center.x = 0;
+	// sp.sp_center.y = 0;
+	// sp.sp_center.z = 0;
+	// t_intersect  inter;
+    // t_intersection1 *ret;
+
+	// ret = intersect(&sp, &r, &inter);
+	// printf("count = %d\n", inter.count);
+	// printf("inter 1 = %lf\n inter 2 = %lf", inter.value[0], inter.value[1]);
+
+    
+    // // t_intersection in1;
+    // // t_intersection in2;
+    // // printf("\n%f\n", in1.t); 
+    // // ret =  intersections(2,&in1, &in2);
+    // printf("\n%f\n", ret->ins[0]->t);
+    //  printf("\n%f\n", ret->ins[1]->t);
+
+    // t_intersection *ttt;
+    // ttt = hit(ret);
+    // printf("\n end = %f\n",ttt->t);
+
+//     And i1 ← intersection(5, s)
+// And i2 ← intersection(7, s)
+// And i3 ← intersection(-3, s)
+// And i4 ← intersection(2, s)
+// And xs ← intersections(i1, i
 
 
-    while (h < HEIGHT)
-    {   
-        w = 0;
-        while(w < WIDTH)
-        {
+    t_intersection *tt11;
+    t_intersection *tt22;
+    t_intersection *tt33;
+    t_intersection *tt44;
+
+    t_intersection1 *ret1;
+
+    tt11 = intersection(5, &sp);
+    tt22 = intersection(7, &sp);
+    tt33 = intersection(-3, &sp);
+    tt44 = intersection(2, &sp);
+
+    ret1 = intersections(4, tt11, tt22, tt33, tt44);
+
+    t_intersection *rrr;
+
+    rrr = hit(ret1);
+    if (rrr)
+        printf("\n end2 = %f\n",rrr->t);
+
+
+    // // int color;  
+    // t_tuple coord;
+    // int w;
+   // int h;
+    // w = 0;
+    // h = 0;
+    // unsigned char	*dst;
+
+
+    // while (h < HEIGHT)
+    // {   
+    //     w = 0;
+    //     while(w < WIDTH)
+    //     {
 
    
-    if (argc != 2)
-        print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);  
+    // if (argc != 2)
+    //     print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);  
     
-    while (h < 720)
-	{
-        w = 0;
-		while (w < 1080)
-		{
-            coord.x = (double) w / 1080;
-            coord.y = (double) h / 720;
+    // while (h < 720)
+	// {
+    //     w = 0;
+	// 	while (w < 1080)
+	// 	{
+    //         coord.x = (double) w / 1080;
+    //         coord.y = (double) h / 720;
             
-            coord.x = coord.x * 2.0 - 1.0;
-            coord.y = coord.y * 2.0 - 1.0;
+    //         coord.x = coord.x * 2.0 - 1.0;
+    //         coord.y = coord.y * 2.0 - 1.0;
 
-            dst =  scene_data.img.data + (h * scene_data.img.size_line +
-            w * (scene_data.img.bits_per_pixel / 8));
-			*(unsigned int*)dst  = perpixel(coord);
-            w++;
-		}
-        h++;
+    //         dst =  scene_data.img.data + (h * scene_data.img.size_line +
+    //         w * (scene_data.img.bits_per_pixel / 8));
+	// 		*(unsigned int*)dst  = perpixel(coord);
+    //         w++;
+	// 	}
+    //     h++;
 
-    }
+    // }
            
     scene_data.mlx.win_ptr = mlx_new_window(scene_data.mlx.mlx_ptr, WIDTH, HEIGHT, "minirt");     
     if (argc != 2)
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
 
-	}
+	//}
 
 
     parse_scene(argv[1], &scene_data);
@@ -266,5 +330,4 @@ int main (int argc, char **argv)
     mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr, scene_data.img.img_ptr, 0, 0);                 
     mlx_loop(scene_data.mlx.mlx_ptr);  
     return (0);
-}
 }

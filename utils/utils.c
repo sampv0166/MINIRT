@@ -100,3 +100,27 @@ void parse_color(char *str, t_data *scene_data, t_color *colors)
     colors->b =  c [2];
 }
 
+void print_tuple_sam(char *str, t_tuple *tp)
+{
+    printf("%s",str);
+    printf("tp x = %f\n", tp->x);
+    printf("tp y = %f\n", tp->y);
+    printf("tp z = %f\n", tp->z);
+    printf("tp w = %f\n", tp->w);
+}
+void print_point(char *str,t_point *tp)
+{
+    printf("%s",str);
+    printf("point x = %f\n", tp->x);
+    printf("point y = %f\n", tp->y);
+    printf("point z = %f\n", tp->z);
+}
+void print_vector(char *str,t_vector *tp)
+{
+    printf("%s",str);
+    printf("vec x = %f\n", tp->x);
+    printf("vec y = %f\n", tp->y);
+    printf("vec z = %f\n", tp->z);
+}
+
+

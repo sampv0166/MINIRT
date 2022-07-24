@@ -52,17 +52,26 @@ typedef struct s_ray
 {
 	t_point		*origin;
 	t_vector	*direction;
-	// float		tmin;
-	// float		tmax;
 }	t_ray;
 
 //intersection
-
 typedef struct s_intersect
 {
 	int		count;
 	double	value[2];
 }	t_intersect;
+
+typedef struct s_intersection
+{
+    double t;
+    void  *obj;
+}         t_intersection;
+
+typedef struct s_intersection1
+{
+    int count;
+    t_intersection **ins;
+}         t_intersection1;
 
 //color
 
@@ -228,6 +237,12 @@ int get_2darray_size(char **arr);
 double parse_double(char *str);
 void parse_color(char *str, t_data *scene_data, t_color *colors);
 
+void print_tuple_sam(char *str,t_tuple *tp);
+void print_point(char *str,t_point *tp);
+void print_vector(char *str,t_vector *tp);
+
+
+
 
 //MATHS
 int			equal(double a, double b);
@@ -267,7 +282,6 @@ t_tuple		*shearing(t_tuple *tp, double *coord);
 t_ray		*create_ray(t_point *p, t_vector *v);
 t_tuple		*position(t_ray *r, float num);
 t_sphere	*sphere(void);
-t_intersect	*intersect(t_sphere *s, t_ray *r);
 
 t_tuple	*point(t_point *dot);
 double	dot_product(t_tuple *a, t_tuple *b);
@@ -276,4 +290,16 @@ double	dot_product(t_tuple *a, t_tuple *b);
 t_point	*subtract_vector(t_point *p, t_vector *vec);
 
 
+
+
+
+//
+
+t_intersection1	    *intersect(t_sphere *s, t_ray *r, t_intersect *inter);
+void    vector_to_tuple(t_vector *vec, t_tuple *tp);
+void    point_to_tuple(t_point *dot, t_tuple *tp);
+void	subtract_points_new(t_point *p1, t_point *p2, t_tuple *tp);
+t_intersection *intersection(double i, void *obj);
+t_intersection1 *intersections(int n,...);
+t_intersection *hit(t_intersection1 *inter_sects);
 #endif
