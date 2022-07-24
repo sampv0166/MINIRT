@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `get_next_line.o', needed by `miniRT'.  Stop.
 
 
-# Make data base, printed on Fri Jul 22 08:15:13 2022
+# Make data base, printed on Sun Jul 24 05:08:57 2022
 
 # Variables
 
@@ -27,7 +27,6 @@ make: *** No rule to make target `get_next_line.o', needed by `miniRT'.  Stop.
 # makefile
 CURDIR := /Users/imran/Desktop/git/miniRT
 # makefile
- 
 SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
@@ -40,11 +39,13 @@ MAKEFILE_LIST :=  Makefile
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
+INFOPATH = /opt/homebrew/share/info:
+# environment
 VSCODE_CWD = /
 # environment
-PATH = /usr/bin:/bin:/usr/sbin:/sbin
+PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/imran/Library/Python/3.8/bin:/Applications/VMware Fusion Tech Preview.app/Contents/Public:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/opt/X11/include
 # environment
-LaunchInstanceID = C77ABA27-C1C2-4213-96DC-8B816074987C
+LSCOLORS = Gxfxcxdxbxegedabagacad
 # makefile (from `Makefile', line 20)
 MLX_PATH = libs/mlx_mac
 # environment
@@ -52,17 +53,21 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.RyGTueEy9R/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.H6XrUjpM9S/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.XMPtJNjqjK/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.dJ3pnFSpag/org.xquartz:0
 # makefile (from `Makefile', line 3)
 OBJS = ${SRCS:.c=.o}
 # environment
 PWD = /Users/imran/Desktop/git/miniRT
 # environment
+HOMEBREW_CELLAR = /opt/homebrew/Cellar
+# environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+MANPATH = /opt/homebrew/share/man::
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -70,11 +75,13 @@ HOME = /Users/imran
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/imran/Library/Application Support/Code/CachedData/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
+VSCODE_CODE_CACHE_PATH = /Users/imran/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
 # environment
 LOGNAME = imran
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+ZSH = /Users/imran/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -96,11 +103,13 @@ CC = gcc
 # default
 MAKE_VERSION := 3.81
 # environment
-USER = imran
+USER = Imran Mustafa
 # makefile
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 23)
 NAME = miniRT
+# environment
+LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -114,7 +123,7 @@ TMPDIR = /var/folders/4j/y2ymt5nj5q11fgwz4x6nk99c0000gn/T/
 # makefile (from `Makefile', line 9)
 OS = $(shell uname)
 # environment
-VSCODE_IPC_HOOK = /Users/imran/Library/Application Support/Code/1.69.1-main.sock
+VSCODE_IPC_HOOK = /Users/imran/Library/Application Support/Code/1.69.2-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -124,11 +133,15 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.18416032.18416038
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.18883371.18883377
+# environment
+HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
+# environment
+HOMEBREW_REPOSITORY = /opt/homebrew
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x0
 # environment
@@ -142,9 +155,9 @@ LIBFT_PATH = libs/libft
 # makefile (from `Makefile', line 19)
 MLX_FLAGS = -Llibs/mlx_mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit
 # environment
-LC_ALL = C
+PAGER = less
 # environment
-SECURITYSESSIONID = 186b3
+LC_ALL = C
 # automatic
 ^F = $(notdir $^)
 # default
@@ -156,9 +169,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 592
+VSCODE_PID = 2384
 # variable set hash-table stats:
-# Load=71/1024=7%, Rehash=0, Collisions=5/102=5%
+# Load=78/1024=8%, Rehash=0, Collisions=5/109=5%
 
 # Pattern-specific Variable Values
 
@@ -166,27 +179,29 @@ VSCODE_PID = 592
 
 # Directories
 
-# get_next_line.c (device 16777232, inode 18405617): could not be opened.
-# transform (device 16777232, inode 18567650): 6 files, no impossibilities.
-# Makefile (device 16777232, inode 18405611): could not be opened.
-# utils (device 16777232, inode 18405698): 3 files, no impossibilities.
-# libs (device 16777232, inode 18405621): 6 files, no impossibilities.
-# . (device 16777232, inode 18405540): 24 files, no impossibilities.
-# matrix (device 16777232, inode 18451297): 7 files, no impossibilities.
-# parser (device 16777232, inode 18405690): 9 files, no impossibilities.
-# includes (device 16777232, inode 18405619): 3 files, no impossibilities.
-# ray (device 16777232, inode 18739719): 5 files, no impossibilities.
-# controls (device 16777232, inode 18432127): 3 files, no impossibilities.
-# error (device 16777232, inode 18405613): 3 files, no impossibilities.
-# get_next_line_utils.c (device 16777232, inode 18405618): could not be opened.
-# maths (device 16777232, inode 18405752): 8 files, no impossibilities.
-# pdfs (device 16777232, inode 18405754): 5 files, no impossibilities.
-# main.c (device 16777232, inode 18405689): could not be opened.
-# default.rt (device 16777232, inode 18405612): could not be opened.
-# color (device 16777232, inode 18431335): 4 files, no impossibilities.
-# free (device 16777232, inode 18405615): 3 files, no impossibilities.
+# get_next_line.c (device 16777231, inode 18405617): could not be opened.
+# transform (device 16777231, inode 18567650): 6 files, no impossibilities.
+# Makefile (device 16777231, inode 18405611): could not be opened.
+# utils (device 16777231, inode 18405698): 3 files, no impossibilities.
+# libs (device 16777231, inode 18405621): 6 files, no impossibilities.
+# . (device 16777231, inode 18405540): 26 files, no impossibilities.
+# matrix (device 16777231, inode 18451297): 7 files, no impossibilities.
+# parser (device 16777231, inode 18405690): 9 files, no impossibilities.
+# includes (device 16777231, inode 18405619): 3 files, no impossibilities.
+# ray (device 16777231, inode 18739719): 6 files, no impossibilities.
+# controls (device 16777231, inode 18432127): 3 files, no impossibilities.
+# error (device 16777231, inode 18405613): 3 files, no impossibilities.
+# get_next_line_utils.c (device 16777231, inode 18405618): could not be opened.
+# maths (device 16777231, inode 18405752): 8 files, no impossibilities.
+# pdfs (device 16777231, inode 18405754): 5 files, no impossibilities.
+# render (device 16777231, inode 18777402): 3 files, no impossibilities.
+# sphere (device 16777231, inode 18864902): 5 files, no impossibilities.
+# main.c (device 16777231, inode 18777398): could not be opened.
+# default.rt (device 16777231, inode 18777397): could not be opened.
+# color (device 16777231, inode 18431335): 4 files, no impossibilities.
+# free (device 16777231, inode 18405615): 3 files, no impossibilities.
 
-# 89 files, no impossibilities in 19 directories.
+# 100 files, no impossibilities in 21 directories.
 
 # Implicit Rules
 
@@ -204,6 +219,12 @@ all: miniRT
 
 # Not a target:
 parser/parser.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+sphere/sphere.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -238,7 +259,7 @@ parser/parse_light.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-miniRT: get_next_line.o get_next_line_utils.o main.o color/color.o controls/keys.o error/error.o free/free_scene_data.o maths/compare.o maths/misc.o maths/operation.o maths/point.o maths/tuple.o matrix/inverse.o matrix/matrices.o parser/parse_ambient_lighting.o parser/parse_camera.o parser/parse_cylinder.o parser/parse_light.o parser/parse_plane.o parser/parse_sphere.o parser/parser.o ray/ray.o transform/transform.o utils/utils.o
+miniRT: get_next_line.o get_next_line_utils.o main.o color/color.o controls/keys.o error/error.o free/free_scene_data.o maths/compare.o maths/misc.o maths/operation.o maths/point.o maths/tuple.o matrix/inverse.o matrix/matrices.o parser/parse_ambient_lighting.o parser/parse_camera.o parser/parse_cylinder.o parser/parse_light.o parser/parse_plane.o parser/parse_sphere.o parser/parser.o ray/ray.o render/renderer.o sphere/sphere.o transform/transform.o utils/utils.o
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
@@ -254,8 +275,8 @@ miniRT: get_next_line.o get_next_line_utils.o main.o color/color.o controls/keys
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
 #  Last modified 2022-07-13 17:05:50
+ 
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -371,6 +392,12 @@ main.o:
 #  File has not been updated.
 
 # Not a target:
+render/renderer.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 maths/misc.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -409,7 +436,7 @@ utils/utils.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=32/1024=3%, Rehash=0, Collisions=1/73=1%
+# Load=34/1024=3%, Rehash=0, Collisions=1/77=1%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -421,6 +448,6 @@ utils/utils.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Jul 22 08:15:13 2022
+# Finished Make data base on Sun Jul 24 05:08:57 2022
 
  
