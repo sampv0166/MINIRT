@@ -92,11 +92,6 @@ double	**matrix_multi(double **mat1, double **mat2)
 	return (res);
 }
 
-void	print_tuple(t_tuple *tp)
-{
-	printf("x:%lf,\ny:%lf,\nz:%lf,\nw:%lf\n", tp->x, tp->y, tp->z, tp->w);
-}
-
 t_tuple	*matrix_multi_tp(double **mat, t_tuple *tp)
 {
 	t_tuple	*res;
@@ -118,38 +113,5 @@ t_tuple	*matrix_multi_tp(double **mat, t_tuple *tp)
 	res->y = tmp[1];
 	res->z = tmp[2];
 	res->w = tmp[3];
-	// print_tuple(res);
-	return (res);	
-}
-
-double	**identity_matrix(void)
-{
-	double	**res;
-	double	elem[] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
-
-	res = create_matrix(elem, 4);
-	return (res);
-}
-
-double	**transpose(double **mat)
-{
-	double	**res;
-	int	i;
-	int	j;
-
-	res = malloc(sizeof(double *) * 4);
-	i = 0;
-	j = 0;
-	while (i < 4)
-	{
-		res[i] = malloc(sizeof(double) * 4);
-		j = 0;
-		while (j < 4)
-		{
-			res[i][j] = mat[j][i];
-			j++;
-		}
-		i++;
-	}
 	return (res);
 }

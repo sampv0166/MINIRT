@@ -64,11 +64,78 @@ void	point_light(t_point pos, t_color intensity, t_light *point)
 
 void	material(t_material *m)
 {
-	m->color.r = 255;
-	m->color.g = 255;
-	m->color.b = 255;
+	m->color.r = 1;
+	m->color.g = 1;
+	m->color.b = 1;
 	m->ambient = 0.1;
 	m->diffuse = 0.9;
 	m->specular = 0.9;
 	m->shininess = 200.0;
+}
+
+t_color	lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector normalv)
+{
+	t_point		effective_color;
+	t_vector	*lightv;
+	t_vector	*reflectv;
+	t_color		ambient;
+	t_color		diffuse;
+	t_color		specular;
+	t_color		ret;
+	double		light_dot_normal;
+	double		reflect_dot_eye;
+	double		factor;
+	t_point		p1;
+	t_tuple		*tp1;
+	t_tuple		*tp2;
+	t_tuple		*tp3;
+
+	effective_color.x = m.color.r * l.color.r;
+	effective_color.y = m.color.g * l.color.g;
+	effective_color.z = m.color.b * l.color.b;
+	p1.x = l.pos.x;
+	p1.y = l.pos.y;
+	p1.z = l.pos.z;
+	lightv = normalize(subtract_points(&p1, &pos));
+	tp1 = scalar_mlp(points(&effective_color), m.ambient);
+	ambient.r = tp1->x;
+	ambient.g = tp1->y;
+	ambient.b = tp1->z;
+	light_dot_normal = dot_product(vectors(lightv), vectors(&normalv));
+	if (light_dot_normal < 0)
+	{
+		diffuse.r = 0;
+		diffuse.g = 0;
+		diffuse.b = 0;
+		specular.r = 0;
+		specular.g = 0;
+		specular.b = 0;
+	}
+	else
+	{
+		tp2 = scalar_mlp(points(&effective_color), m.diffuse);
+		tp3 = scalar_mlp(tp2, light_dot_normal);
+		diffuse.r = tp3->x;
+		diffuse.g = tp3->y;
+		diffuse.b = tp3->z;
+		reflectv = reflect(negate_vector(lightv), &normalv);
+		reflect_dot_eye = dot_product(vectors(reflectv), vectors(&eyev));
+		if (reflect_dot_eye <= 0)
+		{
+			specular.r = 0;
+			specular.g = 0;
+			specular.b = 0;
+		}
+		else
+		{
+			factor = pow(reflect_dot_eye, m.shininess);
+			specular.r = l.color.r * m.specular * factor;
+			specular.g = l.color.g * m.specular * factor;
+			specular.b = l.color.b * m.specular * factor;
+		}
+	}
+	ret.r = ambient.r + diffuse.r + specular.r;
+	ret.g = ambient.g + diffuse.g + specular.g;
+	ret.b = ambient.b + diffuse.b + specular.b;
+	return (ret);
 }

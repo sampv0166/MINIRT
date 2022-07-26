@@ -56,6 +56,27 @@ typedef struct s_vector
     double z;
 }              t_vector;
 
+//matrices
+
+typedef struct s_mat4
+{
+	double	mat[4][4];
+	int		size;
+}	t_mat4;
+
+typedef struct s_mat3
+{
+	double	mat[3][3];
+	int		size;
+}	t_mat3;
+
+typedef struct s_mat2
+{
+	double	mat[2][2];
+	int		size;
+}	t_mat2;
+
+
 //ray
 
 typedef struct s_ray
@@ -184,6 +205,11 @@ typedef	struct s_intersection
 	t_sphere	*object;
 }	t_intersection;
 
+typedef struct s_world
+{
+	t_sphere	*s;
+	t_light		l;
+}	t_world;
 
 // main struct
 typedef struct s_data
@@ -267,22 +293,34 @@ void print_vector(char *str,t_vector *tp);
 
 
 
-//MATHS
-int			equal(double a, double b);
-int			tuple_equal(t_tuple *a, t_tuple *b);
-t_tuple		*points(t_point *dot);
-t_tuple		*vectors(t_vector *vec);
-double		magnitude(t_vector *vec);
-t_vector	*normalize(t_vector *vec);
-double		dot_product(t_tuple *a, t_tuple *b);
-t_tuple		*add_tuple(t_tuple *a, t_tuple *b);
-t_vector	*cross_product(t_vector *vec1, t_vector *vec2);
-t_vector	*negate_vector(t_vector *vec);
-t_tuple		*negate_tuple(t_tuple *tp);
-t_tuple		*scalar_mlp(t_tuple *tp, float num);
-t_tuple		*scalar_div(t_tuple *tp, float num);
-t_vector	*subtract_points(t_point *p1, t_point *p2);
-t_point		*subtract_vector(t_point *p, t_vector *vec);
+//Coordinates
+t_tuple		tuple(double x, double y, double z, double w);
+t_tuple		point(double x, double y, double z);
+t_tuple		vector(double x, double y, double z);
+int			double_equal(double a, double b);
+int			tuple_equal(t_tuple a, t_tuple b);
+double		magnitude(t_tuple vec);
+t_tuple		normalize(t_tuple vec);
+double		dot(t_tuple a, t_tuple b);
+t_tuple		add(t_tuple a, t_tuple b);
+t_tuple		subtract(t_tuple a, t_tuple b);
+t_vector	cross_product(t_vector vec1, t_vector vec2);
+t_tuple		cross(t_tuple vec1, t_tuple vec2);
+t_vector	negate_vector(t_vector vec);
+t_tuple		negate(t_tuple tp);
+t_tuple		multiply(t_tuple tp, float num);
+t_tuple		divide(t_tuple tp, float num);
+t_vector	subtract_points(t_point p1, t_point p2);
+t_point		subtract_vector(t_point p, t_vector vec);
+
+//Color
+t_color		color(double red, double green, double blue);
+t_color		color_add(t_color c1, t_color c2);
+t_color		color_subt(t_color c1, t_color c2);
+t_color		color_scale(t_color c, double num);
+t_color		color_multi(t_color c1, t_color c2);
+
+//Matrices
 double		**create_matrix(double *elem, int col);
 void		print_matrix(double **mat, int col);
 int			matrix_equality(double **mat1, double **mat2, int col);
@@ -296,12 +334,16 @@ double		cofactor(double **mat, int size, int row, int col);
 double		determinant(double **mat, int size);
 int			invertible(double **mat, int size);
 double		**inverse(double **mat, int size);
+
+//Matrix Transformations
 double		**translation(t_tuple *tp);
 double		**scaling(t_tuple *tp);
 double		**rotation_x(double rad);
 double		**rotation_y(double rad);
 double		**rotation_z(double rad);
 t_tuple		*shearing(t_tuple *tp, double *coord);
+
+//Ray
 t_ray		*create_ray(t_point *p, t_vector *v);
 t_tuple		*position(t_ray *r, float num);
 t_sphere	*sphere(void);
@@ -314,13 +356,11 @@ t_ray		*transform(t_ray *r, double **m);
 void		set_transform(t_sphere *s, double **t);
 t_vector	*normal_at(t_sphere *s, t_point *p);
 t_vector	*reflect(t_vector *vec, t_vector *normal);
+
+//Scene and lights
 void	point_light(t_point pos, t_color intensity, t_light *point);
 void	material(t_material *m);
-
-t_tuple	*point(t_point *dot);
-double	dot_product(t_tuple *a, t_tuple *b);
-
-//vector operations
-t_point	*subtract_vector(t_point *p, t_vector *vec);
+t_color	lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector normalv);
+void	world(t_world *w);
 
 #endif
