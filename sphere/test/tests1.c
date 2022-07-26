@@ -15,7 +15,6 @@ void	test1(void)
 	n = normal_at(s, point);
 	// n = normalize(n);
 	printf("x: %lf, y: %lf, z: %lf\n", n->x, n->y, n->z);
-
 }
 
 void	test2(void)
