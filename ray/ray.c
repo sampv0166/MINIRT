@@ -1,6 +1,6 @@
 #include "../includes/minirt.h"
 
-t_ray	*create_ray(t_point *p, t_vector *v)
+t_ray	*create_ray(t_point p, t_vector v)
 {
 	t_ray	*ray;
 
@@ -10,16 +10,16 @@ t_ray	*create_ray(t_point *p, t_vector *v)
 	return (ray);
 }
 
-t_tuple	*position(t_ray *r, float num)
+t_tuple	position(t_ray r, float num)
 {
-	t_tuple *multi;
-	t_tuple	*vec;
-	t_tuple	*point;
+	t_tuple	multi;
+	t_tuple	vec;
+	t_tuple	p;
 
-	vec = vectors(r->direction);
-	multi = scalar_mlp(vec, num);
-	point = points(r->origin);
-	return (add_tuple(point, multi));
+	vec = vector_tp(r.direction);
+	multi = multiply(vec, num);
+	p = point_tp(r.origin);
+	return (add(p, multi));
 }
 
 t_sphere	*sphere(void)
@@ -44,30 +44,23 @@ t_sphere	*sphere(void)
 t_intersect	*intersect(t_sphere *s, t_ray *r)
 {
 	t_intersect	*inter;
-	t_vector	*sphere_to_ray;
-	t_tuple		*tp1;
-	t_tuple		*tp2;
+	t_vector	sphere_to_ray;
+	t_tuple		tp1;
+	t_tuple		tp2;
 	t_ray		*r2;
 	double		a;
 	double		b;
 	double		c;
 	double		d;
 
-	tp1 = malloc(sizeof(t_tuple));
-	tp2 = malloc(sizeof(t_tuple));
 	inter = malloc(sizeof(t_intersect));
 	r2 = transform(r, inverse(s->transform, 4));
-	// printf("origin: %lf, %lf, %lf\n",
-	// 	r2->origin->x, r2->origin->y, r2->origin->z);
-	// printf("direction: %lf, %lf, %lf\n",
-	// 	r2->direction->x, r2->direction->y, r2->direction->z);
-	// printf("___________________\n");
-	sphere_to_ray = subtract_points(r2->origin, &s->sp_center);
-	tp1 = vectors(r2->direction);
-	a = dot_product(tp1, tp1);
-	tp2 = vectors(sphere_to_ray);
-	b = 2 * dot_product(tp1, tp2);
-	c = dot_product(tp2, tp2) - 1;
+	sphere_to_ray = subtract_points(r2->origin, s->sp_center);
+	tp1 = vector_tp(r2->direction);
+	a = dot(tp1, tp1);
+	tp2 = vector_tp(sphere_to_ray);
+	b = 2 * dot(tp1, tp2);
+	c = dot(tp2, tp2) - 1;
 	d = pow(b, 2) - 4 * a * c;
 	// printf("a: %lf, b: %lf, c: %lf, d: %lf\n", a, b, c, d);
 	if (d < 0)
@@ -80,7 +73,6 @@ t_intersect	*intersect(t_sphere *s, t_ray *r)
 	inter->count = 2;
 	inter->value[0] = (-b - sqrt(d)) / (2 * a);
 	inter->value[1] = (-b + sqrt(d)) / (2 * a);
-	
 	return (inter);
 }
 
@@ -142,27 +134,25 @@ t_intersection	*hit(t_intersection **xs)
 t_ray	*transform(t_ray *r, double **m)
 {
 	t_ray		*ret;
-	t_tuple		*tp1;
-	t_tuple		*tp2;
-	t_tuple		*multi1;
-	t_tuple		*multi2;
-	t_point		*point;
-	t_vector	*vec;
+	t_tuple		tp1;
+	t_tuple		tp2;
+	t_tuple		multi1;
+	t_tuple		multi2;
+	t_point		p;
+	t_vector	vec;
 
 	ret = malloc(sizeof(t_ray));
-	point = malloc(sizeof(t_point));
-	vec = malloc(sizeof(t_vector));
-	tp1 = points(r->origin);
+	tp1 = point_tp(r->origin);
 	multi1 = matrix_multi_tp(m, tp1);
-	tp2 = vectors(r->direction);
+	tp2 = vector_tp(r->direction);
 	multi2 = matrix_multi_tp(m, tp2);
-	point->x = multi1->x;
-	point->y = multi1->y;
-	point->z = multi1->z;
-	vec->x = multi2->x;
-	vec->y = multi2->y;
-	vec->z = multi2->z;
-	ret->origin = point;
+	p.x = multi1.x;
+	p.y = multi1.y;
+	p.z = multi1.z;
+	vec.x = multi2.x;
+	vec.y = multi2.y;
+	vec.z = multi2.z;
+	ret->origin = p;
 	ret->direction = vec;
 	return (ret);
 }

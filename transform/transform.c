@@ -8,28 +8,28 @@ double	deg(double rad)
 	return (d);
 }
 
-double	**translation(t_tuple *tp)
+double	**translation(t_tuple tp)
 {
 	double	**res;
 
 	res = identity_matrix();
-	res[0][3] = tp->x; 
-	res[1][3] = tp->y; 
-	res[2][3] = tp->z;
-	res[3][3] = tp->w;
-	return (res); 
+	res[0][3] = tp.x; 
+	res[1][3] = tp.y; 
+	res[2][3] = tp.z;
+	res[3][3] = tp.w;
+	return (res);
 }
 
-double	**scaling(t_tuple *tp)
+double	**scaling(t_tuple tp)
 {
 	double	**res;
 
 	res = identity_matrix();
-	res[0][0] = tp->x; 
-	res[1][1] = tp->y; 
-	res[2][2] = tp->z;
+	res[0][0] = tp.x; 
+	res[1][1] = tp.y; 
+	res[2][2] = tp.z;
 	res[3][3] = 1.0;
-	return (res); 
+	return (res);
 }
 
 double	**rotation_x(double rad)
@@ -68,10 +68,10 @@ double	**rotation_z(double rad)
 	return (res);
 }
 
-t_tuple	*shearing(t_tuple *tp, double *coord)
+t_tuple	shearing(t_tuple tp, double *coord)
 {
 	double	**mat;
-	t_tuple	*res;
+	t_tuple	res;
 
 	mat = identity_matrix();
 	mat[0][1] = coord[0];

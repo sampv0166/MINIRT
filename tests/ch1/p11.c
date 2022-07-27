@@ -3,9 +3,9 @@
 
 int	main(void)
 {
-	t_tuple	a;
-	t_tuple	b;
-	t_tuple	res;
+	t_vector	a;
+	t_vector	b;
+	t_vector	res;
 
 	a = vector(1, 2, 3);
 	b = vector(2, 3, 4);

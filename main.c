@@ -120,9 +120,9 @@ unsigned int perpixel(t_tuple coord)
     double b;
     double c;
 
-    a = dot_product(&direction, &direction);
-    b = 2.0 * dot_product(&origin, & direction);;
-    c = dot_product(&origin, &origin) - radius * radius;
+    a = dot(direction, direction);
+    b = 2.0 * dot(origin, direction);;
+    c = dot(origin, origin) - radius * radius;
     
     double disc;
 
@@ -159,16 +159,16 @@ int main (int argc, char **argv)
     double world_x;
     t_point position;
     t_ray r;
-    t_point r_point;
-    t_vector r_direction;
+    // t_point r_point;
+    // t_vector r_direction;
 
-    r.origin = &r_point;
-    r.direction = &r_direction;
+    // r.origin = &r_point;
+    // r.direction = &r_direction;
     t_intersect *inter;
 
-    r.origin->x = 0;
-    r.origin->y = 0;
-    r.origin->z = -5;
+    // r.origin->x = 0;
+    // r.origin->y = 0;
+    // r.origin->z = -5;
      
 
     t_sphere *sp;
@@ -184,7 +184,7 @@ int main (int argc, char **argv)
             position.x = world_x;
             position.y = world_y;
             position.z = wall_z;
-            r.direction = normalize(subtract_points(&position, r.origin));
+            r.direction = normalize(subtract_points(position, r.origin));
             inter = intersect(sp, &r);
             dst =  scene_data.img.data + (h * scene_data.img.size_line +
             w * (scene_data.img.bits_per_pixel / 8));    

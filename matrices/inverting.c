@@ -79,7 +79,7 @@ int	invertible(double **mat, int size)
 
 	det = determinant(mat, size);
 	zero = 0.0;
-	if (equal(det, zero))
+	if (double_equal(det, zero))
 		return (0);
 	return (1);
 }

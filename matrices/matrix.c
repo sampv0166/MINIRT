@@ -57,7 +57,7 @@ int	matrix_equality(double **mat1, double **mat2, int col)
 		j = 0;
 		while (j < col)
 		{
-			if (!equal(mat1[i][j], mat2[i][j]))
+			if (!double_equal(mat1[i][j], mat2[i][j]))
 				return (0);
 			j++;
 		}
@@ -92,26 +92,25 @@ double	**matrix_multi(double **mat1, double **mat2)
 	return (res);
 }
 
-t_tuple	*matrix_multi_tp(double **mat, t_tuple *tp)
+t_tuple	matrix_multi_tp(double **mat, t_tuple tp)
 {
-	t_tuple	*res;
+	t_tuple	res;
 	double	tmp[4];
 	int		i;
 
-	res = malloc(sizeof(t_tuple));
 	i = 0;
 	while (i < 4)
 	{
-		tmp[i] = mat[i][0] * tp->x
-			+ mat[i][1] * tp->y
-			+ mat[i][2] * tp->z
-			+ mat[i][3] * tp->w;
+		tmp[i] = mat[i][0] * tp.x
+			+ mat[i][1] * tp.y
+			+ mat[i][2] * tp.z
+			+ mat[i][3] * tp.w;
 		// printf("%lf\n", res[i][j]);
 		i++;
 	}
-	res->x = tmp[0];
-	res->y = tmp[1];
-	res->z = tmp[2];
-	res->w = tmp[3];
+	res.x = tmp[0];
+	res.y = tmp[1];
+	res.z = tmp[2];
+	res.w = tmp[3];
 	return (res);
 }

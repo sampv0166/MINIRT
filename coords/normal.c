@@ -1,10 +1,10 @@
 #include "../includes/minirt.h"
 
-double	magnitude(t_tuple vec)
+double	magnitude(t_vector vec)
 {
 	double		ret;
 	double		sum;
-	t_tuple		tmp;
+	t_vector	tmp;
 
 	tmp.x = pow(vec.x, 2);
 	tmp.y = pow(vec.y, 2);
@@ -14,9 +14,9 @@ double	magnitude(t_tuple vec)
 	return (ret);
 }
 
-t_tuple	normalize(t_tuple vec)
+t_vector	normalize(t_vector vec)
 {
-	t_tuple		ret;
+	t_vector	ret;
 	double		mag;
 
 	mag = magnitude(vec);
