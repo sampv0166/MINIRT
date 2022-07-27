@@ -51,10 +51,10 @@ typedef struct s_point
 
 typedef struct s_vector
 {
-    double x;
-    double y;
-    double z;
-}              t_vector;
+	double	x;
+	double	y;
+	double	z;
+}	t_vector;
 
 //matrices
 
@@ -99,7 +99,7 @@ typedef struct s_color
 
 typedef struct s_light
 {
-    t_tuple pos;
+    t_point pos;
     t_color color;
     double  ratio;
 
@@ -295,19 +295,18 @@ void print_vector(char *str,t_vector *tp);
 
 //Coordinates
 t_tuple		tuple(double x, double y, double z, double w);
-t_tuple		point(double x, double y, double z);
-t_tuple		vector(double x, double y, double z);
-t_tuple		points(t_point dot);
-t_tuple		vectors(t_vector vec);
+t_vector	vector(double x, double y, double z);
+t_point		point(double x, double y, double z);
+t_tuple		vector_tp(t_vector vec);
+t_tuple		point_tp(t_point p);
 int			double_equal(double a, double b);
 int			tuple_equal(t_tuple a, t_tuple b);
-double		magnitude(t_tuple vec);
-t_tuple		normalize(t_tuple vec);
+double		magnitude(t_vector vec);
+t_vector	normalize(t_vector vec);
 double		dot(t_tuple a, t_tuple b);
 t_tuple		add(t_tuple a, t_tuple b);
 t_tuple		subtract(t_tuple a, t_tuple b);
-t_vector	cross_product(t_vector vec1, t_vector vec2);
-t_tuple		cross(t_tuple vec1, t_tuple vec2);
+t_vector	cross(t_vector vec1, t_vector vec2);
 t_vector	negate_vector(t_vector vec);
 t_tuple		negate(t_tuple tp);
 t_tuple		multiply(t_tuple tp, float num);
@@ -356,8 +355,8 @@ t_intersection	**intersections2(int n, ...);
 t_intersection	*hit(t_intersection **xs);
 t_ray		*transform(t_ray *r, double **m);
 void		set_transform(t_sphere *s, double **t);
-t_tuple		normal_at(t_sphere *s, t_point p);
-t_tuple		reflect(t_tuple vec, t_tuple normal);
+t_vector		normal_at(t_sphere *s, t_point p);
+t_vector	reflect(t_vector vec, t_vector normal);
 
 //Scene and lights
 t_light		point_light(t_point pos, t_color intensity);

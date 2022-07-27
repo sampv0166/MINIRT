@@ -2,8 +2,8 @@
 
 int	main(void)
 {
-	t_tuple	v;
-	double	res;
+	t_vector	v;
+	double		res;
 
 	v = vector(1, 0, 0);
 	res = magnitude(v);

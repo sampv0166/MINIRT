@@ -16,12 +16,12 @@ int	main(void)
 		a.x, a.y, a.z, a.w);
 	printf("-------------------\n");
 	printf("point() creates tuple with w=1\n");
-	a = point(4, -4, 3);
+	a = point_tp(4, -4, 3);
 	printf("a x:%lf, y:%lf, z:%lf, w:%lf\n",
 		a.x, a.y, a.z, a.w);
 	printf("-------------------\n");
 	printf("vector() creates tuple with w=0\n");
-	a = vector(4, -4, 3);
+	a = vector_tp(4, -4, 3);
 	printf("a x:%lf, y:%lf, z:%lf, w:%lf\n",
 		a.x, a.y, a.z, a.w);
 }

@@ -184,7 +184,7 @@ int main (int argc, char **argv)
             position.x = world_x;
             position.y = world_y;
             position.z = wall_z;
-            // r.direction = normalize(subtract_points(&position, r.origin));
+            r.direction = normalize(subtract_points(position, r.origin));
             inter = intersect(sp, &r);
             dst =  scene_data.img.data + (h * scene_data.img.size_line +
             w * (scene_data.img.bits_per_pixel / 8));    

@@ -1,6 +1,6 @@
 #include "../includes/minirt.h"
 
-t_tuple	normal_at(t_sphere *s, t_point p)
+t_vector	normal_at(t_sphere *s, t_point p)
 {
 	t_vector	obj_normal;
 	t_vector	world_normal;
@@ -11,7 +11,7 @@ t_tuple	normal_at(t_sphere *s, t_point p)
 	t_tuple		tp3;
 	t_tuple		tp4;
 
-	tp1 = points(p);
+	tp1 = point_tp(p);
 	tp2 = matrix_multi_tp(inverse(s->transform, 4), tp1);
 	obj_point.x = tp2.x;
 	obj_point.y = tp2.y;
@@ -20,20 +20,20 @@ t_tuple	normal_at(t_sphere *s, t_point p)
 	point.y = 0;
 	point.z = 0;
 	obj_normal = subtract_points(obj_point, point);
-	tp3 = vectors(obj_normal);
+	tp3 = vector_tp(obj_normal);
 	tp4 = matrix_multi_tp(transpose(inverse(s->transform, 4)), tp3);
 	world_normal.x = tp4.x;
 	world_normal.y = tp4.y;
 	world_normal.z = tp4.z;
-	return (normalize(tp4));
+	return (normalize(world_normal));
 }
 
-t_tuple	reflect(t_tuple vec, t_tuple normal)
+t_vector	reflect(t_vector vec, t_vector normal)
 {
-	t_tuple		ret;
+	t_vector	ret;
 	double		d;
 
-	d = 2 * dot(vec, normal);
+	d = 2 * dot(vector_tp(vec), vector_tp(normal));
 	normal.x = normal.x * d;
 	normal.y = normal.y * d;
 	normal.z = normal.z * d;
@@ -45,11 +45,9 @@ t_tuple	reflect(t_tuple vec, t_tuple normal)
 
 t_light	point_light(t_point pos, t_color intensity)
 {
-	t_tuple	tp;
 	t_light	l;
 
-	tp = points(pos);
-	l.pos = tp;
+	l.pos = pos;
 	l.color = intensity;
 	return (l);
 }
@@ -71,8 +69,8 @@ t_material	material(void)
 t_color	lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector normalv)
 {
 	t_point		effective_color;
-	t_tuple		lightv;
-	t_tuple		reflectv;
+	t_vector	lightv;
+	t_vector	reflectv;
 	t_color		ambient;
 	t_color		diffuse;
 	t_color		specular;
@@ -91,12 +89,12 @@ t_color	lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector n
 	p1.x = l.pos.x;
 	p1.y = l.pos.y;
 	p1.z = l.pos.z;
-	lightv = normalize(vectors(subtract_points(p1, pos)));
-	tp1 = multiply(points(effective_color), m.ambient);
+	lightv = normalize(subtract_points(p1, pos));
+	tp1 = multiply(point_tp(effective_color), m.ambient);
 	ambient.r = tp1.x;
 	ambient.g = tp1.y;
 	ambient.b = tp1.z;
-	light_dot_normal = dot(lightv, vectors(normalv));
+	light_dot_normal = dot(vector_tp(lightv), vector_tp(normalv));
 	if (light_dot_normal < 0)
 	{
 		diffuse.r = 0;
@@ -108,13 +106,13 @@ t_color	lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector n
 	}
 	else
 	{
-		tp2 = multiply(points(effective_color), m.diffuse);
+		tp2 = multiply(point_tp(effective_color), m.diffuse);
 		tp3 = multiply(tp2, light_dot_normal);
 		diffuse.r = tp3.x;
 		diffuse.g = tp3.y;
 		diffuse.b = tp3.z;
-		reflectv = reflect(negate(lightv), vectors(normalv));
-		reflect_dot_eye = dot(reflectv, vectors(eyev));
+		reflectv = reflect(negate_vector(lightv), normalv);
+		reflect_dot_eye = dot(vector_tp(reflectv), vector_tp(eyev));
 		if (reflect_dot_eye <= 0)
 		{
 			specular.r = 0;

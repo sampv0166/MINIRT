@@ -17,3 +17,10 @@ int	tuple_equal(t_tuple a, t_tuple b)
 	}
 	return (0);
 }
+
+int	check_type(t_tuple tp)
+{
+	if (double_equal(tp.w, 1.0))
+		return (1);
+	return (0);
+}

@@ -16,9 +16,9 @@ t_tuple	position(t_ray r, float num)
 	t_tuple	vec;
 	t_tuple	p;
 
-	vec = vector(r.direction.x, r.direction.y, r.direction.z);
+	vec = vector_tp(r.direction);
 	multi = multiply(vec, num);
-	p = point(r.origin.x, r.origin.y, r.origin.z);
+	p = point_tp(r.origin);
 	return (add(p, multi));
 }
 
@@ -56,9 +56,9 @@ t_intersect	*intersect(t_sphere *s, t_ray *r)
 	inter = malloc(sizeof(t_intersect));
 	r2 = transform(r, inverse(s->transform, 4));
 	sphere_to_ray = subtract_points(r2->origin, s->sp_center);
-	tp1 = vector(r2->direction.x, r2->direction.y, r2->direction.z);
+	tp1 = vector_tp(r2->direction);
 	a = dot(tp1, tp1);
-	tp2 = vector(sphere_to_ray.x, sphere_to_ray.y, sphere_to_ray.z);
+	tp2 = vector_tp(sphere_to_ray);
 	b = 2 * dot(tp1, tp2);
 	c = dot(tp2, tp2) - 1;
 	d = pow(b, 2) - 4 * a * c;
@@ -142,9 +142,9 @@ t_ray	*transform(t_ray *r, double **m)
 	t_vector	vec;
 
 	ret = malloc(sizeof(t_ray));
-	tp1 = points(r->origin);
+	tp1 = point_tp(r->origin);
 	multi1 = matrix_multi_tp(m, tp1);
-	tp2 = vectors(r->direction);
+	tp2 = vector_tp(r->direction);
 	multi2 = matrix_multi_tp(m, tp2);
 	p.x = multi1.x;
 	p.y = multi1.y;
