@@ -17,7 +17,7 @@ void	world(t_world *w)
 	c1.r = 1;
 	c1.g = 1;
 	c1.b = 1;
-	point_light(p, c1, &light);
+	light = point_light(p, c1);
 	s1 = sphere();
 	c2.r = 0.8;
 	c2.g = 1.0;
@@ -30,7 +30,7 @@ void	world(t_world *w)
 	tp.y = 0.5;
 	tp.z = 0.5;
 	tp.w = 1.0;
-	t = scaling(&tp);
+	t = scaling(tp);
 	s2->transform = t;
 	w->l = light;
 	w->s = malloc(sizeof(t_sphere) * 2);

@@ -81,8 +81,8 @@ typedef struct s_mat2
 
 typedef struct s_ray
 {
-	t_point		*origin;
-	t_vector	*direction;
+	t_point		origin;
+	t_vector	direction;
 }	t_ray;
 
 //color
@@ -297,6 +297,8 @@ void print_vector(char *str,t_vector *tp);
 t_tuple		tuple(double x, double y, double z, double w);
 t_tuple		point(double x, double y, double z);
 t_tuple		vector(double x, double y, double z);
+t_tuple		points(t_point dot);
+t_tuple		vectors(t_vector vec);
 int			double_equal(double a, double b);
 int			tuple_equal(t_tuple a, t_tuple b);
 double		magnitude(t_tuple vec);
@@ -325,7 +327,7 @@ double		**create_matrix(double *elem, int col);
 void		print_matrix(double **mat, int col);
 int			matrix_equality(double **mat1, double **mat2, int col);
 double		**matrix_multi(double **mat1, double **mat2);
-t_tuple		*matrix_multi_tp(double **mat, t_tuple *tp);
+t_tuple		matrix_multi_tp(double **mat, t_tuple tp);
 double		**identity_matrix(void);
 double		**transpose(double **mat);
 double		**submatrix(double **mat, int size, int row, int col);
@@ -336,16 +338,16 @@ int			invertible(double **mat, int size);
 double		**inverse(double **mat, int size);
 
 //Matrix Transformations
-double		**translation(t_tuple *tp);
-double		**scaling(t_tuple *tp);
+double		**translation(t_tuple tp);
+double		**scaling(t_tuple tp);
 double		**rotation_x(double rad);
 double		**rotation_y(double rad);
 double		**rotation_z(double rad);
-t_tuple		*shearing(t_tuple *tp, double *coord);
+t_tuple		shearing(t_tuple tp, double *coord);
 
 //Ray
-t_ray		*create_ray(t_point *p, t_vector *v);
-t_tuple		*position(t_ray *r, float num);
+t_ray		*create_ray(t_point p, t_vector v);
+t_tuple		position(t_ray r, float num);
 t_sphere	*sphere(void);
 t_intersect	*intersect(t_sphere *s, t_ray *r);
 t_intersection	*intersection(double value, void *object);
@@ -354,13 +356,13 @@ t_intersection	**intersections2(int n, ...);
 t_intersection	*hit(t_intersection **xs);
 t_ray		*transform(t_ray *r, double **m);
 void		set_transform(t_sphere *s, double **t);
-t_vector	*normal_at(t_sphere *s, t_point *p);
-t_vector	*reflect(t_vector *vec, t_vector *normal);
+t_tuple		normal_at(t_sphere *s, t_point p);
+t_tuple		reflect(t_tuple vec, t_tuple normal);
 
 //Scene and lights
-void	point_light(t_point pos, t_color intensity, t_light *point);
-void	material(t_material *m);
-t_color	lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector normalv);
-void	world(t_world *w);
+t_light		point_light(t_point pos, t_color intensity);
+t_material	material(void);
+t_color		lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector normalv);
+void		world(t_world *w);
 
 #endif
