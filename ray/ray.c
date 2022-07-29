@@ -1,78 +1,75 @@
 #include "../includes/minirt.h"
 
-t_ray	*create_ray(t_point p, t_vector v)
+t_ray	create_ray(t_point p, t_vector v)
 {
-	t_ray	*ray;
+	t_ray	ray;
 
-	ray = malloc(sizeof(t_ray));
-	ray->origin = p;
-	ray->direction = v;
+	ray.origin = p;
+	ray.direction = v;
 	return (ray);
 }
 
-t_tuple	position(t_ray r, float num)
+t_point	position(t_ray r, float num)
 {
 	t_tuple	multi;
-	t_tuple	vec;
-	t_tuple	p;
+	t_tuple	res;
+	t_point	p;
 
-	vec = vector_tp(r.direction);
-	multi = multiply(vec, num);
-	p = point_tp(r.origin);
-	return (add(p, multi));
+	multi = multiply(vector_tp(r.direction), num);
+	res = add(point_tp(r.origin), multi);
+	p = point(res.x, res.y, res.z);
+	return (p);
 }
 
-t_sphere	*sphere(void)
+t_sphere	sphere(void)
 {
-	t_sphere	*sp;
+	t_sphere	sp;
 	t_point		center;
 	static int	id;
 
-	sp = malloc(sizeof(t_sphere));
 	if (!id)
 		id = 0;
 	center.x = 0;
 	center.y = 0;
 	center.z = 0;
-	sp->sp_center = center;
-	sp->radius = 1.0;
-	sp->id = id++;
-	sp->transform = identity_matrix();
+	sp.sp_center = center;
+	sp.radius = 1.0;
+	sp.id = id++;
+	sp.transform = identity_matrix();
+	sp.material = material();
 	return (sp);
 }
 
-t_intersect	*intersect(t_sphere *s, t_ray *r)
+t_intersect	intersect(t_sphere s, t_ray r)
 {
-	t_intersect	*inter;
+	t_intersect	inter;
 	t_vector	sphere_to_ray;
 	t_tuple		tp1;
 	t_tuple		tp2;
-	t_ray		*r2;
+	t_ray		r2;
 	double		a;
 	double		b;
 	double		c;
 	double		d;
 
-	inter = malloc(sizeof(t_intersect));
-	r2 = transform(r, inverse(s->transform, 4));
-	sphere_to_ray = subtract_points(r2->origin, s->sp_center);
-	tp1 = vector_tp(r2->direction);
+	r2 = transform(r, inverse(s.transform, 4));
+	sphere_to_ray = subtract_points(r2.origin, s.sp_center);
+	tp1 = vector_tp(r2.direction);
 	a = dot(tp1, tp1);
 	tp2 = vector_tp(sphere_to_ray);
 	b = 2 * dot(tp1, tp2);
 	c = dot(tp2, tp2) - 1;
 	d = pow(b, 2) - 4 * a * c;
-	// printf("a: %lf, b: %lf, c: %lf, d: %lf\n", a, b, c, d);
 	if (d < 0)
 	{
-		inter->count = 0;
-		inter->value[0] = 0;
-		inter->value[1] = 0;
+		inter.count = 0;
+		inter.value[0] = 0;
+		inter.value[1] = 0;
 		return (inter);
 	}
-	inter->count = 2;
-	inter->value[0] = (-b - sqrt(d)) / (2 * a);
-	inter->value[1] = (-b + sqrt(d)) / (2 * a);
+	inter.count = 2;
+	inter.value[0] = (-b - sqrt(d)) / (2 * a);
+	inter.value[1] = (-b + sqrt(d)) / (2 * a);
 	return (inter);
 }
 
@@ -131,9 +128,9 @@ t_intersection	*hit(t_intersection **xs)
 	return (inter);
 }
 
-t_ray	*transform(t_ray *r, double **m)
+t_ray	transform(t_ray r, double **m)
 {
-	t_ray		*ret;
+	t_ray		ret;
 	t_tuple		tp1;
 	t_tuple		tp2;
 	t_tuple		multi1;
@@ -141,10 +138,9 @@ t_ray	*transform(t_ray *r, double **m)
 	t_point		p;
 	t_vector	vec;
 
-	ret = malloc(sizeof(t_ray));
-	tp1 = point_tp(r->origin);
+	tp1 = point_tp(r.origin);
 	multi1 = matrix_multi_tp(m, tp1);
-	tp2 = vector_tp(r->direction);
+	tp2 = vector_tp(r.direction);
 	multi2 = matrix_multi_tp(m, tp2);
 	p.x = multi1.x;
 	p.y = multi1.y;
@@ -152,8 +148,8 @@ t_ray	*transform(t_ray *r, double **m)
 	vec.x = multi2.x;
 	vec.y = multi2.y;
 	vec.z = multi2.z;
-	ret->origin = p;
-	ret->direction = vec;
+	ret.origin = p;
+	ret.direction = vec;
 	return (ret);
 }
 

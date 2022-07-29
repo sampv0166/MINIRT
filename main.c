@@ -164,14 +164,14 @@ int main (int argc, char **argv)
 
     // r.origin = &r_point;
     // r.direction = &r_direction;
-    t_intersect *inter;
+    t_intersect inter;
 
     // r.origin->x = 0;
     // r.origin->y = 0;
     // r.origin->z = -5;
      
 
-    t_sphere *sp;
+    t_sphere sp;
     sp = sphere();
     unsigned char	*dst;
     while (h < canvas_pixels - 1)
@@ -185,10 +185,10 @@ int main (int argc, char **argv)
             position.y = world_y;
             position.z = wall_z;
             r.direction = normalize(subtract_points(position, r.origin));
-            inter = intersect(sp, &r);
+            inter = intersect(sp, r);
             dst =  scene_data.img.data + (h * scene_data.img.size_line +
             w * (scene_data.img.bits_per_pixel / 8));    
-            if (inter->count > 0)
+            if (inter.count > 0)
 			    *(unsigned int*)dst  = 234242342;
             else
                 *(unsigned int*)dst  = 0;

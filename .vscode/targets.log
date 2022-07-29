@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `get_next_line.o', needed by `miniRT'.  Stop.
 
 
-# Make data base, printed on Sun Jul 24 05:08:57 2022
+# Make data base, printed on Fri Jul 29 08:49:44 2022
 
 # Variables
 
@@ -20,6 +20,7 @@ make: *** No rule to make target `get_next_line.o', needed by `miniRT'.  Stop.
 ?F = $(notdir $?)
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
+ 
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
@@ -39,13 +40,11 @@ MAKEFILE_LIST :=  Makefile
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-INFOPATH = /opt/homebrew/share/info:
-# environment
 VSCODE_CWD = /
 # environment
-PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/imran/Library/Python/3.8/bin:/Applications/VMware Fusion Tech Preview.app/Contents/Public:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/opt/X11/include
+PATH = /usr/bin:/bin:/usr/sbin:/sbin
 # environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
+LaunchInstanceID = 885ED037-1E7D-4C0D-97C0-A898F33859B2
 # makefile (from `Makefile', line 20)
 MLX_PATH = libs/mlx_mac
 # environment
@@ -53,21 +52,17 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.H6XrUjpM9S/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.9YNRLB9rUy/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.dJ3pnFSpag/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.J8nmxcKg3e/org.xquartz:0
 # makefile (from `Makefile', line 3)
 OBJS = ${SRCS:.c=.o}
 # environment
 PWD = /Users/imran/Desktop/git/miniRT
 # environment
-HOMEBREW_CELLAR = /opt/homebrew/Cellar
-# environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
-# environment
-MANPATH = /opt/homebrew/share/man::
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -80,8 +75,6 @@ VSCODE_CODE_CACHE_PATH = /Users/imran/Library/Application Support/Code/CachedDat
 LOGNAME = imran
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
-# environment
-ZSH = /Users/imran/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -103,13 +96,11 @@ CC = gcc
 # default
 MAKE_VERSION := 3.81
 # environment
-USER = Imran Mustafa
+USER = imran
 # makefile
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 23)
 NAME = miniRT
-# environment
-LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -134,14 +125,10 @@ MFLAGS = -Rrqp
 *D = $(patsubst %/,%,$(dir $*))
 # environment
 XPC_SERVICE_NAME = application.com.microsoft.VSCode.18883371.18883377
-# environment
-HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
-# environment
-HOMEBREW_REPOSITORY = /opt/homebrew
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x0
 # environment
@@ -155,9 +142,9 @@ LIBFT_PATH = libs/libft
 # makefile (from `Makefile', line 19)
 MLX_FLAGS = -Llibs/mlx_mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit
 # environment
-PAGER = less
-# environment
 LC_ALL = C
+# environment
+SECURITYSESSIONID = 186b2
 # automatic
 ^F = $(notdir $^)
 # default
@@ -169,9 +156,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 2384
+VSCODE_PID = 559
 # variable set hash-table stats:
-# Load=78/1024=8%, Rehash=0, Collisions=5/109=5%
+# Load=71/1024=7%, Rehash=0, Collisions=5/102=5%
 
 # Pattern-specific Variable Values
 
@@ -180,34 +167,41 @@ VSCODE_PID = 2384
 # Directories
 
 # get_next_line.c (device 16777231, inode 18405617): could not be opened.
-# transform (device 16777231, inode 18567650): 6 files, no impossibilities.
+# scene (device 16777231, inode 18933331): 5 files, no impossibilities.
 # Makefile (device 16777231, inode 18405611): could not be opened.
 # utils (device 16777231, inode 18405698): 3 files, no impossibilities.
 # libs (device 16777231, inode 18405621): 6 files, no impossibilities.
 # . (device 16777231, inode 18405540): 26 files, no impossibilities.
-# matrix (device 16777231, inode 18451297): 7 files, no impossibilities.
 # parser (device 16777231, inode 18405690): 9 files, no impossibilities.
 # includes (device 16777231, inode 18405619): 3 files, no impossibilities.
-# ray (device 16777231, inode 18739719): 6 files, no impossibilities.
+# ray (device 16777231, inode 18739719): 3 files, no impossibilities.
+# coords (device 16777231, inode 18405752): 9 files, no impossibilities.
 # controls (device 16777231, inode 18432127): 3 files, no impossibilities.
 # error (device 16777231, inode 18405613): 3 files, no impossibilities.
 # get_next_line_utils.c (device 16777231, inode 18405618): could not be opened.
-# maths (device 16777231, inode 18405752): 8 files, no impossibilities.
 # pdfs (device 16777231, inode 18405754): 5 files, no impossibilities.
 # render (device 16777231, inode 18777402): 3 files, no impossibilities.
-# sphere (device 16777231, inode 18864902): 5 files, no impossibilities.
-# main.c (device 16777231, inode 18777398): could not be opened.
+# sphere (device 16777231, inode 18864902): 6 files, no impossibilities.
+# main.c (device 16777231, inode 18897746): could not be opened.
 # default.rt (device 16777231, inode 18777397): could not be opened.
-# color (device 16777231, inode 18431335): 4 files, no impossibilities.
 # free (device 16777231, inode 18405615): 3 files, no impossibilities.
+# tests (device 16777231, inode 18956081): 15 files, no impossibilities.
+# matrices (device 16777231, inode 18451297): 8 files, no impossibilities.
 
-# 100 files, no impossibilities in 21 directories.
+# 110 files, no impossibilities in 21 directories.
 
 # Implicit Rules
 
 # No implicit rules.
 
 # Files
+ 
+
+# Not a target:
+coords/subtract.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 all: miniRT
 #  Command-line target.
@@ -236,12 +230,6 @@ error/error.o:
 #  File has not been updated.
 
 # Not a target:
-transform/transform.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
 parser/parse_cylinder.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -259,7 +247,7 @@ parser/parse_light.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-miniRT: get_next_line.o get_next_line_utils.o main.o color/color.o controls/keys.o error/error.o free/free_scene_data.o maths/compare.o maths/misc.o maths/operation.o maths/point.o maths/tuple.o matrix/inverse.o matrix/matrices.o parser/parse_ambient_lighting.o parser/parse_camera.o parser/parse_cylinder.o parser/parse_light.o parser/parse_plane.o parser/parse_sphere.o parser/parser.o ray/ray.o render/renderer.o sphere/sphere.o transform/transform.o utils/utils.o
+miniRT: get_next_line.o get_next_line_utils.o main.o controls/keys.o coords/color.o coords/compare.o coords/normal.o coords/operation.o coords/product.o coords/subtract.o coords/tuple.o error/error.o free/free_scene_data.o matrices/identity.o matrices/inverse.o matrices/inverting.o matrices/matrix.o matrices/transform.o matrices/transpose.o parser/parse_ambient_lighting.o parser/parse_camera.o parser/parse_cylinder.o parser/parse_light.o parser/parse_plane.o parser/parse_sphere.o parser/parser.o ray/ray.o render/renderer.o scene/scene.o sphere/sphere.o utils/utils.o
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
@@ -276,32 +264,19 @@ miniRT: get_next_line.o get_next_line_utils.o main.o color/color.o controls/keys
 Makefile:
 #  Implicit rule search has been done.
 #  Last modified 2022-07-13 17:05:50
- 
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-maths/compare.o:
+scene/scene.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-color/color.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-maths/operation.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-matrix/matrices.o:
+matrices/matrix.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -323,18 +298,6 @@ fclean: clean
 	
 
 # Not a target:
-matrix/inverse.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-maths/tuple.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
 get_next_line_utils.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -348,6 +311,12 @@ parser/parse_ambient_lighting.o:
 
 # Not a target:
 .DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matrices/identity.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -380,6 +349,18 @@ ray/ray.o:
 #  File has not been updated.
 
 # Not a target:
+coords/compare.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+coords/normal.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 parser/parse_sphere.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -392,19 +373,32 @@ main.o:
 #  File has not been updated.
 
 # Not a target:
+matrices/transpose.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+coords/operation.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 render/renderer.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
+ 
 # Not a target:
-maths/misc.o:
+free/free_scene_data.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-free/free_scene_data.o:
+matrices/transform.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -418,13 +412,19 @@ get_next_line.o:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
+coords/product.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 controls/keys.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-maths/point.o:
+coords/color.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -435,8 +435,26 @@ utils/utils.o:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+matrices/inverse.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+coords/tuple.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matrices/inverting.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=34/1024=3%, Rehash=0, Collisions=1/77=1%
+# Load=39/1024=4%, Rehash=0, Collisions=2/87=2%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -448,6 +466,6 @@ utils/utils.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun Jul 24 05:08:57 2022
+# Finished Make data base on Fri Jul 29 08:49:44 2022
 
  
