@@ -18,6 +18,8 @@
 
 //KEYS
 # define KEY_ESC 53
+# define TRUE 1
+# define FALSE 0
 
 //object types
 
@@ -27,6 +29,8 @@ enum
 	PL,
 	CN,
 };
+
+typedef unsigned int t_bool;
 
 //tuple
 
@@ -172,11 +176,17 @@ typedef struct sobj_list
 }		tobj_list;
 
 //intersection
+typedef	struct s_intersection
+{
+	int			count;
+	double		t;
+	t_sphere	object;
+}	t_intersection;
 
 typedef struct s_intersect
 {
-	int		count;
-	double	value[2];
+	int				count;
+	double			t[2];
 }	t_intersect;
 
 // typedef struct s_obj
@@ -186,17 +196,22 @@ typedef struct s_intersect
 // }	t_obj;
 
 
-typedef	struct s_intersection
-{
-	double		t;
-	t_sphere	*object;
-}	t_intersection;
 
 typedef struct s_world
 {
-	t_sphere	*s;
+	t_sphere	s[2];
 	t_light		l;
 }	t_world;
+
+typedef	struct s_comps
+{
+	double			t;
+	t_sphere		object;
+	t_point			point;
+	t_vector		eyev;
+	t_vector		normalv;
+	t_bool			inside;
+}	t_comps;
 
 // main struct
 typedef struct s_data
@@ -332,23 +347,32 @@ double		**rotation_z(double rad);
 t_tuple		shearing(t_tuple tp, double *coord);
 
 //Ray
-t_ray		create_ray(t_point p, t_vector v);
+t_ray		ray(t_point p, t_vector v);
 t_point		position(t_ray r, float num);
 t_sphere	sphere(void);
 t_intersect	intersect(t_sphere s, t_ray r);
-t_intersection	*intersection(double value, void *object);
-t_intersection	**intersections(t_intersection *i1, t_intersection *i2);
-t_intersection	**intersections2(int n, ...);
-t_intersection	*hit(t_intersection **xs);
+t_intersection	intersection(double value, t_sphere object);
+t_intersection	*intersections(t_intersection i1, t_intersection i2);
+t_intersection	*intersections2(int n, ...);
+t_intersection	hit(t_intersection *xs);
 t_ray		transform(t_ray r, double **m);
 void		set_transform(t_sphere *s, double **t);
-t_vector		normal_at(t_sphere *s, t_point p);
+t_vector		normal_at(t_sphere s, t_point p);
 t_vector	reflect(t_vector vec, t_vector normal);
 
 //Scene and lights
 t_light		point_light(t_point pos, t_color intensity);
 t_material	material(void);
 t_color		lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector normalv);
-t_world		world();
+t_world		world(void);
+t_world		default_world(void);
+t_intersection	*intersect_world(t_world w, t_ray r);
+t_comps	prepare_computations(t_intersection i, t_ray r);
+t_color	shade_hit(t_world w, t_comps comps);
+t_color	color_at(t_world w, t_ray r);
+
+//Utility
+void	sort_list(int n, double *num);
+void	sort_intersections(t_intersection *xs);
 
 #endif

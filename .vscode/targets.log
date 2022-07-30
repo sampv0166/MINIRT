@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `get_next_line.o', needed by `miniRT'.  Stop.
 
 
-# Make data base, printed on Fri Jul 29 08:49:44 2022
+# Make data base, printed on Sat Jul 30 05:11:14 2022
 
 # Variables
 
@@ -20,7 +20,6 @@ make: *** No rule to make target `get_next_line.o', needed by `miniRT'.  Stop.
 ?F = $(notdir $?)
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
- 
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
@@ -30,6 +29,7 @@ CURDIR := /Users/imran/Desktop/git/miniRT
 # makefile
 SHELL = /bin/sh
 # environment
+ 
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
@@ -44,7 +44,7 @@ VSCODE_CWD = /
 # environment
 PATH = /usr/bin:/bin:/usr/sbin:/sbin
 # environment
-LaunchInstanceID = 885ED037-1E7D-4C0D-97C0-A898F33859B2
+LaunchInstanceID = E4101C1F-1961-4DD4-9997-2DD107566CF0
 # makefile (from `Makefile', line 20)
 MLX_PATH = libs/mlx_mac
 # environment
@@ -52,11 +52,11 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.9YNRLB9rUy/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.BHzTlfIGo2/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.J8nmxcKg3e/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.X2k7cjnAag/org.xquartz:0
 # makefile (from `Makefile', line 3)
 OBJS = ${SRCS:.c=.o}
 # environment
@@ -156,7 +156,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 559
+VSCODE_PID = 552
 # variable set hash-table stats:
 # Load=71/1024=7%, Rehash=0, Collisions=5/102=5%
 
@@ -167,7 +167,7 @@ VSCODE_PID = 559
 # Directories
 
 # get_next_line.c (device 16777231, inode 18405617): could not be opened.
-# scene (device 16777231, inode 18933331): 5 files, no impossibilities.
+# scene (device 16777231, inode 18933331): 3 files, no impossibilities.
 # Makefile (device 16777231, inode 18405611): could not be opened.
 # utils (device 16777231, inode 18405698): 3 files, no impossibilities.
 # libs (device 16777231, inode 18405621): 6 files, no impossibilities.
@@ -181,21 +181,20 @@ VSCODE_PID = 559
 # get_next_line_utils.c (device 16777231, inode 18405618): could not be opened.
 # pdfs (device 16777231, inode 18405754): 5 files, no impossibilities.
 # render (device 16777231, inode 18777402): 3 files, no impossibilities.
-# sphere (device 16777231, inode 18864902): 6 files, no impossibilities.
+# sphere (device 16777231, inode 18864902): 5 files, no impossibilities.
 # main.c (device 16777231, inode 18897746): could not be opened.
 # default.rt (device 16777231, inode 18777397): could not be opened.
 # free (device 16777231, inode 18405615): 3 files, no impossibilities.
-# tests (device 16777231, inode 18956081): 15 files, no impossibilities.
+# tests (device 16777231, inode 18956081): 16 files, no impossibilities.
 # matrices (device 16777231, inode 18451297): 8 files, no impossibilities.
 
-# 110 files, no impossibilities in 21 directories.
+# 108 files, no impossibilities in 21 directories.
 
 # Implicit Rules
 
 # No implicit rules.
 
 # Files
- 
 
 # Not a target:
 coords/subtract.o:
@@ -299,6 +298,7 @@ fclean: clean
 
 # Not a target:
 get_next_line_utils.o:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -390,7 +390,6 @@ render/renderer.o:
 #  Modification time never checked.
 #  File has not been updated.
 
- 
 # Not a target:
 free/free_scene_data.o:
 #  Implicit rule search has not been done.
@@ -466,6 +465,6 @@ matrices/inverting.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Jul 29 08:49:44 2022
+# Finished Make data base on Sat Jul 30 05:11:14 2022
 
  

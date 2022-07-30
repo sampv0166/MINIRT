@@ -14,7 +14,7 @@ int	main(void)
 	p = point(1, 2, 3);
 	v = vector(0, 1, 0);
 	tp = tuple(3, 4, 5, 1);
-	r1 = create_ray(p, v);
+	r1 = ray(p, v);
 	m = translation(tp);
 	r2 = transform(r1, m);
 	printf("-------------------\n");
@@ -43,11 +43,11 @@ int	main(void)
 	set_transform(&s, m);
 	print_matrix(s.transform, 4);
 	tp = tuple(2, 2, 2, 1);
-	r1 = create_ray(point(0, 0, -5), vector(0, 0, 1));
+	r1 = ray(point(0, 0, -5), vector(0, 0, 1));
 	set_transform(&s, scaling(tp));
 	xs = intersect(s, r1);
 	printf("-------------------\n");
 	printf("Intersecting a scaled sphere with a ray\n");
 	printf("xs count: %d, value 1: %lf, value 2: %lf\n", 
-		xs.count, xs.value[0], xs.value[1]);
+		xs.count, xs.t[0], xs.t[1]);
 }
