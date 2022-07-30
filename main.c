@@ -166,6 +166,7 @@ int main (int argc, char **argv)
     t_point position1;
     t_ray r;
 
+
     t_intersect *inter;
 
     r.origin.x = 0;
@@ -173,7 +174,7 @@ int main (int argc, char **argv)
     r.origin.z = -5;
      
 
-    t_sphere *sp;
+    t_sphere sp;
     sp = sphere();
     sp->material = material();
 

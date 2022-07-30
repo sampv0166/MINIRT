@@ -57,24 +57,11 @@ typedef struct s_vector
 
 //matrices
 
-typedef struct s_mat4
+typedef struct s_mat
 {
-	double	mat[4][4];
-	int		size;
-}	t_mat4;
-
-typedef struct s_mat3
-{
-	double	mat[3][3];
-	int		size;
-}	t_mat3;
-
-typedef struct s_mat2
-{
-	double	mat[2][2];
-	int		size;
-}	t_mat2;
-
+	int		s;
+	double	m[4][4];
+}	t_mat;
 
 //ray
 
@@ -344,15 +331,15 @@ double		**rotation_z(double rad);
 t_tuple		shearing(t_tuple tp, double *coord);
 
 //Ray
-t_ray		*create_ray(t_point p, t_vector v);
-t_tuple		position(t_ray r, float num);
-t_sphere	*sphere(void);
-t_intersect	*intersect(t_sphere *s, t_ray *r);
+t_ray		create_ray(t_point p, t_vector v);
+t_point		position(t_ray r, float num);
+t_sphere	sphere(void);
+t_intersect	intersect(t_sphere s, t_ray r);
 t_intersection	*intersection(double value, void *object);
 t_intersection	**intersections(t_intersection *i1, t_intersection *i2);
 t_intersection	**intersections2(int n, ...);
 t_intersection	*hit(t_intersection **xs);
-t_ray		*transform(t_ray *r, double **m);
+t_ray		transform(t_ray r, double **m);
 void		set_transform(t_sphere *s, double **t);
 t_vector		normal_at(t_sphere *s, t_point p);
 t_vector	reflect(t_vector vec, t_vector normal);
@@ -361,6 +348,6 @@ t_vector	reflect(t_vector vec, t_vector normal);
 t_light		point_light(t_point pos, t_color intensity);
 t_material	material(void);
 t_color		lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector normalv);
-void		world(t_world *w);
+t_world		world();
 
 #endif
