@@ -137,6 +137,12 @@ unsigned int perpixel(t_tuple coord)
 
 }
 
+// int	rgb_to_int(t_color rgb)
+// {
+// 	return(rgb.r << 16 | rgb.g << 8 | rgb.b);
+// }
+
+
 int main (int argc, char **argv)
 {
     t_data scene_data;
@@ -157,22 +163,33 @@ int main (int argc, char **argv)
     h = 0;
     double world_y;
     double world_x;
-    t_point position;
+    t_point position1;
     t_ray r;
-    // t_point r_point;
-    // t_vector r_direction;
 
-    // r.origin = &r_point;
-    // r.direction = &r_direction;
-    t_intersect inter;
 
-    // r.origin->x = 0;
-    // r.origin->y = 0;
-    // r.origin->z = -5;
+    t_intersect *inter;
+
+    r.origin.x = 0;
+    r.origin.y = 0;
+    r.origin.z = -5;
      
 
     t_sphere sp;
     sp = sphere();
+    sp->material = material();
+
+    t_point light_position;
+    light_position = point(-10 ,10,-10);
+    //int light_color = 16777211;
+
+    t_light light;
+    t_color color;
+    color.r =  1;
+    color.g = 0.2;
+    color.b = 1;
+
+    light = point_light(light_position, color);
+
     unsigned char	*dst;
     while (h < canvas_pixels - 1)
     {   
@@ -181,18 +198,68 @@ int main (int argc, char **argv)
         while(w < canvas_pixels - 1)
         {
             world_x = -half + pixel_size * w;
-            position.x = world_x;
-            position.y = world_y;
-            position.z = wall_z;
-            r.direction = normalize(subtract_points(position, r.origin));
-            inter = intersect(sp, r);
+            position1.x = world_x;
+            position1.y = world_y;
+            position1.z = wall_z;
+            r.direction = normalize(subtract_points(position1, r.origin));
+            inter = intersect(sp, &r);
+
+            // point ← position1(ray, hit.t)
+            // normal ← normal_at(hit.object, point)
+            // eye ← -ray.direction
+
+            t_tuple p;
+            t_vector normal;
+            t_color col;
+
+            p = position(r, inter->value[0]);
+            t_point pnt;
+            pnt.x = p.x;
+            pnt.y = p.y;
+            pnt.z = p.z;
+
+            t_vector eye;
+
+            eye = negate_vector(r.direction);
+
+            normal = normal_at(sp,pnt);
+            col = lighting(sp->material, light, pnt, eye , normal);
+
+            // std::cout << "r = " << col.r << "\n";
+            // std::cout << "g = " << col.g << "\n";
+            // std::cout << "b = " << col.b << "\n";
+            
+   
+            int rr;
+            int gg;
+            int bb;
+
+            rr = col.r * 255;
+            gg = col.g * 255;
+            bb = col.b * 255;
+            
+            // printf("r = %lf\n", rr);
+            // printf("g = %lf\n", gg);
+            // printf("b = %lf\n", bb);
+            // int col;
+//             int	rgb_to_int(const t_rgb rgb)
+// {
+	        //col = rgb.r << 16 | rgb.g << 8 | rgb.b;
+// }
+            int color_code;
+
+            color_code = rr << 16 | gg << 8 | bb;
+
+
+
             dst =  scene_data.img.data + (h * scene_data.img.size_line +
             w * (scene_data.img.bits_per_pixel / 8));    
-            if (inter.count > 0)
-			    *(unsigned int*)dst  = 234242342;
+            if (inter->count > 0)
+			    *(unsigned int*)dst  = color_code;
             else
                 *(unsigned int*)dst  = 0;
-            w++;    
+            w++;
+
         }
         h++;
     }
