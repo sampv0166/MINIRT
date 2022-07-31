@@ -1,6 +1,6 @@
 #include "../includes/minirt.h"
 
-t_vector	normal_at(t_sphere *s, t_point p)
+t_vector	normal_at(t_sphere s, t_point p)
 {
 	t_vector	obj_normal;
 	t_vector	world_normal;
@@ -12,7 +12,7 @@ t_vector	normal_at(t_sphere *s, t_point p)
 	t_tuple		tp4;
 
 	tp1 = point_tp(p);
-	tp2 = matrix_multi_tp(inverse(s->transform, 4), tp1);
+	tp2 = matrix_multi_tp(inverse(s.transform, 4), tp1);
 	obj_point.x = tp2.x;
 	obj_point.y = tp2.y;
 	obj_point.z = tp2.z;
@@ -21,7 +21,7 @@ t_vector	normal_at(t_sphere *s, t_point p)
 	point.z = 0;
 	obj_normal = subtract_points(obj_point, point);
 	tp3 = vector_tp(obj_normal);
-	tp4 = matrix_multi_tp(transpose(inverse(s->transform, 4)), tp3);
+	tp4 = matrix_multi_tp(transpose(inverse(s.transform, 4)), tp3);
 	world_normal.x = tp4.x;
 	world_normal.y = tp4.y;
 	world_normal.z = tp4.z;
@@ -78,7 +78,7 @@ t_color	lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector n
 	double		light_dot_normal;
 	double		reflect_dot_eye;
 	double		factor;
-	t_point		p1;
+	t_point		p;
 	t_tuple		tp1;
 	t_tuple		tp2;
 	t_tuple		tp3;
@@ -86,39 +86,25 @@ t_color	lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector n
 	effective_color.x = m.color.r * l.color.r;
 	effective_color.y = m.color.g * l.color.g;
 	effective_color.z = m.color.b * l.color.b;
-	p1.x = l.pos.x;
-	p1.y = l.pos.y;
-	p1.z = l.pos.z;
-	lightv = normalize(subtract_points(p1, pos));
+	p = point(l.pos.x, l.pos.y, l.pos.z);
+	lightv = normalize(subtract_points(p, pos));
 	tp1 = multiply(point_tp(effective_color), m.ambient);
-	ambient.r = tp1.x;
-	ambient.g = tp1.y;
-	ambient.b = tp1.z;
+	ambient = color(tp1.x, tp1.y, tp1.z);
 	light_dot_normal = dot(vector_tp(lightv), vector_tp(normalv));
 	if (light_dot_normal < 0)
 	{
-		diffuse.r = 0;
-		diffuse.g = 0;
-		diffuse.b = 0;
-		specular.r = 0;
-		specular.g = 0;
-		specular.b = 0;
+		diffuse = color(0, 0, 0);
+		specular = color(0, 0, 0);
 	}
 	else
 	{
 		tp2 = multiply(point_tp(effective_color), m.diffuse);
 		tp3 = multiply(tp2, light_dot_normal);
-		diffuse.r = tp3.x;
-		diffuse.g = tp3.y;
-		diffuse.b = tp3.z;
+		diffuse = color(tp3.x, tp3.y, tp3.z);
 		reflectv = reflect(negate_vector(lightv), normalv);
 		reflect_dot_eye = dot(vector_tp(reflectv), vector_tp(eyev));
 		if (reflect_dot_eye <= 0)
-		{
-			specular.r = 0;
-			specular.g = 0;
-			specular.b = 0;
-		}
+			specular = color(0, 0, 0);
 		else
 		{
 			factor = pow(reflect_dot_eye, m.shininess);

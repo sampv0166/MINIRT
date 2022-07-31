@@ -1,6 +1,6 @@
 #include "../includes/minirt.h"
 
-t_ray	create_ray(t_point p, t_vector v)
+t_ray	ray(t_point p, t_vector v)
 {
 	t_ray	ray;
 
@@ -63,30 +63,33 @@ t_intersect	intersect(t_sphere s, t_ray r)
 	if (d < 0)
 	{
 		inter.count = 0;
-		inter.value[0] = 0;
-		inter.value[1] = 0;
+		inter.t[0] = 0;
+		inter.t[1] = 0;
 		return (inter);
 	}
 	inter.count = 2;
-	inter.value[0] = (-b - sqrt(d)) / (2 * a);
-	inter.value[1] = (-b + sqrt(d)) / (2 * a);
+	inter.t[0] = (-b - sqrt(d)) / (2 * a);
+	inter.t[1] = (-b + sqrt(d)) / (2 * a);
 	return (inter);
 }
 
-t_intersection	*intersection(double value, void *object)
+t_intersection	intersection(double value, t_sphere object)
 {
-	t_intersection	*i;
+	t_intersection	i;
+	static int		c;
 
-	i = malloc(sizeof(t_intersection));
-	i->object = malloc(sizeof(typeof(object)));
-	i->t = value;
-	i->object = object;
+	// i->object = malloc(sizeof(typeof(object)));
+	if (!c)
+		c = 0;
+	i.count = c++;
+	i.t = value;
+	i.object = object;
 	return (i);
 }
 
-t_intersection	**intersections(t_intersection *i1, t_intersection *i2)
+t_intersection	*intersections(t_intersection i1, t_intersection i2)
 {
-	t_intersection	**ret;
+	t_intersection	*ret;
 
 	ret = malloc(sizeof(t_intersection) * 2);
 	ret[0] = i1;
@@ -94,9 +97,33 @@ t_intersection	**intersections(t_intersection *i1, t_intersection *i2)
 	return (ret);
 }
 
-t_intersection	**intersections2(int n, ...)
+void	sort_intersections(t_intersection *xs)
 {
-	t_intersection	**ret;
+	int				i;
+	int				j;
+	t_intersection	a;
+	
+	i = 0;
+	while (i < xs[0].count)
+	{
+		j = i + 1;
+		while (j < xs[0].count)
+		{
+			if (xs[i].t > xs[j].t)
+			{
+				a = xs[i];
+				xs[i] = xs[j];
+				xs[j] = a;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+t_intersection	*intersections2(int n, ...)
+{
+	t_intersection	*ret;
 	int				i;
 	va_list			inters;
 
@@ -105,26 +132,29 @@ t_intersection	**intersections2(int n, ...)
 	va_start(inters, n);
 	while (i < n)
 	{
-		ret[i] = va_arg(inters, t_intersection *);
+		ret[i] = va_arg(inters, t_intersection);
 		i++;
 	}
 	va_end(inters);
+	ret[0].count = i;
 	return (ret);
 }
 
-t_intersection	*hit(t_intersection **xs)
+t_intersection	hit(t_intersection *xs)
 {
 	int				i;
-	t_intersection	*inter;
+	t_intersection	inter;
 
 	i = 0;
-	inter = malloc(sizeof(t_intersection));
-	while (xs[i])
+
+	sort_intersections(xs);
+	while (i < xs[0].count)
 	{
-		if (xs[i]->t > 0)
-			inter = xs[i];
+		if (xs[i].t > 0)
+			return(xs[i]);
 		i++;
 	}
+	inter = xs[i];
 	return (inter);
 }
 
@@ -142,12 +172,8 @@ t_ray	transform(t_ray r, double **m)
 	multi1 = matrix_multi_tp(m, tp1);
 	tp2 = vector_tp(r.direction);
 	multi2 = matrix_multi_tp(m, tp2);
-	p.x = multi1.x;
-	p.y = multi1.y;
-	p.z = multi1.z;
-	vec.x = multi2.x;
-	vec.y = multi2.y;
-	vec.z = multi2.z;
+	p = point(multi1.x, multi1.y, multi1.z);
+	vec = vector(multi2.x, multi2.y, multi2.z);
 	ret.origin = p;
 	ret.direction = vec;
 	return (ret);

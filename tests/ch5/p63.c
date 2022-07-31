@@ -3,11 +3,11 @@
 int	main(void)
 {
 	t_sphere		s;
-	t_intersection	*i;
+	t_intersection	i;
 
 	s = sphere();
-	i = intersection(3.5, &s);
+	i = intersection(3.5, s);
 	printf("-------------------\n");
 	printf("An intersection encapsulates t and object\n");
-	printf("t value: %lf object id: %d\n", i->t, i->object->id);
+	printf("t value: %lf object id: %d\n", i.t, i.object.id);
 }
