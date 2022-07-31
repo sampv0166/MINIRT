@@ -1,6 +1,7 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/imran/Desktop/git/miniRT'
 gcc -Wall -Wextra -Werror -g3   -c -o get_next_line.o get_next_line.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o get_next_line_utils.o get_next_line_utils.c
 gcc -Wall -Wextra -Werror -g3   -c -o main.o main.c
 gcc -Wall -Wextra -Werror -g3   -c -o controls/keys.o controls/keys.c
@@ -10,30 +11,45 @@ gcc -Wall -Wextra -Werror -g3   -c -o coords/normal.o coords/normal.c
 gcc -Wall -Wextra -Werror -g3   -c -o coords/operation.o coords/operation.c
 gcc -Wall -Wextra -Werror -g3   -c -o coords/product.o coords/product.c
 gcc -Wall -Wextra -Werror -g3   -c -o coords/subtract.o coords/subtract.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o coords/tuple.o coords/tuple.c
 gcc -Wall -Wextra -Werror -g3   -c -o error/error.o error/error.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o free/free_scene_data.o free/free_scene_data.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o matrices/identity.o matrices/identity.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o matrices/inverse.o matrices/inverse.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o matrices/inverting.o matrices/inverting.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o matrices/matrix.o matrices/matrix.c
 gcc -Wall -Wextra -Werror -g3   -c -o matrices/transform.o matrices/transform.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o matrices/transpose.o matrices/transpose.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o parser/parse_ambient_lighting.o parser/parse_ambient_lighting.c
 gcc -Wall -Wextra -Werror -g3   -c -o parser/parse_camera.o parser/parse_camera.c
 gcc -Wall -Wextra -Werror -g3   -c -o parser/parse_cylinder.o parser/parse_cylinder.c
 gcc -Wall -Wextra -Werror -g3   -c -o parser/parse_light.o parser/parse_light.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o parser/parse_plane.o parser/parse_plane.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o parser/parse_sphere.o parser/parse_sphere.c
 gcc -Wall -Wextra -Werror -g3   -c -o parser/parser.o parser/parser.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o ray/ray.o ray/ray.c
+ 
 gcc -Wall -Wextra -Werror -g3   -c -o render/renderer.o render/renderer.c
 gcc -Wall -Wextra -Werror -g3   -c -o scene/scene.o scene/scene.c
 gcc -Wall -Wextra -Werror -g3   -c -o sphere/sphere.o sphere/sphere.c
 gcc -Wall -Wextra -Werror -g3   -c -o utils/utils.o utils/utils.c
+ 
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C libs/mlx_mac
+ 
 make[1]: Entering directory `/Users/imran/Desktop/git/miniRT/libs/mlx_mac'
 cc -O2 -DSTRINGPUTX11   -c -o mlx_shaders.o mlx_shaders.c
+ 
 cc -O2 -DSTRINGPUTX11   -c -o mlx_new_window.o mlx_new_window.m
 cc -O2 -DSTRINGPUTX11   -c -o mlx_init_loop.o mlx_init_loop.m
 cc -O2 -DSTRINGPUTX11   -c -o mlx_new_image.o mlx_new_image.m
@@ -45,92 +61,143 @@ ar -r libmlx.a mlx_shaders.o mlx_new_window.o mlx_init_loop.o mlx_new_image.o ml
 ranlib libmlx.a
 make[1]: Leaving directory `/Users/imran/Desktop/git/miniRT/libs/mlx_mac'
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C libs/libft
+ 
 make[1]: Entering directory `/Users/imran/Desktop/git/miniRT/libs/libft'
 gcc -Wall -Wextra -Werror -g   -c -o ft_atoi.o ft_atoi.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_bzero.o ft_bzero.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_calloc.o ft_calloc.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_isalnum.o ft_isalnum.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_isalpha.o ft_isalpha.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_isascii.o ft_isascii.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_isdigit.o ft_isdigit.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_isprint.o ft_isprint.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_itoa.o ft_itoa.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_memchr.o ft_memchr.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_split.o ft_split.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_memcmp.o ft_memcmp.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_memcpy.o ft_memcpy.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_memmove.o ft_memmove.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_memset.o ft_memset.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_putchar_fd.o ft_putchar_fd.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_putendl_fd.o ft_putendl_fd.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strjoin.o ft_strjoin.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_putnbr_fd.o ft_putnbr_fd.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_putstr_fd.o ft_putstr_fd.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_striteri.o ft_striteri.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strchr.o ft_strchr.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strdup.o ft_strdup.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_strlcat.o ft_strlcat.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strlcpy.o ft_strlcpy.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strlen.o ft_strlen.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strmapi.o ft_strmapi.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_strncmp.o ft_strncmp.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strnstr.o ft_strnstr.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strrchr.o ft_strrchr.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_strtrim.o ft_strtrim.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_substr.o ft_substr.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_tolower.o ft_tolower.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_toupper.o ft_toupper.c
+ 
 ar -rcs libft.a ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_memchr.o ft_split.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_putchar_fd.o ft_putendl_fd.o ft_strjoin.o ft_putnbr_fd.o ft_putstr_fd.o ft_striteri.o ft_strchr.o ft_strdup.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o
 make[1]: Leaving directory `/Users/imran/Desktop/git/miniRT/libs/libft'
+ 
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C libs/libft bonus
  
 make[1]: Entering directory `/Users/imran/Desktop/git/miniRT/libs/libft'
 gcc -Wall -Wextra -Werror -g   -c -o ft_atoi.o ft_atoi.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_bzero.o ft_bzero.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_calloc.o ft_calloc.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_isalnum.o ft_isalnum.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_isalpha.o ft_isalpha.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_isascii.o ft_isascii.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_isdigit.o ft_isdigit.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_isprint.o ft_isprint.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_itoa.o ft_itoa.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_memchr.o ft_memchr.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_split.o ft_split.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_memcmp.o ft_memcmp.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_memcpy.o ft_memcpy.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_memmove.o ft_memmove.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_memset.o ft_memset.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_putchar_fd.o ft_putchar_fd.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_putendl_fd.o ft_putendl_fd.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_strjoin.o ft_strjoin.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_putnbr_fd.o ft_putnbr_fd.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_putstr_fd.o ft_putstr_fd.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_striteri.o ft_striteri.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_strchr.o ft_strchr.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_strdup.o ft_strdup.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strlcat.o ft_strlcat.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_strlcpy.o ft_strlcpy.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strlen.o ft_strlen.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strmapi.o ft_strmapi.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_strncmp.o ft_strncmp.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strnstr.o ft_strnstr.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_strrchr.o ft_strrchr.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_strtrim.o ft_strtrim.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_substr.o ft_substr.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_tolower.o ft_tolower.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_toupper.o ft_toupper.c
 ar -rcs libft.a ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_memchr.o ft_split.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_putchar_fd.o ft_putendl_fd.o ft_strjoin.o ft_putnbr_fd.o ft_putstr_fd.o ft_striteri.o ft_strchr.o ft_strdup.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_lstadd_back.o ft_lstadd_back.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_lstadd_front.o ft_lstadd_front.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_lstclear.o ft_lstclear.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_lstdelone.o ft_lstdelone.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_lstiter.o ft_lstiter.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_lstlast.o ft_lstlast.c
 gcc -Wall -Wextra -Werror -g   -c -o ft_lstsize.o ft_lstsize.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_lstnew.o ft_lstnew.c
+ 
 gcc -Wall -Wextra -Werror -g   -c -o ft_lstmap.o ft_lstmap.c
 ar -rcs libft.a ft_lstadd_back.o ft_lstadd_front.o ft_lstclear.o ft_lstdelone.o ft_lstiter.o ft_lstlast.o ft_lstsize.o ft_lstnew.o ft_lstmap.o
 make[1]: Leaving directory `/Users/imran/Desktop/git/miniRT/libs/libft'
+ 
 gcc get_next_line.o get_next_line_utils.o main.o controls/keys.o coords/color.o coords/compare.o coords/normal.o coords/operation.o coords/product.o coords/subtract.o coords/tuple.o error/error.o free/free_scene_data.o matrices/identity.o matrices/inverse.o matrices/inverting.o matrices/matrix.o matrices/transform.o matrices/transpose.o parser/parse_ambient_lighting.o parser/parse_camera.o parser/parse_cylinder.o parser/parse_light.o parser/parse_plane.o parser/parse_sphere.o parser/parser.o ray/ray.o render/renderer.o scene/scene.o sphere/sphere.o utils/utils.o libs/libft/libft.a -Llibs/mlx_mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit  -Wall -Wextra -Werror -g3 -o miniRT
+ 
 make: Leaving directory `/Users/imran/Desktop/git/miniRT'
  

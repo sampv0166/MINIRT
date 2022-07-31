@@ -106,6 +106,17 @@ typedef struct s_camera
 
 }               t_camera;
 
+typedef struct s_camera2
+{
+    double	hsize;
+	double	vsize;
+    double	field_of_view;
+	double	**transform;
+	double	half_width;
+	double	half_height;
+	double	pixel_size;
+
+}	t_camera2;
 
 typedef struct		s_mlx
 {
@@ -374,5 +385,10 @@ t_color	color_at(t_world w, t_ray r);
 //Utility
 void	sort_list(int n, double *num);
 void	sort_intersections(t_intersection *xs);
+
+//View transformation
+double	**view_transform(t_point from, t_point to, t_vector up);
+t_camera2	camera(double hsize, double vsize, double field_of_view);
+t_ray	ray_for_pixel(t_camera2 camera, double x, double y);
 
 #endif
