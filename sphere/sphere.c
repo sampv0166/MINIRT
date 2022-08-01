@@ -66,7 +66,8 @@ t_material	material(void)
 	return (m);
 }
 
-t_color	lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector normalv)
+t_color	lighting(t_material m, t_light l, t_point pos,
+	t_vector eyev, t_vector normalv, t_bool in_shadow)
 {
 	t_point		effective_color;
 	t_vector	lightv;
@@ -91,7 +92,7 @@ t_color	lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector n
 	tp1 = multiply(point_tp(effective_color), m.ambient);
 	ambient = color(tp1.x, tp1.y, tp1.z);
 	light_dot_normal = dot(vector_tp(lightv), vector_tp(normalv));
-	if (light_dot_normal < 0)
+	if (light_dot_normal < 0 || in_shadow)
 	{
 		diffuse = color(0, 0, 0);
 		specular = color(0, 0, 0);
