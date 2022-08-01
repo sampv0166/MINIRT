@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `get_next_line.o', needed by `miniRT'.  Stop.
 
 
-# Make data base, printed on Sun Jul 31 07:21:12 2022
+# Make data base, printed on Mon Aug  1 05:06:23 2022
 
 # Variables
 
@@ -22,7 +22,6 @@ make: *** No rule to make target `get_next_line.o', needed by `miniRT'.  Stop.
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
- 
 # automatic
 @F = $(notdir $@)
 # makefile
@@ -44,7 +43,7 @@ VSCODE_CWD = /
 # environment
 PATH = /usr/bin:/bin:/usr/sbin:/sbin
 # environment
-LaunchInstanceID = 876348AD-21E1-4681-9D97-2CA4F29EF5A2
+LaunchInstanceID = 31B9AD67-1C2B-4A38-AD30-4B0EB567F981
 # makefile (from `Makefile', line 20)
 MLX_PATH = libs/mlx_mac
 # environment
@@ -52,11 +51,11 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.8GfBK9sXYw/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.WHeGgyiHBG/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.OQplhgDdlY/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.yPDe1lOum1/org.xquartz:0
 # makefile (from `Makefile', line 3)
 OBJS = ${SRCS:.c=.o}
 # environment
@@ -101,6 +100,7 @@ USER = imran
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 23)
 NAME = miniRT
+ 
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -156,7 +156,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 574
+VSCODE_PID = 560
 # variable set hash-table stats:
 # Load=71/1024=7%, Rehash=0, Collisions=5/102=5%
 
@@ -166,29 +166,30 @@ VSCODE_PID = 574
 
 # Directories
 
-# get_next_line.c (device 16777231, inode 18405617): could not be opened.
-# scene (device 16777231, inode 18933331): 3 files, no impossibilities.
-# Makefile (device 16777231, inode 18405611): could not be opened.
-# utils (device 16777231, inode 18405698): 3 files, no impossibilities.
-# libs (device 16777231, inode 18405621): 6 files, no impossibilities.
-# . (device 16777231, inode 18405540): 26 files, no impossibilities.
-# parser (device 16777231, inode 18405690): 9 files, no impossibilities.
-# includes (device 16777231, inode 18405619): 3 files, no impossibilities.
-# ray (device 16777231, inode 18739719): 3 files, no impossibilities.
-# coords (device 16777231, inode 18405752): 9 files, no impossibilities.
-# controls (device 16777231, inode 18432127): 3 files, no impossibilities.
-# error (device 16777231, inode 18405613): 3 files, no impossibilities.
-# get_next_line_utils.c (device 16777231, inode 18405618): could not be opened.
-# pdfs (device 16777231, inode 18405754): 5 files, no impossibilities.
-# render (device 16777231, inode 18777402): 3 files, no impossibilities.
-# sphere (device 16777231, inode 18864902): 5 files, no impossibilities.
-# main.c (device 16777231, inode 18897746): could not be opened.
-# default.rt (device 16777231, inode 18777397): could not be opened.
-# free (device 16777231, inode 18405615): 3 files, no impossibilities.
-# tests (device 16777231, inode 18956081): 16 files, no impossibilities.
-# matrices (device 16777231, inode 18451297): 8 files, no impossibilities.
+# get_next_line.c (device 16777233, inode 18405617): could not be opened.
+# scene (device 16777233, inode 18933331): 4 files, no impossibilities.
+# Makefile (device 16777233, inode 18405611): could not be opened.
+# utils (device 16777233, inode 18405698): 3 files, no impossibilities.
+# libs (device 16777233, inode 18405621): 6 files, no impossibilities.
+# . (device 16777233, inode 18405540): 27 files, no impossibilities.
+# parser (device 16777233, inode 18405690): 9 files, no impossibilities.
+# includes (device 16777233, inode 18405619): 3 files, no impossibilities.
+# ray (device 16777233, inode 18739719): 3 files, no impossibilities.
+# coords (device 16777233, inode 18405752): 9 files, no impossibilities.
+# controls (device 16777233, inode 18432127): 3 files, no impossibilities.
+# error (device 16777233, inode 18405613): 3 files, no impossibilities.
+# get_next_line_utils.c (device 16777233, inode 18405618): could not be opened.
+# pdfs (device 16777233, inode 18405754): 5 files, no impossibilities.
+# render (device 16777233, inode 18777402): 3 files, no impossibilities.
+# sphere (device 16777233, inode 18864902): 3 files, no impossibilities.
+# main.c (device 16777233, inode 18897746): could not be opened.
+# default.rt (device 16777233, inode 18777397): could not be opened.
+# shadow (device 16777233, inode 19209387): 3 files, no impossibilities.
+# free (device 16777233, inode 18405615): 3 files, no impossibilities.
+# tests (device 16777233, inode 18956081): 16 files, no impossibilities.
+# matrices (device 16777233, inode 18451297): 8 files, no impossibilities.
 
-# 108 files, no impossibilities in 21 directories.
+# 111 files, no impossibilities in 22 directories.
 
 # Implicit Rules
 
@@ -212,7 +213,6 @@ all: miniRT
 
 # Not a target:
 parser/parser.o:
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -225,6 +225,12 @@ sphere/sphere.o:
 
 # Not a target:
 error/error.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+shadow/shadow.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -247,7 +253,7 @@ parser/parse_light.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-miniRT: get_next_line.o get_next_line_utils.o main.o controls/keys.o coords/color.o coords/compare.o coords/normal.o coords/operation.o coords/product.o coords/subtract.o coords/tuple.o error/error.o free/free_scene_data.o matrices/identity.o matrices/inverse.o matrices/inverting.o matrices/matrix.o matrices/transform.o matrices/transpose.o parser/parse_ambient_lighting.o parser/parse_camera.o parser/parse_cylinder.o parser/parse_light.o parser/parse_plane.o parser/parse_sphere.o parser/parser.o ray/ray.o render/renderer.o scene/scene.o sphere/sphere.o utils/utils.o
+miniRT: get_next_line.o get_next_line_utils.o main.o controls/keys.o coords/color.o coords/compare.o coords/normal.o coords/operation.o coords/product.o coords/subtract.o coords/tuple.o error/error.o free/free_scene_data.o matrices/identity.o matrices/inverse.o matrices/inverting.o matrices/matrix.o matrices/transform.o matrices/transpose.o parser/parse_ambient_lighting.o parser/parse_camera.o parser/parse_cylinder.o parser/parse_light.o parser/parse_plane.o parser/parse_sphere.o parser/parser.o ray/ray.o render/renderer.o scene/scene.o scene/view.o shadow/shadow.o sphere/sphere.o utils/utils.o
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
@@ -271,6 +277,12 @@ Makefile:
 
 # Not a target:
 scene/scene.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+scene/view.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -323,6 +335,7 @@ matrices/identity.o:
 
 re: fclean all
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -453,7 +466,7 @@ matrices/inverting.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=39/1024=4%, Rehash=0, Collisions=2/87=2%
+# Load=41/1024=4%, Rehash=0, Collisions=2/91=2%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -465,6 +478,6 @@ matrices/inverting.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun Jul 31 07:21:12 2022
+# Finished Make data base on Mon Aug  1 05:06:23 2022
 
  

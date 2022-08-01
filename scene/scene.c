@@ -2,9 +2,8 @@
 
 // t_world	world(void)
 // {	
-// 	t_world	w;
+// 	t_world		w;
 
-// 	w.s[0] = NULL;
 // 	return (w);
 // }
 
@@ -38,36 +37,11 @@ t_world	default_world(void)
 	return (w);
 }
 
-void	sort_list(int n, double *num)
-{
-	int		i;
-	int		j;
-	double	a;
-	
-	i = 0;
-	while (i < n)
-	{
-		j = i + 1;
-		while (j < n)
-		{
-			if (num[i] > num[j])
-			{
-				a = num[i];
-				num[i] = num[j];
-				num[j] = a;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
 t_intersection	*intersect_world(t_world w, t_ray r)
 {
 	t_intersection	*xs;
 	t_intersect		inter1;
 	t_intersect		inter2;
-	double			t[4];
 	t_intersection	i1;
 	t_intersection	i2;
 	t_intersection	i3;
@@ -75,16 +49,16 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 
 	inter1 = intersect(w.s[0], r);
 	inter2 = intersect(w.s[1], r);
-	t[0] = inter1.t[0];
-	t[1] = inter1.t[1];
-	t[2] = inter2.t[0];
-	t[3] = inter2.t[1];
-	sort_list(4, t);
-	i1 = intersection(t[0], w.s[0]);
-	i2 = intersection(t[1], w.s[0]);
-	i3 = intersection(t[2], w.s[1]);
-	i4 = intersection(t[3], w.s[1]);
+	// printf("t1: %lf, t2: %lf, t3: %lf, t4: %lf\n",
+	// 	inter1.t[0], inter1.t[1], inter2.t[0], inter2.t[1]);
+	i1 = intersection(inter1.t[0], w.s[0]);
+	i2 = intersection(inter1.t[1], w.s[0]);
+	i3 = intersection(inter2.t[0], w.s[1]);
+	i4 = intersection(inter2.t[1], w.s[1]);
 	xs = intersections2(4, i1, i2, i3, i4);
+	sort_intersections(xs);
+	// printf("t1: %lf, t2: %lf, t3: %lf, t4: %lf\n",
+	// 	i1.t, i2.t, i3.t, i4.t);
 	return (xs);
 }
 
@@ -97,6 +71,9 @@ t_comps	prepare_computations(t_intersection i, t_ray r)
 	comps.point = position(r, comps.t);
 	comps.eyev = negate_vector(r.direction);
 	comps.normalv = normal_at(comps.object, comps.point);
+	comps.over_point.x = comps.point.x + comps.normalv.x * EPSILON;
+	comps.over_point.y = comps.point.y + comps.normalv.y * EPSILON;
+	comps.over_point.z = comps.point.z + comps.normalv.z * EPSILON;
 	if (dot(vector_tp(comps.normalv), vector_tp(comps.eyev)) < 0)
 	{
 		comps.inside = TRUE;
@@ -110,8 +87,10 @@ t_comps	prepare_computations(t_intersection i, t_ray r)
 t_color	shade_hit(t_world w, t_comps comps)
 {
 	t_color	c;
+	t_bool	shadowed;
 	
-	c = lighting(comps.object.material, w.l, comps.point, comps.eyev, comps.normalv);
+	shadowed = is_shadowed(w, comps.over_point);
+	c = lighting(comps.object.material, w.l, comps.over_point, comps.eyev, comps.normalv, shadowed);
 	return (c);
 }
 

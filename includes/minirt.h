@@ -219,6 +219,7 @@ typedef	struct s_comps
 	double			t;
 	t_sphere		object;
 	t_point			point;
+	t_point			over_point;
 	t_vector		eyev;
 	t_vector		normalv;
 	t_bool			inside;
@@ -374,7 +375,8 @@ t_vector	reflect(t_vector vec, t_vector normal);
 //Scene and lights
 t_light		point_light(t_point pos, t_color intensity);
 t_material	material(void);
-t_color		lighting(t_material m, t_light l, t_point pos, t_vector eyev, t_vector normalv);
+t_color		lighting(t_material m, t_light l, t_point pos,
+	t_vector eyev, t_vector normalv, t_bool in_shadow);
 t_world		world(void);
 t_world		default_world(void);
 t_intersection	*intersect_world(t_world w, t_ray r);
@@ -383,12 +385,14 @@ t_color	shade_hit(t_world w, t_comps comps);
 t_color	color_at(t_world w, t_ray r);
 
 //Utility
-void	sort_list(int n, double *num);
 void	sort_intersections(t_intersection *xs);
 
 //View transformation
 double	**view_transform(t_point from, t_point to, t_vector up);
 t_camera2	camera(double hsize, double vsize, double field_of_view);
 t_ray	ray_for_pixel(t_camera2 camera, double x, double y);
+t_bool	is_shadowed(t_world w, t_point p);
+
+t_world	world(void);
 
 #endif

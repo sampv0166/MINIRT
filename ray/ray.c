@@ -47,19 +47,22 @@ t_intersect	intersect(t_sphere s, t_ray r)
 	t_tuple		tp1;
 	t_tuple		tp2;
 	t_ray		r2;
+	t_point		origin;
 	double		a;
 	double		b;
 	double		c;
 	double		d;
 
 	r2 = transform(r, inverse(s.transform, 4));
-	sphere_to_ray = subtract_points(r2.origin, s.sp_center);
+	origin = point(0, 0, 0);
+	sphere_to_ray = subtract_points(r2.origin, origin);
 	tp1 = vector_tp(r2.direction);
 	a = dot(tp1, tp1);
 	tp2 = vector_tp(sphere_to_ray);
 	b = 2 * dot(tp1, tp2);
 	c = dot(tp2, tp2) - 1;
 	d = pow(b, 2) - 4 * a * c;
+	// printf("d: %lf\n", d);
 	if (d < 0)
 	{
 		inter.count = 0;
@@ -80,7 +83,7 @@ t_intersection	intersection(double value, t_sphere object)
 
 	// i->object = malloc(sizeof(typeof(object)));
 	if (!c)
-		c = 0;
+		c = 1;
 	i.count = c++;
 	i.t = value;
 	i.object = object;
@@ -104,6 +107,7 @@ void	sort_intersections(t_intersection *xs)
 	t_intersection	a;
 	
 	i = 0;
+	// printf("count : %d\n", xs[0].count);
 	while (i < xs[0].count)
 	{
 		j = i + 1;
@@ -146,15 +150,15 @@ t_intersection	hit(t_intersection *xs)
 	t_intersection	inter;
 
 	i = 0;
-
 	sort_intersections(xs);
-	while (i < xs[0].count)
+	while (i < xs[i].count)
 	{
-		if (xs[i].t > 0)
+		if (xs[i].t > 0.0)
 			return(xs[i]);
 		i++;
 	}
-	inter = xs[i];
+	inter.count = 0;
+	inter.t = 0;
 	return (inter);
 }
 
