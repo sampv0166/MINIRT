@@ -179,6 +179,15 @@ typedef struct s_cy
     double height;
 }		       t_cy;
 
+typedef struct s_shape
+{
+	double		**transform;
+	t_material  material;
+	
+
+}			   t_shape;
+
+
 typedef struct sobj_list
 {
 	void		*content;
@@ -192,6 +201,7 @@ typedef	struct s_intersection
 	double		t;
 	t_sphere	object;
 }	t_intersection;
+
 
 typedef struct s_intersect
 {
