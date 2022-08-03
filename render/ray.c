@@ -40,7 +40,13 @@ t_sphere	sphere(void)
 	return (sp);
 }
 
+t_ray find_ray_in_object_space(t_shape s)
+{
+	t_ray r;
 
+	r = transform(r, inverse(s.transform, 4));
+	return (r);
+}
 
 t_intersect	intersect(t_sphere s, t_ray r)
 {
@@ -53,8 +59,7 @@ t_intersect	intersect(t_sphere s, t_ray r)
 	double		b;
 	double		c;
 	double		d;
-
-	r2 = transform(r, inverse(s.transform, 4));
+	r2 = find_ray_in_object_space(s);
 	sphere_to_ray = subtract_points(r2.origin, point(0, 0, 0));
 	tp1 = vector_tp(r2.direction);
 	a = dot(tp1, tp1);
