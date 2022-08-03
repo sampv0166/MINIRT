@@ -19,7 +19,7 @@ t_world	default_world(void)
 	t_tuple		tp;
 	t_world		w;
 
-	p = point(-10, -10, -10);
+	p = point(-10, 10, -10);
 	c1 = color(1, 1, 1);
 	light = point_light(p, c1);
 	s1 = sphere();
@@ -49,16 +49,12 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 
 	inter1 = intersect(w.s[0], r);
 	inter2 = intersect(w.s[1], r);
-	// printf("t1: %lf, t2: %lf, t3: %lf, t4: %lf\n",
-	// 	inter1.t[0], inter1.t[1], inter2.t[0], inter2.t[1]);
 	i1 = intersection(inter1.t[0], w.s[0]);
 	i2 = intersection(inter1.t[1], w.s[0]);
 	i3 = intersection(inter2.t[0], w.s[1]);
 	i4 = intersection(inter2.t[1], w.s[1]);
 	xs = intersections2(4, i1, i2, i3, i4);
 	sort_intersections(xs);
-	// printf("t1: %lf, t2: %lf, t3: %lf, t4: %lf\n",
-	// 	i1.t, i2.t, i3.t, i4.t);
 	return (xs);
 }
 
@@ -88,9 +84,10 @@ t_color	shade_hit(t_world w, t_comps comps)
 {
 	t_color	c;
 	t_bool	shadowed;
-	
+
 	shadowed = is_shadowed(w, comps.over_point);
-	c = lighting(comps.object.material, w.l, comps.over_point, comps.eyev, comps.normalv, shadowed);
+	c = lighting(comps.object.material, w.l, comps.over_point, comps.eyev,
+			comps.normalv, shadowed);
 	return (c);
 }
 
