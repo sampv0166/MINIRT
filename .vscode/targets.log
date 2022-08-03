@@ -7,10 +7,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
-make: *** No rule to make target `get_next_line.o', needed by `miniRT'.  Stop.
+make: *** No rule to make target `main.o', needed by `miniRT'.  Stop.
 
 
-# Make data base, printed on Mon Aug  1 05:06:23 2022
+# Make data base, printed on Wed Aug  3 08:21:36 2022
 
 # Variables
 
@@ -24,6 +24,7 @@ make: *** No rule to make target `get_next_line.o', needed by `miniRT'.  Stop.
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
 @F = $(notdir $@)
+ 
 # makefile
 CURDIR := /Users/imran/Desktop/git/miniRT
 # makefile
@@ -39,11 +40,15 @@ MAKEFILE_LIST :=  Makefile
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
+INFOPATH = /opt/homebrew/share/info:
+# environment
 VSCODE_CWD = /
 # environment
-PATH = /usr/bin:/bin:/usr/sbin:/sbin
+PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/imran/Library/Python/3.8/bin:/Applications/VMware Fusion Tech Preview.app/Contents/Public:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/opt/X11/include
 # environment
-LaunchInstanceID = 31B9AD67-1C2B-4A38-AD30-4B0EB567F981
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# environment
+LaunchInstanceID = ABD4A418-B12C-45FB-A8DB-8B9380B56129
 # makefile (from `Makefile', line 20)
 MLX_PATH = libs/mlx_mac
 # environment
@@ -51,17 +56,21 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.WHeGgyiHBG/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.QTccwK1aGy/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.yPDe1lOum1/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.YDjYgHyvMv/org.xquartz:0
 # makefile (from `Makefile', line 3)
 OBJS = ${SRCS:.c=.o}
 # environment
 PWD = /Users/imran/Desktop/git/miniRT
 # environment
+HOMEBREW_CELLAR = /opt/homebrew/Cellar
+# environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+MANPATH = /opt/homebrew/share/man::
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -74,6 +83,8 @@ VSCODE_CODE_CACHE_PATH = /Users/imran/Library/Application Support/Code/CachedDat
 LOGNAME = imran
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+ZSH = /Users/imran/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -95,12 +106,13 @@ CC = gcc
 # default
 MAKE_VERSION := 3.81
 # environment
-USER = imran
+USER = Imran Mustafa
 # makefile
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 23)
 NAME = miniRT
- 
+# environment
+LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -125,10 +137,14 @@ MFLAGS = -Rrqp
 *D = $(patsubst %/,%,$(dir $*))
 # environment
 XPC_SERVICE_NAME = application.com.microsoft.VSCode.18883371.18883377
+# environment
+HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
+# environment
+HOMEBREW_REPOSITORY = /opt/homebrew
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x0
 # environment
@@ -142,9 +158,11 @@ LIBFT_PATH = libs/libft
 # makefile (from `Makefile', line 19)
 MLX_FLAGS = -Llibs/mlx_mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit
 # environment
+PAGER = less
+# environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 186b2
+SECURITYSESSIONID = 186ae
 # automatic
 ^F = $(notdir $^)
 # default
@@ -156,9 +174,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 560
+VSCODE_PID = 8835
 # variable set hash-table stats:
-# Load=71/1024=7%, Rehash=0, Collisions=5/102=5%
+# Load=80/1024=8%, Rehash=0, Collisions=5/111=5%
 
 # Pattern-specific Variable Values
 
@@ -166,30 +184,32 @@ VSCODE_PID = 560
 
 # Directories
 
-# get_next_line.c (device 16777233, inode 18405617): could not be opened.
-# scene (device 16777233, inode 18933331): 4 files, no impossibilities.
-# Makefile (device 16777233, inode 18405611): could not be opened.
-# utils (device 16777233, inode 18405698): 3 files, no impossibilities.
-# libs (device 16777233, inode 18405621): 6 files, no impossibilities.
-# . (device 16777233, inode 18405540): 27 files, no impossibilities.
-# parser (device 16777233, inode 18405690): 9 files, no impossibilities.
-# includes (device 16777233, inode 18405619): 3 files, no impossibilities.
-# ray (device 16777233, inode 18739719): 3 files, no impossibilities.
-# coords (device 16777233, inode 18405752): 9 files, no impossibilities.
-# controls (device 16777233, inode 18432127): 3 files, no impossibilities.
-# error (device 16777233, inode 18405613): 3 files, no impossibilities.
-# get_next_line_utils.c (device 16777233, inode 18405618): could not be opened.
-# pdfs (device 16777233, inode 18405754): 5 files, no impossibilities.
-# render (device 16777233, inode 18777402): 3 files, no impossibilities.
-# sphere (device 16777233, inode 18864902): 3 files, no impossibilities.
-# main.c (device 16777233, inode 18897746): could not be opened.
-# default.rt (device 16777233, inode 18777397): could not be opened.
-# shadow (device 16777233, inode 19209387): 3 files, no impossibilities.
-# free (device 16777233, inode 18405615): 3 files, no impossibilities.
-# tests (device 16777233, inode 18956081): 16 files, no impossibilities.
-# matrices (device 16777233, inode 18451297): 8 files, no impossibilities.
+# get_next_line.c (device 16777234, inode 18405617): could not be opened.
+# scene (device 16777234, inode 18933331): 4 files, no impossibilities.
+# Makefile (device 16777234, inode 18405611): could not be opened.
+# utils (device 16777234, inode 18405698): 3 files, no impossibilities.
+# libs (device 16777234, inode 18405621): 6 files, no impossibilities.
+# . (device 16777234, inode 18405540): 29 files, no impossibilities.
+# get_next_line_utils.o (device 16777234, inode 19314189): could not be opened.
+# parser (device 16777234, inode 18405690): 9 files, no impossibilities.
+# includes (device 16777234, inode 18405619): 3 files, no impossibilities.
+# ray (device 16777234, inode 18739719): 3 files, no impossibilities.
+# coords (device 16777234, inode 18405752): 9 files, no impossibilities.
+# controls (device 16777234, inode 18432127): 3 files, no impossibilities.
+# error (device 16777234, inode 18405613): 3 files, no impossibilities.
+# get_next_line_utils.c (device 16777234, inode 18405618): could not be opened.
+# get_next_line.o (device 16777234, inode 19314188): could not be opened.
+# pdfs (device 16777234, inode 18405754): 5 files, no impossibilities.
+# render (device 16777234, inode 18777402): 3 files, no impossibilities.
+# sphere (device 16777234, inode 18864902): 3 files, no impossibilities.
+# main.c (device 16777234, inode 18897746): could not be opened.
+# default.rt (device 16777234, inode 18777397): could not be opened.
+# shadow (device 16777234, inode 19209387): 3 files, no impossibilities.
+# free (device 16777234, inode 18405615): 3 files, no impossibilities.
+# tests (device 16777234, inode 18956081): 16 files, no impossibilities.
+# matrices (device 16777234, inode 18451297): 8 files, no impossibilities.
 
-# 111 files, no impossibilities in 22 directories.
+# 113 files, no impossibilities in 24 directories.
 
 # Implicit Rules
 
@@ -250,6 +270,7 @@ parser/parse_light.o:
 # Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -311,9 +332,12 @@ fclean: clean
 
 # Not a target:
 get_next_line_utils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-08-02 10:44:08
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 parser/parse_ambient_lighting.o:
@@ -335,7 +359,6 @@ matrices/identity.o:
 
 re: fclean all
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -381,9 +404,11 @@ parser/parse_sphere.o:
 
 # Not a target:
 main.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
+#  Implicit rule search has been done.
+#  File does not exist.
 #  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 matrices/transpose.o:
@@ -418,8 +443,9 @@ matrices/transform.o:
 # Not a target:
 get_next_line.o:
 #  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2022-08-02 10:44:08
+#  File has been updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -478,6 +504,6 @@ matrices/inverting.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Aug  1 05:06:23 2022
+# Finished Make data base on Wed Aug  3 08:21:36 2022
 
  
