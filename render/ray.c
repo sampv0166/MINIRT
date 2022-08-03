@@ -40,6 +40,8 @@ t_sphere	sphere(void)
 	return (sp);
 }
 
+
+
 t_intersect	intersect(t_sphere s, t_ray r)
 {
 	t_intersect	inter;
@@ -185,7 +187,7 @@ t_ray	transform(t_ray r, double **m)
 	return (ret);
 }
 
-void	set_transform(t_sphere *s, double **t)
+void	set_transform(t_shape *s, double **t)
 {
 	s->transform = t;
 }

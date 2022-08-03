@@ -156,10 +156,7 @@ typedef struct s_sphere
 	int			id;
 	t_point		sp_center;
 	double		radius;
-	t_color		color;
-	double		**transform;
-	t_material	material;
-
+	
 }		       t_sphere;
 
 typedef struct s_plane
@@ -183,8 +180,10 @@ typedef struct s_shape
 {
 	double		**transform;
 	t_material  material;
+	t_color		color;
+	t_ray		ray_in_obj_space;
+	t_vector	norm_vector;
 	
-
 }			   t_shape;
 
 
@@ -377,7 +376,7 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2);
 t_intersection	*intersections2(int n, ...);
 t_intersection	hit(t_intersection *xs);
 t_ray		transform(t_ray r, double **m);
-void		set_transform(t_sphere *s, double **t);
+void		set_transform(t_shape *s, double **t);
 t_vector		normal_at(t_sphere s, t_point p);
 t_vector	reflect(t_vector vec, t_vector normal);
 
