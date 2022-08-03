@@ -143,33 +143,131 @@ unsigned int perpixel(t_tuple coord)
 // }
 
 int main (int argc, char **argv) {
-
-    (void ) argv;
     t_data scene_data;
     setup_mlx(&scene_data);
 
-    t_world w;
-    t_camera2 c;
+    // scenesetup
+    // sphere 1
+    t_tuple sptrans;
+    sptrans.x = -0.5;
+    sptrans.y = 1;
+    sptrans.z = 0.5;
+    sptrans.w = 1;
 
-    w = default_world();
-    c = camera(HEIGHT, WIDTH , 1.0471975512);
-    t_point		from;
-	t_point		to;
-	t_vector	up;
+    t_sphere sp;
 
-	from = point(0, 0, -5);
-	to = point(0, 0, -1);
-	up = vector(0, 1, 0);
+    sp = sphere();
+    sp.transform = translation(sptrans);
+    sp.material = material();
+    sp.material.diffuse = 0.7;
+    sp.material.specular = 0.3;    
 
-    c.transform = view_transform(from, to, up);
-    render(c, w, &scene_data);
+    // sphere - 2
+    // t_sphere sp2;
 
-    //printf("here stop");
+    // sp2 = sphere();
+    // sp2.material = material();
+    // sp2.material.diffuse = 0.7;
+    // sp2.material.specular = 0.3;  
 
-   
+    // t_sphere spp[2];
+    // spp[0] = sp;
+    // spp[1] = sp2;
+
+
+    int w;
+    int h;
+    double wall_z = 2;
+    double wall_size = 7;
+    double canvas_pixels = WIDTH;
+
+    double pixel_size;
+    pixel_size = wall_size / canvas_pixels;
+    double half;
+
+    half = wall_size / 2;
+    w = 0;
+    h = 0;
+    double world_y;
+    double world_x;
+    t_point position1;
+    t_ray r;
+
+    t_intersect inter;
+
+    r.origin.x = 0;
+    r.origin.y = 0;
+    r.origin.z = -5;
+    
+ 
+
+    t_point light_position;
+    light_position = point(-10 ,10,-10);
+    //int light_color = 16777211;
+
+    t_light light;
+    t_color color;
+    color.r =  0.1;
+    color.g = 1;
+    color.b = 0.5;
+
+    light = point_light(light_position, color);
+
+    unsigned char	*dst;
+
+    while (h < canvas_pixels - 1)
+    {   
+            w = 0;
+            world_y = half - pixel_size * h;
+            while(w < canvas_pixels - 1)
+        {
+            world_x = -half + pixel_size * w;
+            position1.x = world_x;
+            position1.y = world_y;
+            position1.z = wall_z;
+            r.direction = normalize(subtract_points(position1, r.origin));
+            inter = intersect(sp, r);
+
+            t_point pnt;
+            t_vector normal;
+            t_color col;
+
+            pnt = position(r, inter.t[0]);
+
+
+            t_vector eye;
+
+            eye = negate_vector(r.direction);
+
+            normal = normal_at(sp,pnt);
+            col = lighting(sp.material, light, pnt, eye , normal, FALSE);
+
+            int rr;
+            int gg;
+            int bb;
+
+            rr = col.r * 255;
+            gg = col.g * 255;
+            bb = col.b * 255;
+            int color_code;
+
+            color_code = rr << 16 | gg << 8 | bb;
+
+
+
+            dst =  scene_data.img.data + (h * scene_data.img.size_line +
+            w * (scene_data.img.bits_per_pixel / 8));    
+            if (inter.count > 0)
+			    *(unsigned int*)dst  = color_code;
+            else
+                *(unsigned int*)dst  = 0;
+            w++;
+        }
+        h++;
+    }
     if (argc != 2)
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
-    //parse_scene(argv[1], &scene_data);
+    parse_scene(argv[1], &scene_data);
     //render_scene(&scene_data);
     // ! uncomment this to check all the parsed values
 	//print_parsed_values(&scene_data);

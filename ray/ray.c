@@ -33,7 +33,7 @@ t_sphere	sphere(void)
 	center.y = 0;
 	center.z = 0;
 	sp.sp_center = center;
-	sp.radius = 1.0;
+	sp.radius = 4.0;
 	sp.id = id++;
 	sp.transform = identity_matrix();
 	sp.material = material();
@@ -65,6 +65,7 @@ t_intersect	intersect(t_sphere s, t_ray r)
 	// printf("d: %lf\n", d);
 	if (d < 0)
 	{
+		printf("\nhere\n");
 		inter.count = 0;
 		inter.t[0] = 0;
 		inter.t[1] = 0;
@@ -79,12 +80,12 @@ t_intersect	intersect(t_sphere s, t_ray r)
 t_intersection	intersection(double value, t_sphere object)
 {
 	t_intersection	i;
-	static int		c;
+	//static int		c;
 
 	// i->object = malloc(sizeof(typeof(object)));
-	if (!c)
-		c = 1;
-	i.count = c++;
+	// if (!c)
+	// 	c = 1;
+	i.count = 0;
 	i.t = value;
 	i.object = object;
 	return (i);
@@ -108,7 +109,7 @@ void	sort_intersections(t_intersection *xs)
 	
 	i = 0;
 	// printf("count : %d\n", xs[0].count);
-	while (i < xs[0].count)
+	while (xs && i < xs[0].count)
 	{
 		j = i + 1;
 		while (j < xs[0].count)
@@ -137,10 +138,11 @@ t_intersection	*intersections2(int n, ...)
 	while (i < n)
 	{
 		ret[i] = va_arg(inters, t_intersection);
+		ret[i].count = n;
 		i++;
 	}
+
 	va_end(inters);
-	ret[0].count = i;
 	return (ret);
 }
 
@@ -150,12 +152,15 @@ t_intersection	hit(t_intersection *xs)
 	t_intersection	inter;
 
 	i = 0;
-	sort_intersections(xs);
-	while (i < xs[i].count)
+	if (xs)
 	{
-		if (xs[i].t > 0.0)
-			return(xs[i]);
-		i++;
+		sort_intersections(xs);
+		while (xs && i < xs[i].count)
+		{
+			if (xs[i].t > 0.0)
+				return(xs[i]);
+			i++;
+		}
 	}
 	inter.count = 0;
 	inter.t = 0;

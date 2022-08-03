@@ -240,7 +240,7 @@ typedef struct s_data
     //mlx
     t_mlx		mlx;
 
-    t_img		img;
+	t_img img;
 
     //CAMERA
     t_camera camera;
@@ -403,5 +403,8 @@ t_ray	ray_for_pixel(t_camera2 camera, double x, double y);
 t_bool	is_shadowed(t_world w, t_point p);
 
 t_world	world(void);
+
+void  render(t_camera2, t_world, t_data *scene_data);
+
 
 #endif

@@ -1,18 +1,53 @@
 #include "../includes/minirt.h"
 
-void setup_scene(t_data *scene_data)
+
+void write_pixel(unsigned char *dst, double w, double h, t_color color,t_data *scene_data)
 {
-    scene_data->width = 1080;
-    scene_data->height = 720;
+    int rr;
+    int gg;
+    int bb;
+    int color_code ;
+    
+    rr = color.r * 255;
+    gg = color.g * 255;
+    bb = color.b * 255;
 
-    scene_data->aspect_ratio = (double) (scene_data->width) / (scene_data->height);
-    scene_data->x0 = -1.0;
-    scene_data->x1 = +1.0;
+    color_code = rr << 16 | gg << 8 | bb;
 
-    scene_data->y0 = -1.0;
-    scene_data->y1 = +1.0;
+    dst =  scene_data->img.data + (int)(h * scene_data->img.size_line +
+    w * (scene_data->img.bits_per_pixel / 8));  
 
-    scene_data->xstep = (scene_data->x1 - scene_data->x0) / (scene_data->width - 1);
-    scene_data->ystep = (scene_data->y1 - scene_data->y0) / (scene_data->height - 1);
+    	//     printf("\nr == %f\n", col.r);
+    // printf("\ng == %f\n", col.g);
+    //printf("\nb == %d\n", color_code);
+    
+    *(unsigned int*)dst  = color_code;
+}
+
+void render(t_camera2 cam, t_world wrld, t_data *scene_data)
+{
+    double w;
+    double h;
+    t_ray r;
+    t_color color;
+    unsigned char	*dst;
+    dst = NULL;
+    h = 0; 
+    w = 0;
+
+    while (h < HEIGHT - 1)
+    {
+        w = 0;
+        while(w < WIDTH - 1)
+        {
+            r = ray_for_pixel(cam, w, h);
+            color = color_at(wrld, r);
+            write_pixel(dst,w, h, color, scene_data);
+            w++;
+        }
+        h++;
+    }
+
+   
 }
 

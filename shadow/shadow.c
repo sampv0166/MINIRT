@@ -21,10 +21,15 @@ t_bool	is_shadowed(t_world w, t_point p)
 	xs = intersect_world(w, r);
 	// printf("xs count:%d, xs0: %lf, xs1: %lf, xs2: %lf, xs4: %lf\n",
 	// 	xs[0].count, xs[0].t, xs[1].t, xs[2].t, xs[3].t);
-	h = hit(xs);
-	// printf("h value: %lf\n", h.t);
-	if (h.t && h.t < distance)
-		return TRUE;
+	if (xs)
+	{
+		h = hit(xs);
+		// printf("h value: %lf\n", h.t);
+		if (h.t && h.t < distance)
+			return TRUE;
+		else
+			return FALSE;	
+	}
 	else
 		return FALSE;
 }
