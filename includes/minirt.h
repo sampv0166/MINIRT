@@ -183,7 +183,7 @@ typedef struct s_shape
 	t_color		color;
 	t_ray		ray_in_obj_space;
 	t_vector	norm_vector;
-	
+	void*		shape;
 }			   t_shape;
 
 
