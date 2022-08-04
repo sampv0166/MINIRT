@@ -1,6 +1,6 @@
 #include "../includes/minirt.h"
 
-t_vector	normal_at(t_shape s, t_point p)
+t_vector	local_normal_at_sphere(t_shape s, t_point p)
 {
 	t_vector	obj_normal;
 	t_vector	world_normal;
@@ -27,6 +27,8 @@ t_vector	normal_at(t_shape s, t_point p)
 	world_normal.z = tp4.z;
 	return (normalize(world_normal));
 }
+
+
 
 t_vector	reflect(t_vector vec, t_vector normal)
 {

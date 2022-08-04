@@ -46,7 +46,7 @@ t_plane	*plane(void)
 	t_plane	*pl;
 
 	pl = malloc(sizeof(t_plane));
-	pl->xyz = tuple(10,10,0,1);
+	pl->xyz = tuple(0,0,0,0);
 	return (pl);
 }
 
@@ -55,10 +55,8 @@ t_shape create_shape(int i)
 	t_shape shape;
 	shape.transform = identity_matrix();
 	shape.material = material();
-	
 	if (i == 1)
 	{
-		
 		shape.shape = sphere();
 	}
 	else if (i == 2)
@@ -89,7 +87,6 @@ t_intersect	local_intersect_sphere(t_ray r2)
 	d = (b * b) - (4 * a * c);
 	if (d < 0)
 	{
-		printf("\nhere\n");
 		inter.count = 0;
 		inter.t[0] = 0;
 		inter.t[1] = 0;
@@ -112,9 +109,9 @@ t_intersect local_intersect_plane(t_ray r)
 		inter.t[1] = 0;
 		return (inter);
 	}
-	inter.count = 1;
-	inter.t[0] = -r.origin.y / r.direction.y;
-	inter.t[1] = 0; 
+	inter.count = 2;
+	inter.t[0] = -r.origin.y / r.direction.y ;
+	inter.t[1] = -r.origin.y / r.direction.y ; 
 	return (inter);
 }
 
@@ -127,6 +124,8 @@ t_intersect	intersect(t_shape s, t_ray r)
 		return (local_intersect_sphere(local_ray));
 	else if(!ft_strncmp(s.shape_name, "pl", 2))
 		return(local_intersect_plane(local_ray));
+	
+	printf("\nnever here\n");
 	return (local_intersect_sphere(local_ray));		
 }
 

@@ -13,8 +13,8 @@
 # define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define EPSILON 0.00001
 # define	PI 4.0 * atan(1.0)
-# define HEIGHT 300
-# define WIDTH 300
+# define HEIGHT 200
+# define WIDTH 200
 //KEYS
 # define KEY_ESC 53
 # define TRUE 1
@@ -379,7 +379,7 @@ t_intersection	*intersections2(int n, ...);
 t_intersection	hit(t_intersection *xs);
 t_ray		transform(t_ray r, double **m);
 void		set_transform(t_shape *s, double **t);
-t_vector		normal_at(t_shape s, t_point p);
+t_vector		local_normal_at_sphere(t_shape s, t_point p);
 t_vector	reflect(t_vector vec, t_vector normal);
 
 //Scene and lights
