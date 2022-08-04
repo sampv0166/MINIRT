@@ -1,5 +1,5 @@
 #include "../includes/minirt.h"
-
+#include <string.h>
 t_ray	ray(t_point p, t_vector v)
 {
 	t_ray	ray;
@@ -21,9 +21,11 @@ t_point	position(t_ray r, float num)
 	return (p);
 }
 
-t_sphere	sphere(void)
+t_sphere	*sphere(void)
 {
-	t_sphere	sp;
+	t_sphere	*sp;
+
+	sp = malloc(sizeof(t_sphere));
 	t_point		center;
 	static int	id;
 
@@ -32,34 +34,52 @@ t_sphere	sphere(void)
 	center.x = 0;
 	center.y = 0;
 	center.z = 0;
-	sp.sp_center = center;
-	sp.radius = 4.0;
-	sp.id = id++;
-	sp.transform = identity_matrix();
-	sp.material = material();
+	sp->sp_center = center;
+	sp->radius = 4.0;
+	sp->id = id++;
+
 	return (sp);
 }
 
-t_ray find_ray_in_object_space(t_shape s)
+t_plane	*plane(void)
 {
-	t_ray r;
+	t_plane	*pl;
 
-	r = transform(r, inverse(s.transform, 4));
-	return (r);
+	pl = malloc(sizeof(t_plane));
+	pl->xyz = tuple(10,10,0,1);
+	return (pl);
 }
 
-t_intersect	intersect(t_sphere s, t_ray r)
+t_shape create_shape(int i)
+{
+	t_shape shape;
+	shape.transform = identity_matrix();
+	shape.material = material();
+	
+	if (i == 1)
+	{
+		
+		shape.shape = sphere();
+	}
+	else if (i == 2)
+	{
+		shape.shape = plane();
+	}
+	return (shape);
+}
+
+
+t_intersect	local_intersect_sphere(t_ray r2)
 {
 	t_intersect	inter;
 	t_vector	sphere_to_ray;
 	t_tuple		tp1;
 	t_tuple		tp2;
-	t_ray		r2;
 	double		a;
 	double		b;
 	double		c;
 	double		d;
-	r2 = find_ray_in_object_space(s);
+
 	sphere_to_ray = subtract_points(r2.origin, point(0, 0, 0));
 	tp1 = vector_tp(r2.direction);
 	a = dot(tp1, tp1);
@@ -81,7 +101,36 @@ t_intersect	intersect(t_sphere s, t_ray r)
 	return (inter);
 }
 
-t_intersection	intersection(double value, t_sphere object)
+t_intersect local_intersect_plane(t_ray r)
+{
+	t_intersect	inter;
+
+	if (fabs(r.direction.y) < EPSILON)
+	{
+		inter.count = 0;
+		inter.t[0] = 0;
+		inter.t[1] = 0;
+		return (inter);
+	}
+	inter.count = 1;
+	inter.t[0] = -r.origin.y / r.direction.y;
+	inter.t[1] = 0; 
+	return (inter);
+}
+
+t_intersect	intersect(t_shape s, t_ray r)
+{
+	t_ray local_ray;
+
+	local_ray = transform(r, inverse(s.transform, 4));
+	if (!ft_strncmp(s.shape_name, "sp", 2))
+		return (local_intersect_sphere(local_ray));
+	else if(!ft_strncmp(s.shape_name, "pl", 2))
+		return(local_intersect_plane(local_ray));
+	return (local_intersect_sphere(local_ray));		
+}
+
+t_intersection	intersection(double value, t_shape object)
 {
 	t_intersection	i;
 	//static int		c;
@@ -92,6 +141,7 @@ t_intersection	intersection(double value, t_sphere object)
 	i.count = 0;
 	i.t = value;
 	i.object = object;
+	i.object.shape_name = object.shape_name;
 	return (i);
 }
 

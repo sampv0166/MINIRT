@@ -45,9 +45,10 @@ void render(t_camera2 cam, t_world wrld, t_data *scene_data)
             write_pixel(dst,w, h, color, scene_data);
             w++;
         }
+          write(1, "2", 1);
         h++;
     }
-
+  
    
 }
 

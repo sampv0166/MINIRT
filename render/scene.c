@@ -10,8 +10,8 @@
 t_world	default_world(void)
 {
 	t_light		light;
-	t_sphere	s1;
-	t_sphere	s2;
+	// t_sphere	s1;
+	// t_sphere	s2;
 	t_point		p;
 	t_color		c1;
 	t_color		c2;
@@ -19,29 +19,43 @@ t_world	default_world(void)
 	//double		**t;
 //	t_tuple		tp;
 	t_world		w;
+	t_shape shape1;
+	t_shape shape2;
+	t_shape shape3;
 
 	p = point(-10, 10, -10);
 	c1 = color(1, 1, 1);
 	light = point_light(p, c1);
-	s1 = sphere();
-	c2 = color(0.8, 1.0, 0.6);
-	s1.material.color = c2;
-	s1.material.diffuse = 0.7;
-	s1.material.specular = 0.2;
-	s1.transform = translation(tuple(-1, 1, 1, 1));
-	s2 = sphere();
-	//tp = tuple(0.5, 0.5, 0.5, 1.0);
-	//t = scaling(tp);
-	//s2.transform = t;
-	c3 = color(0.5, 1.0, 0.1);
-	s2.material.color = c3;
-	s2.material.diffuse = 0.7;
-	s2.material.specular = 0.2;
 
+	int i;
+	i = 1;
+	shape1 = create_shape(i);
+	c2 = color(0.8, 1.0, 0.6);
+	shape1.material.color = c2;
+	shape1.material.diffuse = 0.7;
+	shape1.material.specular = 0.2;
+	shape1.transform = translation(tuple(-1, 1, 1, 1));
+	shape1.shape_name = "sp";
+
+	shape2 = create_shape(i);
+	c3 = color(0.5, 1.0, 0.1);
+	shape2.material.color = c3;
+	shape2.material.diffuse = 0.7;
+	shape2.material.specular = 0.2;
+	shape2.shape_name = "sp";
+	i = 2;
+	shape3 = create_shape(2);
+	c3 = color(0.5, 1.0, 0.1);
+	shape3.material.color = c3;
+	shape3.material.diffuse = 0.7;
+	shape3.material.specular = 0.2;
+	shape3.shape_name = "pl";
 
 	w.l = light;
-	w.s[0] = s1;
-	w.s[1] = s2;
+	w.s[0] = shape1;
+	w.s[1] = shape2;
+	w.s[2] = shape3;
+
 	return (w);
 }
 
@@ -95,7 +109,9 @@ t_comps	prepare_computations(t_intersection i, t_ray r)
 	comps.object = i.object;
 	comps.point = position(r, comps.t);
 	comps.eyev = negate_vector(r.direction);
+	
 	comps.normalv = normal_at(comps.object, comps.point);
+	
 	comps.over_point.x = comps.point.x + comps.normalv.x * EPSILON;
 	comps.over_point.y = comps.point.y + comps.normalv.y * EPSILON;
 	comps.over_point.z = comps.point.z + comps.normalv.z * EPSILON;

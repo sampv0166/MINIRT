@@ -1,6 +1,6 @@
 #include "../includes/minirt.h"
 
-t_vector	normal_at(t_sphere s, t_point p)
+t_vector	normal_at(t_shape s, t_point p)
 {
 	t_vector	obj_normal;
 	t_vector	world_normal;

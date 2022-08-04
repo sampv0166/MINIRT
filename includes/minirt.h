@@ -184,6 +184,7 @@ typedef struct s_shape
 	t_ray		ray_in_obj_space;
 	t_vector	norm_vector;
 	void*		shape;
+	char*		shape_name;
 }			   t_shape;
 
 
@@ -198,7 +199,8 @@ typedef	struct s_intersection
 {
 	int			count;
 	double		t;
-	t_sphere	object;
+	t_shape	object;
+	char	*shape_name;
 }	t_intersection;
 
 
@@ -218,14 +220,14 @@ typedef struct s_intersect
 
 typedef struct s_world
 {
-	t_sphere	s[2];
+	t_shape	s[3];
 	t_light		l;
 }	t_world;
 
 typedef	struct s_comps
 {
 	double			t;
-	t_sphere		object;
+	t_shape			object;
 	t_point			point;
 	t_point			over_point;
 	t_vector		eyev;
@@ -369,15 +371,15 @@ t_tuple		shearing(t_tuple tp, double *coord);
 //Ray
 t_ray		ray(t_point p, t_vector v);
 t_point		position(t_ray r, float num);
-t_sphere	sphere(void);
-t_intersect	intersect(t_sphere s, t_ray r);
-t_intersection	intersection(double value, t_sphere object);
+t_sphere*	sphere(void);
+t_intersect	intersect(t_shape s, t_ray r);
+t_intersection	intersection(double value, t_shape object);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);
 t_intersection	*intersections2(int n, ...);
 t_intersection	hit(t_intersection *xs);
 t_ray		transform(t_ray r, double **m);
 void		set_transform(t_shape *s, double **t);
-t_vector		normal_at(t_sphere s, t_point p);
+t_vector		normal_at(t_shape s, t_point p);
 t_vector	reflect(t_vector vec, t_vector normal);
 
 //Scene and lights
@@ -404,6 +406,6 @@ t_bool	is_shadowed(t_world w, t_point p);
 t_world	world(void);
 
 void  render(t_camera2, t_world, t_data *scene_data);
-
+t_shape create_shape(int i);
 
 #endif
