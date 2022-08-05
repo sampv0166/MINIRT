@@ -156,12 +156,15 @@ int main (int argc, char **argv) {
     t_point		from;
 	t_point		to;
 	t_vector	up;
+ 
+	from = point(4, 0, 5);
 
-	from = point(0, 0, -5);
 	to = point(0, 0, -1);
-	up = vector(0, 1, 0);
+	
+    up = vector(0, 1, 0);
 
     c.transform = view_transform(from, to, up);
+    
     render(c, w, &scene_data);
 
     //printf("here stop");

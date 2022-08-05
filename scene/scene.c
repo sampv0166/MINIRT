@@ -1,11 +1,23 @@
 #include "../includes/minirt.h"
 
-// t_world	world(void)
-// {	
-// 	t_world		w;
 
-// 	return (w);
-// }
+// translation
+//---------------------------------------
+// -z == bring objects closer to the eye
+// +z == move objects away from eye
+
+// +x == move objects to the right
+// -x == move ojects  to the left
+
+// +y == move objects to up
+//--y == move objects down
+
+
+// z is used to see the otherside
+// positive z will show u the backside
+// negative z will be our front side
+// remebder 5 and 50
+
 
 t_world	default_world(void)
 {
@@ -20,7 +32,7 @@ t_world	default_world(void)
 //	t_tuple		tp;
 	t_world		w;
 
-	p = point(-10, 10, -10);
+	p = point(-20, 0, 50);
 	c1 = color(1, 1, 1);
 	light = point_light(p, c1);
 	s1 = sphere();
@@ -28,7 +40,7 @@ t_world	default_world(void)
 	s1.material.color = c2;
 	s1.material.diffuse = 0.7;
 	s1.material.specular = 0.2;
-	s1.transform = translation(tuple(-1, 1, 1, 1));
+	s1.transform = translation(tuple(2, -1, -2, 1));
 	s2 = sphere();
 	//tp = tuple(0.5, 0.5, 0.5, 1.0);
 	//t = scaling(tp);
