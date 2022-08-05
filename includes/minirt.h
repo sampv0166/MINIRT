@@ -219,7 +219,7 @@ typedef struct s_intersect
 
 typedef struct s_world
 {
-	t_sphere	s[2];
+	t_sphere	s[3];
 	t_light		l;
 }	t_world;
 

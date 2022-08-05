@@ -152,14 +152,14 @@ int main (int argc, char **argv) {
     t_camera2 c;
 
     w = default_world();
-    c = camera(HEIGHT, WIDTH , 1.0471975512);
+    c = camera(HEIGHT, WIDTH , PI/3);
     t_point		from;
 	t_point		to;
 	t_vector	up;
  
-	from = point(4, 0, 5);
+	from = point(0, 1.5, -5);
 
-	to = point(0, 0, -1);
+	to = point(0, 1, 0);
 	
     up = vector(0, 1, 0);
 

@@ -22,37 +22,78 @@
 t_world	default_world(void)
 {
 	t_light		light;
-	t_sphere	s1;
-	t_sphere	s2;
 	t_point		p;
-	t_color		c1;
-	t_color		c2;
-	t_color		c3;
-	//double		**t;
-//	t_tuple		tp;
 	t_world		w;
 
-	p = point(-20, 0, 50);
-	c1 = color(1, 1, 1);
-	light = point_light(p, c1);
-	s1 = sphere();
-	c2 = color(0.8, 1.0, 0.6);
-	s1.material.color = c2;
-	s1.material.diffuse = 0.7;
-	s1.material.specular = 0.2;
-	s1.transform = translation(tuple(2, -1, -2, 1));
-	s2 = sphere();
-	//tp = tuple(0.5, 0.5, 0.5, 1.0);
-	//t = scaling(tp);
-	//s2.transform = t;
-	c3 = color(0.5, 1.0, 0.1);
-	s2.material.color = c3;
-	s2.material.diffuse = 0.7;
-	s2.material.specular = 0.2;
+	p = point(-10, 10, -10);
+	light = point_light(p, color(1, 1, 1));
+
+
+	// t_sphere floor; 
+	// floor = sphere();
+	// floor.transform = scaling(tuple(10, 0.01, 10, 1));
+	// floor.material = material();
+	// floor.material.color = color(1,0.9,0.9);
+	// floor.material.specular = 0;
+
+// 	t_sphere leftWall;
+// 	leftWall = sphere();
+// 	leftWall.transform = translation(tuple(0,0, 5,1));
+// 	leftWall.transform = matrix_multi(leftWall.transform, rotation_y(-PI/4));
+// 	leftWall.transform = matrix_multi(leftWall.transform, rotation_x(PI/ 2));
+// 	leftWall.transform = matrix_multi(leftWall.transform, scaling(tuple(10,0.01,10, 1)));
+// 	leftWall.material = floor.material;
+
+
+// // 	right_wall ← sphere()
+// // right_wall.transform ← translation(0, 0, 5) *
+// // rotation_y(π/4) * rotation_x(π/2) *
+// // scaling(10, 0.01, 10)
+// // right_wall.material ← floor.material
+
+
+// 	t_sphere rightWall;
+// 	rightWall = sphere();
+// 	rightWall.transform = translation(tuple(0,0, 5,1));
+// 	rightWall.transform = matrix_multi(rightWall.transform, rotation_y(PI/4));
+// 	rightWall.transform = matrix_multi(rightWall.transform, rotation_x(PI/ 2));
+// 	rightWall.transform = matrix_multi(rightWall.transform, scaling(tuple(10,0.01,10, 1)));
+// 	rightWall.material = floor.material;
+
+
+	t_sphere middle;
+	middle = sphere();
+	middle.transform = translation(tuple (-0.5,1,0.5,1));
+	middle.material = material();
+	middle.material.color = color(0.1,1,0.5);
+	middle.material.diffuse = 0.7;
+	middle.material.specular = 0.3;
+
+	t_sphere right;
+	right = sphere();
+	right.transform = matrix_multi(translation(tuple (1.5,0.5,-0.5,1)),  scaling(tuple(0.5,0.5,0.5,1)));
+	right.material = material();
+	right.material.color = color(0.5,1,0.1);
+	right.material.diffuse = 0.7;
+	right.material.specular = 0.3;
+
+	t_sphere left;
+	left = sphere();
+	left.transform = matrix_multi(translation(tuple (-1.5, 0.33, -0.75,1)),  scaling(tuple(0.33, 0.33, 0.33,1)));
+	left.material = material();
+	left.material.color = color(1, 0.8, 0.1);
+	left.material.diffuse = 0.7;
+	left.material.specular = 0.3;
 
 	w.l = light;
-	w.s[0] = s1;
-	w.s[1] = s2;
+	//w.s[0] = floor;
+	// w.s[1] = leftWall;
+	// w.s[2] = rightWall;
+
+	w.s[0] = middle;
+	w.s[1] = right;
+	w.s[2] = left;
+
 	return (w);
 }
 
@@ -112,7 +153,7 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 	int l;
 	l = 0;
 	i = 0;
-	while (i < 2)
+	while (i < 3)
 	{
 		inter1 = intersect(w.s[i], r);
 		if (inter1.count > 0)
