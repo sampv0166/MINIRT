@@ -65,7 +65,6 @@ t_intersect	intersect(t_sphere s, t_ray r)
 	// printf("d: %lf\n", d);
 	if (d < 0)
 	{
-		printf("\nhere\n");
 		inter.count = 0;
 		inter.t[0] = 0;
 		inter.t[1] = 0;
@@ -80,11 +79,6 @@ t_intersect	intersect(t_sphere s, t_ray r)
 t_intersection	intersection(double value, t_sphere object)
 {
 	t_intersection	i;
-	//static int		c;
-
-	// i->object = malloc(sizeof(typeof(object)));
-	// if (!c)
-	// 	c = 1;
 	i.count = 0;
 	i.t = value;
 	i.object = object;
