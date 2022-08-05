@@ -109,7 +109,6 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 		}
 		i++;
 	}
-	sort_intersections(xs)
 	// printf("t1: %lf, t2: %lf, t3: %lf, t4: %lf\n",
 	// 	inter1.t[0], inter1.t[1], inter2.t[0], inter2.t[1]);
 	// if (inter1.count > 0 && inter2.count > 0)
