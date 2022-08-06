@@ -76,10 +76,13 @@ t_intersect	intersect(t_sphere s, t_ray r)
 	return (inter);
 }
 
-t_intersection	intersection(double value, t_sphere object)
+t_intersection	intersection(double value, t_sphere object, int count)
 {
 	t_intersection	i;
-	i.count = 0;
+
+	//i = malloc(sizeof(t_intersection));
+
+	i.count = count;
 	i.t = value;
 	i.object = object;
 	return (i);
@@ -156,8 +159,10 @@ t_intersection	hit(t_intersection *xs)
 			i++;
 		}
 	}
+	//printf("\nitss here\n");
 	inter.count = 0;
 	inter.t = 0;
+	//inter.object = xs->object;
 	return (inter);
 }
 

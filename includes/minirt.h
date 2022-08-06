@@ -13,8 +13,8 @@
 # define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define EPSILON 0.00001
 # define	PI 4.0 * atan(1.0)
-# define HEIGHT 300
-# define WIDTH 300
+# define HEIGHT 200
+# define WIDTH 200
 //KEYS
 # define KEY_ESC 53
 # define TRUE 1
@@ -215,11 +215,9 @@ typedef struct s_intersect
 // 	int			obj_type;
 // }	t_obj;
 
-
-
 typedef struct s_world
 {
-	t_sphere	s[3];
+	t_sphere	s[6];
 	t_light		l;
 }	t_world;
 
@@ -372,7 +370,7 @@ t_ray		ray(t_point p, t_vector v);
 t_point		position(t_ray r, float num);
 t_sphere	sphere(void);
 t_intersect	intersect(t_sphere s, t_ray r);
-t_intersection	intersection(double value, t_sphere object);
+t_intersection	intersection(double value, t_sphere object, int count);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);
 t_intersection	*intersections2(int n, ...);
 t_intersection	hit(t_intersection *xs);
