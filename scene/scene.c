@@ -18,9 +18,23 @@
 // negative z will be our front side
 // remebder 5 and 50
 
+t_shape create_shape(char *shape_name)
+{
+	t_shape shp;
+	if (!ft_strncmp(shape_name, "sp", 2))
+	{
+		shp.shape = sphere();
+		shp.shape_name = "sp";
+	}
+	return (shp);
+}
+
 
 t_world	default_world(void)
 {
+	char *shape_sphere;
+
+	shape_sphere = "sp";
 	t_light		light;
 	t_point		p;
 	t_world		w;
@@ -29,15 +43,15 @@ t_world	default_world(void)
 	light = point_light(p, color(1, 1, 1));
 
 
-	t_sphere floor; 
-	floor = sphere();
+	t_shape floor; 
+	floor = create_shape(shape_sphere);
 	floor.transform = scaling(tuple(10, 0.01, 10, 1));
 	floor.material = material();
 	floor.material.color = color(1,0.9,0.9);
 	floor.material.specular = 0;
 
-	t_sphere leftWall;
-	leftWall = sphere();
+	t_shape leftWall;
+	leftWall = create_shape(shape_sphere);
 	leftWall.transform = translation(tuple(0,0, 5,1));
 	leftWall.transform = matrix_multi(leftWall.transform, rotation_y(-PI/4));
 	leftWall.transform = matrix_multi(leftWall.transform, rotation_x(PI/ 2));
@@ -52,8 +66,8 @@ t_world	default_world(void)
 // // right_wall.material ← floor.material
 
 
-	t_sphere rightWall;
-	rightWall = sphere();
+	t_shape rightWall;
+	rightWall =  create_shape(shape_sphere);
 	rightWall.transform = translation(tuple(0,0, 5,1));
 	rightWall.transform = matrix_multi(rightWall.transform, rotation_y(PI/4));
 	rightWall.transform = matrix_multi(rightWall.transform, rotation_x(PI/ 2));
@@ -61,24 +75,24 @@ t_world	default_world(void)
 	rightWall.material = floor.material;
 
 
-	t_sphere middle;
-	middle = sphere();
+	t_shape middle;
+	middle = create_shape(shape_sphere);
 	middle.transform = translation(tuple (-0.5,1,0.5,1));
 	middle.material = material();
 	middle.material.color = color(0.1,1,0.5);
 	middle.material.diffuse = 0.7;
 	middle.material.specular = 0.3;
 
-	t_sphere right;
-	right = sphere();
+	t_shape right;
+	right =  create_shape(shape_sphere);
 	right.transform = matrix_multi(translation(tuple (1.5,0.5,-0.5,1)),  scaling(tuple(0.5,0.5,0.5,1)));
 	right.material = material();
 	right.material.color = color(0.5,1,0.1);
 	right.material.diffuse = 0.7;
 	right.material.specular = 0.3;
 
-	t_sphere left;
-	left = sphere();
+	t_shape left;
+	left = create_shape(shape_sphere);
 	left.transform = matrix_multi(translation(tuple (-1.5, 0.33, -0.75,1)),  scaling(tuple(0.33, 0.33, 0.33,1)));
 	left.material = material();
 	left.material.color = color(1, 0.8, 0.1);
@@ -96,7 +110,7 @@ t_world	default_world(void)
 	return (w);
 }
 
-// t_intersection **addToInterSections(t_intersect inter, t_intersection **xs, t_sphere sp, int *i,int *cnt)
+// t_intersection **addToInterSections(t_intersect inter, t_intersection **xs, t_shape sp, int *i,int *cnt)
 // {
 // 	t_intersection *tmp;
 // 	tmp = NULL;
@@ -138,18 +152,26 @@ t_world	default_world(void)
 // 	}
 // }
 
+t_intersect	intersect(t_shape s, t_ray r)
+{
+	//t_ray local_ray;
+
+	s.ray_in_obj_space = transform(r, inverse(s.transform, 4));
+	if (!ft_strncmp(s.shape_name, "sp", 2))
+		return (local_intersect_sphere(s.ray_in_obj_space));
+	// else if(!ft_strncmp(s.shape_name, "pl", 2))
+	// 	return(local_intersect_plane(local_ray));
+	
+	// printf("\nnever here\n");
+	//exit(0);
+	return (local_intersect_sphere(s.ray_in_obj_space));		
+}
+
+
 t_intersection	*intersect_world(t_world w, t_ray r)
 {
 	t_intersection	*xs;
 	t_intersect		inter1;
-	// t_intersect		inter2;
-	// t_intersection	i1;
-	// t_intersection	i2;
-	// t_intersection	i3;
-	// t_intersection	i4;
-
-	// inter1 = intersect(w.s[0], r);
-	// inter2 = intersect(w.s[1], r);
 
 	int i;
 	int count;
@@ -163,7 +185,6 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 		{
 			if (count == 0)
 			{
-				//printf("\nh\n");
 				xs = malloc (sizeof(t_intersection) * (2));
 				xs[0] = intersection(inter1.t[0],w.s[i], count + 2 );
 				xs[1] = intersection(inter1.t[1],w.s[i], count + 2 );
@@ -171,19 +192,14 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 			}
 			else
 			{
-			
-				//printf("\n%d\n", xs[0].count);
-				///printf("\ns\n");
 				t_intersection *tmp;
 				tmp = malloc (sizeof(t_intersection) * (count + 2));
 				int j;
 				j = 0;
 				while (j < count)
 				{
-					//printf("\nxs = %d\n", xs[j].count);
 					tmp[j] = xs[j];
 					tmp[j].count = count + 2;
-					//printf("\ntmp j = %d\n", xs[j].count);
 					j++;
 				}
 				j = count ;

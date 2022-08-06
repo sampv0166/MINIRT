@@ -21,9 +21,11 @@ t_point	position(t_ray r, float num)
 	return (p);
 }
 
-t_sphere	sphere(void)
+t_sphere	*sphere(void)
 {
-	t_sphere	sp;
+	t_sphere	*sp;
+
+	sp = malloc(sizeof(t_sphere));
 	t_point		center;
 	static int	id;
 
@@ -32,31 +34,28 @@ t_sphere	sphere(void)
 	center.x = 0;
 	center.y = 0;
 	center.z = 0;
-	sp.sp_center = center;
-	sp.radius = 4.0;
-	sp.id = id++;
-	sp.transform = identity_matrix();
-	sp.material = material();
+	sp->sp_center = center;
+	sp->radius = 4.0;
+	sp->id = id++;
 	return (sp);
 }
 
-t_intersect	intersect(t_sphere s, t_ray r)
+t_intersect	local_intersect_sphere(t_ray r)
 {
 	t_intersect	inter;
 	t_vector	sphere_to_ray;
 	t_tuple		tp1;
 	t_tuple		tp2;
-	t_ray		r2;
+
 	t_point		origin;
 	double		a;
 	double		b;
 	double		c;
 	double		d;
 
-	r2 = transform(r, inverse(s.transform, 4));
 	origin = point(0, 0, 0);
-	sphere_to_ray = subtract_points(r2.origin, origin);
-	tp1 = vector_tp(r2.direction);
+	sphere_to_ray = subtract_points(r.origin, origin);
+	tp1 = vector_tp(r.direction);
 	a = dot(tp1, tp1);
 	tp2 = vector_tp(sphere_to_ray);
 	b = 2 * dot(tp1, tp2);
@@ -76,7 +75,7 @@ t_intersect	intersect(t_sphere s, t_ray r)
 	return (inter);
 }
 
-t_intersection	intersection(double value, t_sphere object, int count)
+t_intersection	intersection(double value, t_shape object, int count)
 {
 	t_intersection	i;
 
@@ -187,7 +186,7 @@ t_ray	transform(t_ray r, double **m)
 	return (ret);
 }
 
-void	set_transform(t_sphere *s, double **t)
+void	set_transform(t_shape *s, double **t)
 {
 	s->transform = t;
 }

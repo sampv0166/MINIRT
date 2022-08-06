@@ -5,9 +5,9 @@ void parse_sphere(char **info, t_data *scene_data)
     t_list *new;
     t_sphere *sphere;
     char **point_split;
-    char **color_split;
+   // char **color_split;
     point_split = ft_split(info[1], ',');
-    color_split = ft_split(info[3], ',');
+   // color_split = ft_split(info[3], ',');
     sphere = malloc (sizeof (t_sphere));
     if (get_2darray_size(info) != 4)
         print_error_msg_and_exit("INVALID NUMBER OF VALUES FOR AMBIENT LIGHTING", scene_data);
@@ -17,9 +17,9 @@ void parse_sphere(char **info, t_data *scene_data)
     
     sphere->radius = parse_double(info[2]);
 
-    sphere->color.r = parse_double(color_split[0]);
-    sphere->color.g = parse_double(color_split[1]);
-    sphere->color.b = parse_double(color_split[2]);
+    // sphere->color.r = parse_double(color_split[0]);
+    // sphere->color.g = parse_double(color_split[1]);
+    // sphere->color.b = parse_double(color_split[2]);
     new = ft_lstnew(sphere);
     //ft_lstadd_back(&scene_data->sphere_list, new);
     scene_data->sphere_list  = new;
