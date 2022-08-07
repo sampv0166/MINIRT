@@ -221,7 +221,7 @@ typedef struct s_intersect
 
 typedef struct s_world
 {
-	t_shape		*s;
+	t_shape		s[7];
 	t_light		l;
 }	t_world;
 
