@@ -1,6 +1,5 @@
 #include "../includes/minirt.h"
 
-
 // translation
 //---------------------------------------
 // -z == bring objects closer to the eye
@@ -18,66 +17,93 @@
 // negative z will be our front side
 // remebder 5 and 50
 
+t_plane	*plane(void)
+{
+	t_plane	*pl;
+
+	pl = malloc(sizeof(t_plane));
+	pl->xyz = tuple(0,0,0,0);
+	return (pl);
+}
+
 t_shape create_shape(char *shape_name)
 {
 	t_shape shp;
+	shp.transform = identity_matrix();
+	shp.material = material();
 	if (!ft_strncmp(shape_name, "sp", 2))
 	{
 		shp.shape = sphere();
 		shp.shape_name = "sp";
 	}
+	if (!ft_strncmp(shape_name, "pl", 2))
+	{
+		shp.shape = plane();
+		shp.shape_name = "pl";
+	}	
 	return (shp);
 }
-
 
 t_world	default_world(void)
 {
 	char *shape_sphere;
+	char *shape_plane;
 
+	shape_plane = "pl";
 	shape_sphere = "sp";
 	t_light		light;
 	t_point		p;
 	t_world		w;
 
-	p = point(-10, 10, -10);
+	p = point(-3, 15, -20);
 	light = point_light(p, color(1, 1, 1));
 
-
-	t_shape floor; 
-	floor = create_shape(shape_sphere);
-	floor.transform = scaling(tuple(10, 0.01, 10, 1));
+	t_shape floor;	
+	floor = create_shape(shape_plane);
+	floor.transform = translation(tuple(0, -3, 0, 1));
 	floor.material = material();
 	floor.material.color = color(1,0.9,0.9);
 	floor.material.specular = 0;
 
-	t_shape leftWall;
-	leftWall = create_shape(shape_sphere);
-	leftWall.transform = translation(tuple(0,0, 5,1));
-	leftWall.transform = matrix_multi(leftWall.transform, rotation_y(-PI/4));
-	leftWall.transform = matrix_multi(leftWall.transform, rotation_x(PI/ 2));
-	leftWall.transform = matrix_multi(leftWall.transform, scaling(tuple(10,0.01,10, 1)));
-	leftWall.material = floor.material;
+	t_shape backwall;
+	backwall = create_shape(shape_plane);
+	backwall.transform = matrix_multi(rotation_x(-PI/2), translation(tuple (0,1,10,1)));
+	backwall.material = material();
+	backwall.material.color = color(0,1,0);
+	backwall.material.specular = 0;
+	//set_transform(&backwall, rotation_y(PI/2));
+	//set_transform (&backwall, rotation_y(PI/2));
+	//set_transform (&backwall, rotation_x(-PI/2));
+	//backwall.transform = 
+	//ceiling
+	//leftWalll.transform = matrix_multi(rotation_y(-PI/2), translation(tuple (5,3,3,1)));
 
-
-// // 	right_wall ← sphere()
-// // right_wall.transform ← translation(0, 0, 5) *
-// // rotation_y(π/4) * rotation_x(π/2) *
-// // scaling(10, 0.01, 10)
-// // right_wall.material ← floor.material
-
+	//set_transform (&backwall,translation(tuple (0,-1,0,1)));
+	//backwall.material.ambient = 0.2;
+	t_shape leftWalll;
+	leftWalll = create_shape(shape_plane);
+	leftWalll.transform = matrix_multi(rotation_z(-PI/  2), translation(tuple (0,-6,0,1)));
+	//leftWalll.transform =translation(tuple(-100,-100,-100,1));
+	// ;
+	// set_transform(&leftWalll,rotation_x(PI/2));
+	// set_transform(&leftWalll,rotation_z(-PI/2));
+	//leftWalll.transform = matrix_multi (leftWalll.transform ,translation(tuple (0,-3,0,1) ));
+	// matrix_multi(rotation_z(PI/2), translation(tuple (0,3,0,1)));
+	leftWalll.material = material();
+	leftWalll.material.color = color(1,0,0);
+	leftWalll.material.specular = 0;
 
 	t_shape rightWall;
-	rightWall =  create_shape(shape_sphere);
-	rightWall.transform = translation(tuple(0,0, 5,1));
-	rightWall.transform = matrix_multi(rightWall.transform, rotation_y(PI/4));
-	rightWall.transform = matrix_multi(rightWall.transform, rotation_x(PI/ 2));
-	rightWall.transform = matrix_multi(rightWall.transform, scaling(tuple(10,0.01,10, 1)));
-	rightWall.material = floor.material;
+	rightWall = create_shape(shape_plane);
+	rightWall.transform = matrix_multi(rotation_z(PI/  2), translation(tuple (0,-6,0,1)));
+	rightWall.material = material();
+	rightWall.material.color = color(1,0,0);
+	rightWall.material.specular = 0;
 
 
 	t_shape middle;
 	middle = create_shape(shape_sphere);
-	middle.transform = translation(tuple (-0.5,1,0.5,1));
+	middle.transform =matrix_multi (translation(tuple (0.5,-0.8,-9.5,1)) , scaling(tuple(0.5,0.5,0.5,1)));
 	middle.material = material();
 	middle.material.color = color(0.1,1,0.5);
 	middle.material.diffuse = 0.7;
@@ -85,7 +111,7 @@ t_world	default_world(void)
 
 	t_shape right;
 	right =  create_shape(shape_sphere);
-	right.transform = matrix_multi(translation(tuple (1.5,0.5,-0.5,1)),  scaling(tuple(0.5,0.5,0.5,1)));
+	right.transform = matrix_multi(translation(tuple (2,0.5,-3,1)),  scaling(tuple(0.7,0.7,0.7,1)));
 	right.material = material();
 	right.material.color = color(0.5,1,0.1);
 	right.material.diffuse = 0.7;
@@ -93,19 +119,23 @@ t_world	default_world(void)
 
 	t_shape left;
 	left = create_shape(shape_sphere);
-	left.transform = matrix_multi(translation(tuple (-1.5, 0.33, -0.75,1)),  scaling(tuple(0.33, 0.33, 0.33,1)));
+	left.transform = matrix_multi(translation(tuple (-2.5, 2, -6,1)),  scaling(tuple(1, 1, 1,1)));
 	left.material = material();
-	left.material.color = color(1, 0.8, 0.1);
+	left.material.color = color(1, 0.2, 1);
 	left.material.diffuse = 0.7;
 	left.material.specular = 0.3;
 
 	w.l = light;
-	w.s[0] = floor;
-	w.s[1] = leftWall;
-	w.s[2] = rightWall;
-	w.s[3] = middle;
-	w.s[4] = right;
-	w.s[5] = left;
+	// w.s[0] = floor;
+	// w.s[1] = leftWall;
+	// w.s[2] = rightWall;
+	w.s[0] = middle;
+	w.s[1] = right;
+	w.s[2] = left;
+	w.s[3] = floor;
+	w.s[4] = backwall;
+	w.s[5] = rightWall;
+	w.s[6] = leftWalll;
 
 	return (w);
 }
@@ -159,8 +189,8 @@ t_intersect	intersect(t_shape s, t_ray r)
 	s.ray_in_obj_space = transform(r, inverse(s.transform, 4));
 	if (!ft_strncmp(s.shape_name, "sp", 2))
 		return (local_intersect_sphere(s.ray_in_obj_space));
-	// else if(!ft_strncmp(s.shape_name, "pl", 2))
-	// 	return(local_intersect_plane(local_ray));
+	else if(!ft_strncmp(s.shape_name, "pl", 2))
+		return(local_intersect_plane(s.ray_in_obj_space));
 	
 	// printf("\nnever here\n");
 	//exit(0);
@@ -178,7 +208,7 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 	xs = NULL;
 	i = 0;
 	count = 0;
-	while (i < 6)
+	while (i < 7)
 	{
 		inter1 = intersect(w.s[i], r);
 		if (inter1.count > 0)

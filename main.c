@@ -155,21 +155,18 @@ int main (int argc, char **argv) {
     c = camera(HEIGHT, WIDTH , PI/3);
     t_point		from;
 	t_point		to;
-	t_vector	up;
- 
-	from = point(0, 1.5, -5);
+    t_vector	up;
 
-	to = point(0, 1, 0);
+	from = point(0, 1, -15);
+
+	to = point(0, 0, 0);
 	
     up = vector(0, 1, 0);
 
     c.transform = view_transform(from, to, up);
-    
     render(c, w, &scene_data);
-
+    
     //printf("here stop");
-
-   
     if (argc != 2)
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
     //parse_scene(argv[1], &scene_data);

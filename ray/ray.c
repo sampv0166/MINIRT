@@ -75,6 +75,23 @@ t_intersect	local_intersect_sphere(t_ray r)
 	return (inter);
 }
 
+t_intersect local_intersect_plane(t_ray r)
+{
+	t_intersect	inter;
+
+	if (fabs(r.direction.y) < EPSILON)
+	{
+		inter.count = 0;
+		inter.t[0] = 0;
+		inter.t[1] = 0;
+		return (inter);
+	}
+	inter.count = 2;
+	inter.t[0] = -r.origin.y / r.direction.y ;
+	inter.t[1] = -r.origin.y / r.direction.y ; 
+	return (inter);
+}
+
 t_intersection	intersection(double value, t_shape object, int count)
 {
 	t_intersection	i;
