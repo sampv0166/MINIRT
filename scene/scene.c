@@ -44,143 +44,38 @@ t_shape create_shape(char *shape_name)
 	return (shp);
 }
 
-t_world	default_world(void)
+t_world	default_world(t_data *scene_data)
 {
-	char *shape_sphere;
-	char *shape_plane;
-
-	shape_plane = "pl";
-	shape_sphere = "sp";
-	t_light		light;
-	t_point		p;
 	t_world		w;
+	int			i;
+	int			j;
 
-	p = point(-3, 15, -20);
-	light = point_light(p, color(1, 1, 1));
-
-	t_shape floor;	
-	floor = create_shape(shape_plane);
-	floor.transform = translation(tuple(0, -3, 0, 1));
-	floor.material = material();
-	floor.material.color = color(1,0.9,0.9);
-	floor.material.specular = 0;
-
-	t_shape backwall;
-	backwall = create_shape(shape_plane);
-	backwall.transform = matrix_multi(rotation_x(-PI/2), translation(tuple (0,1,10,1)));
-	backwall.material = material();
-	backwall.material.color = color(0,1,0);
-	backwall.material.specular = 0;
-	//set_transform(&backwall, rotation_y(PI/2));
-	//set_transform (&backwall, rotation_y(PI/2));
-	//set_transform (&backwall, rotation_x(-PI/2));
-	//backwall.transform = 
-	//ceiling
-	//leftWalll.transform = matrix_multi(rotation_y(-PI/2), translation(tuple (5,3,3,1)));
-
-	//set_transform (&backwall,translation(tuple (0,-1,0,1)));
-	//backwall.material.ambient = 0.2;
-	t_shape leftWalll;
-	leftWalll = create_shape(shape_plane);
-	leftWalll.transform = matrix_multi(rotation_z(-PI/  2), translation(tuple (0,-6,0,1)));
-	//leftWalll.transform =translation(tuple(-100,-100,-100,1));
-	// ;
-	// set_transform(&leftWalll,rotation_x(PI/2));
-	// set_transform(&leftWalll,rotation_z(-PI/2));
-	//leftWalll.transform = matrix_multi (leftWalll.transform ,translation(tuple (0,-3,0,1) ));
-	// matrix_multi(rotation_z(PI/2), translation(tuple (0,3,0,1)));
-	leftWalll.material = material();
-	leftWalll.material.color = color(1,0,0);
-	leftWalll.material.specular = 0;
-
-	t_shape rightWall;
-	rightWall = create_shape(shape_plane);
-	rightWall.transform = matrix_multi(rotation_z(PI/  2), translation(tuple (0,-6,0,1)));
-	rightWall.material = material();
-	rightWall.material.color = color(1,0,0);
-	rightWall.material.specular = 0;
-
-
-	t_shape middle;
-	middle = create_shape(shape_sphere);
-	middle.transform =matrix_multi (translation(tuple (0.5,-0.8,-9.5,1)) , scaling(tuple(0.5,0.5,0.5,1)));
-	middle.material = material();
-	middle.material.color = color(0.1,1,0.5);
-	middle.material.diffuse = 0.7;
-	middle.material.specular = 0.3;
-
-	t_shape right;
-	right =  create_shape(shape_sphere);
-	right.transform = matrix_multi(translation(tuple (2,0.5,-3,1)),  scaling(tuple(0.7,0.7,0.7,1)));
-	right.material = material();
-	right.material.color = color(0.5,1,0.1);
-	right.material.diffuse = 0.7;
-	right.material.specular = 0.3;
-
-	t_shape left;
-	left = create_shape(shape_sphere);
-	left.transform = matrix_multi(translation(tuple (-2.5, 2, -6,1)),  scaling(tuple(1, 1, 1,1)));
-	left.material = material();
-	left.material.color = color(1, 0.2, 1);
-	left.material.diffuse = 0.7;
-	left.material.specular = 0.3;
-
-	w.l = light;
-	// w.s[0] = floor;
-	// w.s[1] = leftWall;
-	// w.s[2] = rightWall;
-	w.s[0] = middle;
-	w.s[1] = right;
-	w.s[2] = left;
-	w.s[3] = floor;
-	w.s[4] = backwall;
-	w.s[5] = rightWall;
-	w.s[6] = leftWalll;
-
+	j = 0;
+	i = 0;
+	w.s = malloc (sizeof (t_shape) * scene_data->total_shape_count);
+	
+	while (i < scene_data->total_sphere_count)
+	{
+		w.s[i]	= create_shape("sp");
+		i++;
+	}
+	while (j < scene_data->total_plane_count)
+	{
+		w.s[i] = create_shape("pl");
+		i++;
+		j++;
+	}
+	j = 0;	
+	while (j < scene_data->total_cylinder_count)
+	{
+		w.s[i] = create_shape("pl");
+		i++;
+		j++;
+	}
 	return (w);
 }
 
-// t_intersection **addToInterSections(t_intersect inter, t_intersection **xs, t_shape sp, int *i,int *cnt)
-// {
-// 	t_intersection *tmp;
-// 	tmp = NULL;
-// 	if (*i == 0)
-// 	{
-// 			//printf("\nfffff\n");
-// 		tmp = malloc(sizeof(t_intersection) * 2);
-// 		tmp[0] = intersection(inter.t[0], sp);
-// 		tmp[0].count = *cnt;
-// 		tmp[1] = intersection(inter.t[1], sp);
-// 		tmp[1].count = *cnt;
-// 		*i += 2;
-// 		return(&tmp);
-// 	}
-// 	else
-// 	{
-// 			//printf("\nssss\n");
-// 				///
-// 		tmp = malloc(sizeof(t_intersection) * (*i + 2));
-// 		int j;
-// 		int k;
-// 		j = 0;
-// 		k = 0;
-// 		printf("\ni i == %d\n", *(i));
-// 		while (j < *(i))
-// 		{
-// 			tmp[j] = xs[0][j];
-// 			tmp[j].count =  *cnt;
-// 			k++;
-// 			j++;
-// 		}
-// 		tmp[(*i)++] = intersection(inter.t[0], sp);
-// 		tmp[(*i)].count = *cnt;
-// 		tmp[(*i)++] = intersection(inter.t[1], sp);
-// 		tmp[(*i)].count = *cnt;
-// 		free(*xs);
-// 		*xs = NULL;
-// 		return(&tmp);	
-// 	}
-// }
+//5N6hV5ZM96we7X2
 
 t_intersect	intersect(t_shape s, t_ray r)
 {

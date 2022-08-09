@@ -158,6 +158,7 @@ typedef struct s_sphere
 	int			id;
 	t_point		sp_center;
 	double		radius;
+	t_color color;
 
 }		       t_sphere;
 
@@ -221,7 +222,7 @@ typedef struct s_intersect
 
 typedef struct s_world
 {
-	t_shape		s[7];
+	t_shape		*s;
 	t_light		l;
 }	t_world;
 
@@ -263,6 +264,12 @@ typedef struct s_data
     t_color amb_color;
     double  amb_ratio;
     int     amb_set;
+
+	int 	total_shape_count;
+	int 	total_sphere_count;
+	int 	total_plane_count;
+	int		total_cylinder_count;
+
 
     // screen info
     int width;
@@ -390,7 +397,7 @@ t_material	material(void);
 t_color		lighting(t_material m, t_light l, t_point pos,
 	t_vector eyev, t_vector normalv, t_bool in_shadow);
 t_world		world(void);
-t_world		default_world(void);
+t_world		default_world(t_data *scene_data);
 t_intersection	*intersect_world(t_world w, t_ray r);
 t_comps	prepare_computations(t_intersection i, t_ray r);
 t_color	shade_hit(t_world w, t_comps comps);
