@@ -65,7 +65,7 @@ t_light	point_light(t_point pos, t_color intensity)
 	return (l);
 }
 
-t_material	material(void)
+t_material	material()
 {
 	t_material	m;
 
@@ -73,6 +73,7 @@ t_material	material(void)
 	m.color.g = 1;
 	m.color.b = 1;
 	m.ambient = 0.1;
+	
 	m.diffuse = 0.9;
 	m.specular = 0.9;
 	m.shininess = 200.0;

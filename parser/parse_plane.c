@@ -18,7 +18,6 @@ void parse_plane(char **info, t_data *scene_data)
     color_split = ft_split(info[3], ',');
     if (get_2darray_size(point_split) != 3 || get_2darray_size(norm_vec) != 3 || get_2darray_size(color_split) != 3)
         print_error_msg_and_exit("INVALID NUMBER OF VALUES FOR PLANE", scene_data);
-
     plane = malloc (sizeof (t_plane));
     if (get_2darray_size(info) != 4)
     {
@@ -43,7 +42,6 @@ void parse_plane(char **info, t_data *scene_data)
     plane->norm_vec.z = parse_double(norm_vec[2]);
 
     parse_color(info[3], scene_data, &plane->color);
-
     new = ft_lstnew(plane);
     ft_lstadd_back(&scene_data->plane_list, new);
 }

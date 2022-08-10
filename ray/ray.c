@@ -21,21 +21,15 @@ t_point	position(t_ray r, float num)
 	return (p);
 }
 
-t_sphere	*sphere(void)
+t_sphere	*sphere()
 {
 	t_sphere	*sp;
 
 	sp = malloc(sizeof(t_sphere));
-	t_point		center;
 	static int	id;
-
+	
 	if (!id)
 		id = 0;
-	center.x = 0;
-	center.y = 0;
-	center.z = 0;
-	sp->sp_center = center;
-	sp->radius = 4.0;
 	sp->id = id++;
 	return (sp);
 }

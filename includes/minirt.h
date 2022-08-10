@@ -101,8 +101,8 @@ typedef struct s_light
 
 typedef struct s_camera
 {
-    t_tuple pos;
-    t_tuple norm_vector;
+    t_point pos;
+    t_vector norm_vector;
     double fov;
 
 }               t_camera;
@@ -164,16 +164,16 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_tuple xyz;
-    t_tuple norm_vec;
+	t_point xyz;
+    t_vector norm_vec;
     t_color color;
 }		       t_plane;
 
 
 typedef struct s_cy
 {
-	t_tuple xyz;
-    t_tuple norm_vec;
+	t_point xyz;
+    t_vector norm_vec;
     t_color color;
 
     double diameter;
@@ -182,6 +182,7 @@ typedef struct s_cy
 
 typedef struct s_shape
 {
+	t_point		position;
 	double		**transform;
 	t_material  material;
 	t_color		color;
@@ -224,6 +225,7 @@ typedef struct s_world
 {
 	t_shape		*s;
 	t_light		l;
+	int         shape_count;
 }	t_world;
 
 typedef	struct s_comps
@@ -380,7 +382,7 @@ t_tuple		shearing(t_tuple tp, double *coord);
 //Ray
 t_ray		ray(t_point p, t_vector v);
 t_point		position(t_ray r, float num);
-t_sphere	*sphere(void);
+t_sphere	*sphere();
 t_intersect	intersect(t_shape s, t_ray r);
 t_intersection	intersection(double value, t_shape object, int count);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);

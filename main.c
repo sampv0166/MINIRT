@@ -112,7 +112,7 @@ void init_scence_data(t_data *scene_data)
     scene_data->total_plane_count = 0;
     scene_data->total_cylinder_count = 0;
     scene_data->sphere_list = NULL;
-    scene_data->plane_list  =NULL;
+    scene_data->plane_list  = NULL;
     scene_data->cy_list = NULL;
 }
 
@@ -123,27 +123,30 @@ int main (int argc, char **argv) {
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
     init_scence_data(&scene_data);
     parse_scene(argv[1], &scene_data);
-    print_parsed_values(&scene_data);
-    exit (0);
-
+//     print_parsed_values(&scene_data);
+//    exit(0);
     setup_mlx(&scene_data);
 
     t_world w;
     t_camera2 c;
+    
 
     w = default_world(&scene_data);
-    c = camera(HEIGHT, WIDTH , PI/3);
+    w.shape_count = scene_data.total_shape_count;
+    c = camera(HEIGHT, WIDTH , (scene_data.camera.fov * (PI/180)));
     t_point		from;
 	t_point		to;
     t_vector	up;
 
-	from = point(0, 1, -15);
 
-	to = point(0, 0, 0);
+	from = scene_data.camera.pos;
+
+	to = point(scene_data.camera.norm_vector.x, scene_data.camera.norm_vector.y, scene_data.camera.norm_vector.z);
 	
     up = vector(0, 1, 0);
 
     c.transform = view_transform(from, to, up);
+   
     render(c, w, &scene_data);
     
     //printf("here stop");

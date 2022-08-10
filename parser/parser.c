@@ -93,7 +93,7 @@ static void parse_current_line(char *line, t_data *scene_data)
     {
         scene_data->total_shape_count++;
         scene_data->total_cylinder_count++;
-        parse_cylinder(info_split,scene_data);   
+        parse_cylinder(info_split,scene_data);  
     }
     else
     {
