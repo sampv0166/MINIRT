@@ -304,6 +304,7 @@ void parse_sphere(char **info, t_data *scene_data);
 void parse_plane(char **info, t_data *scene_data);
 void parse_cylinder(char **info, t_data *scene_data);
 
+
 //FREE FUNCTIONS
 void free_scene_data();
 
@@ -317,7 +318,7 @@ void print_error_msg_and_exit(char *error_msg, t_data *scene_data);
 int get_2darray_size(char **arr);
 double parse_double(char *str);
 void parse_color(char *str, t_data *scene_data, t_color *colors);
-
+int skip_dot_verify_digits(char *str);
 void print_tuple_sam(char *str,t_tuple *tp);
 void print_point(char *str,t_point *tp);
 void print_vector(char *str,t_vector *tp);

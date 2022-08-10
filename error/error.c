@@ -7,4 +7,5 @@ void print_error_msg_and_exit(char *error_msg, t_data *scene_data)
     ft_putstr_fd("\n", 1);
     if (scene_data)
         free_scene_data();  
+    exit(0);
 }

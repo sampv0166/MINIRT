@@ -3,83 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makhtar <makhtar@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 14:48:02 by apila-va          #+#    #+#             */
-/*   Updated: 2022/05/18 11:08:13 by makhtar          ###   ########.fr       */
+/*   Created: 2022/02/09 22:22:27 by apila-va          #+#    #+#             */
+/*   Updated: 2022/02/22 09:07:33 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	print_atoi(char *str)
+void	init(size_t *i, int *s, size_t *res)
 {
-	ft_putstr_fd("exit: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putendl_fd(": numeric argument requred", 2);
+	*i = 0;
+	*s = 1;
+	*res = 0;
 }
 
-static int	check_limit(int i, int sign, char *str)
+void	skip_sapces_and_signs(const char *str, size_t *i, int *s)
 {
-	if (i == 19 && sign > 0)
+	while (str && (str[(*i)] == ' ' || str[(*i)] == '\n' || str[(*i)] == '\t' || \
+		str[(*i)] == '\v' || str[(*i)] == '\f' || str[(*i)] == '\r'))
+		(*i)++;
+	if (str && (str[(*i)] == '-' || str[(*i)] == '+'))
 	{
-		if (ft_strncmp(str, "9223372036854775808", 19) < 0)
-			return (1);
+		if (str[(*i)] == '-')
+			*s = -1;
+		(*i)++;
 	}
-	else if (sign < 0 && (i == 20))
-	{
-		if (ft_strncmp(str, "-9223372036854775809", 20) < 0)
-			return (1);
-	}
-	return (0);
 }
 
-static long int	ft_atoi_atoi(char *str, int sign, int *index)
-{
-	int			i;
-	long int	nbr;
+// int	exit_atoi(int *atoi_chec)
+// {
+// 	*atoi_chec = 1;
+// 	return (*atoi_chec);
+// }
 
-	i = 0;
-	i = *index;
-	nbr = 0;
-	if ((str[i] >= '0') && (str[i] <= '9'))
+int	ft_atoi(const char *str)
+{
+	size_t	i;
+	int	s;
+	size_t	res;
+
+	init(&i, &s, &res);
+	if (ft_strlen(str) == 1 && (*str == '-' || *str == '+'))
+		return (0);
+	skip_sapces_and_signs(str, &i, &s);
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		while ((str[i] >= '0') && (str[i] <= '9'))
-		{
-			nbr = (nbr * 10) + (str[i] - '0');
-			i++;
-		}
-		nbr = nbr * sign;
-		if (str[i] == '\0' || str[i] == ' ')
-		{
-			if (i < 19)
-				return (nbr);
-		}
-		if (check_limit(i, sign, str))
-			return (nbr);
-	}
-	print_atoi(str);
-	return (255);
-}
-
-long int	ft_atoi(const char *str)
-{
-	int		i;
-	long	nbr;
-	char	*s;
-	int		sign;
-
-	i = 0;
-	s = (char *)str;
-	sign = 1;
-	while (s[i] == ' ')
+		res = (res * 10) + (str[i] - '0');
 		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
+		if ((res > 2147483647 && s == 1) || (res > 2147483648 && s == -1))
+			return (0);
 	}
-	nbr = ft_atoi_atoi(s, sign, &i);
-	return (nbr);
+	if (str[i] != '\0')
+		return (res);
+	return (res * s);
 }

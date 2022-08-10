@@ -1,6 +1,6 @@
 #include "../includes/minirt.h"
 
-static void remove_extra_spaces(char *line)
+static void replace_tabs_and_newline(char *line)
 {
     int i;
 
@@ -9,6 +9,8 @@ static void remove_extra_spaces(char *line)
     {
         if (line[i] == '\t')
             line[i] = ' ';
+        if (line[i] == '\n')
+            line[i] = '\0';    
         i++;    
     }
 }
@@ -16,7 +18,6 @@ static void remove_extra_spaces(char *line)
 static int check_file_name(char *file_name)
 {
     int i;
-
     i = 0;
 
     while (file_name[i])
@@ -62,14 +63,15 @@ static void parse_current_line(char *line, t_data *scene_data)
     char **info_split;
 
     info_split = NULL;
-    remove_extra_spaces(line);
+    replace_tabs_and_newline(line);
     info_split = ft_split(line, ' ');
-    if (info_split[0][0] == 'A')
+    if (ft_strlen(info_split[0]) == 1 && info_split[0][0] == 'A')
     {
         parse_ambient_lighting(info_split, scene_data);
     }
-    else if (info_split[0][0] == 'C')
+    else if (ft_strlen(info_split[0]) == 1 && info_split[0][0] == 'C')
     {
+
         parse_camera(info_split,scene_data);
     }
     else if (info_split[0][0] == 'L')
@@ -94,31 +96,32 @@ static void parse_current_line(char *line, t_data *scene_data)
         scene_data->total_cylinder_count++;
         parse_cylinder(info_split,scene_data);   
     }
+    else
+    {
+       print_error_msg_and_exit("Invalid Identifier", scene_data); 
+    }
     free_memmory(info_split);                       
 }
 
 void parse_scene(char *file_name, t_data *scene_data)
 {
     char *line;
+    int fd;
 
     if (check_file_name(file_name))
         print_error_msg_and_exit("FILE EXTENTION IS INCORRECT", scene_data);
-
-    int fd;
-
     fd = open(file_name, O_RDONLY);
     if (fd < 0)
-        print_error_msg_and_exit("ERROR OPENING FILE", scene_data);
-        
+        print_error_msg_and_exit("ERROR OPENING FILE", scene_data);    
     while (1)
     {
         line = get_next_line(fd);
-        if (line == NULL){ 
-            break;
-        }
-        if (*line != '#')
+        if (line && *line != '#')
             parse_current_line(line, scene_data);
-        line = NULL;    
-   
+        else
+        {
+            free_memmory(&line);    
+            break ;
+        }
     }
 }
