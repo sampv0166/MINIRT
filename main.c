@@ -20,17 +20,17 @@ void print_parsed_values(t_data *scene_data)
 	printf("\nCAMERA FOV\n");
     printf("%f\n", scene_data->camera.fov);
 	printf("---------------------------------");
-    // printf("\n LIGHT SOURCE POINT\n");
-    // printf("%f\n", scene_data->light_src.pos.x);
-    // printf("%f\n",  scene_data->light_src.pos.y);
-    // printf("%f\n",  scene_data->light_src.pos.z);
-    // // printf("\nCAMERA NORM VECTOR\n");
-    // // printf("%f\n", scene_data->camera.norm_vector.x);
-    // // printf("%f\n", scene_data->camera.norm_vector.y);
-    // // printf("%f\n", scene_data->camera.norm_vector.z);
-	// printf("\nLIGHT RATIO\n");
-    // printf("%f\n", scene_data->light_src.ratio);
-	// printf("---------------------------------");
+    printf("\n LIGHT SOURCE POINT\n");
+    printf("%f\n", scene_data->light_src.pos.x);
+    printf("%f\n",  scene_data->light_src.pos.y);
+    printf("%f\n",  scene_data->light_src.pos.z);
+	printf("\nLight COLOR\n");
+    printf("%f\n", scene_data->light_src.color.r);
+    printf("%f\n", scene_data->light_src.color.r);
+    printf("%f\n", scene_data->light_src.color.r);
+	printf("\nLIGHT RATIO\n");
+    printf("%f\n", scene_data->light_src.ratio);
+	printf("---------------------------------");
     // while (scene_data->sphere_list)
     // {
     //     t_sphere *sphere = scene_data->sphere_list->content; 

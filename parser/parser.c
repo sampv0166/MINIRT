@@ -71,10 +71,9 @@ static void parse_current_line(char *line, t_data *scene_data)
     }
     else if (ft_strlen(info_split[0]) == 1 && info_split[0][0] == 'C')
     {
-
         parse_camera(info_split,scene_data);
     }
-    else if (info_split[0][0] == 'L')
+    else if (ft_strlen(info_split[0]) == 1 &&  info_split[0][0] == 'L')
     {
         parse_light(info_split,scene_data);
     }
