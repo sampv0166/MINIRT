@@ -31,61 +31,61 @@ void print_parsed_values(t_data *scene_data)
 	printf("\nLIGHT RATIO\n");
     printf("%f\n", scene_data->light_src.ratio);
 	printf("---------------------------------");
-    // while (scene_data->sphere_list)
-    // {
-    //     t_sphere *sphere = scene_data->sphere_list->content; 
-    //     printf("\n SPHERE CENTER POINT\n");
-    //     printf("%f\n", sphere->sp_center.x);
-    //     printf("%f\n",  sphere->sp_center.y);
-    //     printf("%f\n",  sphere->sp_center.z);
-    //     printf("\nsphere color\n");
-    //     printf("%f\n", sphere->color.r);
-    //     printf("%f\n",  sphere->color.g);
-    //     printf("%f\n",  sphere->color.b);
-    //     printf("\nradiance\n");
-    //     printf("%f\n", sphere->radius);
-    //     scene_data->sphere_list = scene_data->sphere_list->next;
-    // }
-	// printf("---------------------------------");
-    //   while (scene_data->plane_list)
-    // {
-    //     t_plane *plane = scene_data->plane_list->content; 
-    //     printf("\n plane point xyz\n");
-    //     printf("%f\n", plane->xyz.x);
-    //     printf("%f\n",  plane->xyz.y);
-    //     printf("%f\n",  plane->xyz.z);
-    //     printf("\n norm vec\n");
-    //     printf("%f\n", plane->norm_vec.x);
-    //     printf("%f\n",  plane->norm_vec.y);
-    //     printf("%f\n",  plane->norm_vec.z);
-    //     printf("\nplane color\n");
-    //     printf("%f\n", plane->color.r);
-    //     printf("%f\n",  plane->color.g);
-    //     printf("%f\n",  plane->color.b);
-    //     scene_data->plane_list = scene_data->plane_list->next;
-    // }
-	// printf("---------------------------------");
-    // while (scene_data->cy_list)
-    // {
-    //     t_cy *cy = scene_data->cy_list->content; 
-    //     printf("\n cy point xyz\n");
-    //     printf("%f\n", cy->xyz.x);
-    //     printf("%f\n",  cy->xyz.y);
-    //     printf("%f\n",  cy->xyz.z);
-    //     printf("\n norm vec\n");
-    //     printf("%f\n", cy->norm_vec.x);
-    //     printf("%f\n",  cy->norm_vec.y);
-    //     printf("%f\n",  cy->norm_vec.z);
-    //     printf("\ncy color\n");
-    //     printf("%f\n", cy->color.r);
-    //     printf("%f\n",  cy->color.g);
-    //     printf("%f\n",  cy->color.b);
-    //   printf("\ncy diameter\n");
-    //     printf("%f\n", cy->diameter);
-    //         printf("\ncy height\n");
-    //     printf("%f\n", cy->height);
-    //     scene_data->cy_list = scene_data->cy_list->next;
-    // }
+    while (scene_data->sphere_list)
+    {
+        t_sphere *sphere = scene_data->sphere_list->content; 
+        printf("\n SPHERE CENTER POINT\n");
+        printf("%f\n", sphere->sp_center.x);
+        printf("%f\n",  sphere->sp_center.y);
+        printf("%f\n",  sphere->sp_center.z);
+        printf("\nsphere color\n");
+        printf("%f\n", sphere->color.r);
+        printf("%f\n",  sphere->color.g);
+        printf("%f\n",  sphere->color.b);
+        printf("\nradiance\n");
+        printf("%f\n", sphere->radius);
+        scene_data->sphere_list = scene_data->sphere_list->next;
+    }
+	printf("---------------------------------");
+      while (scene_data->plane_list)
+    {
+        t_plane *plane = scene_data->plane_list->content; 
+        printf("\n plane point xyz\n");
+        printf("%f\n", plane->xyz.x);
+        printf("%f\n",  plane->xyz.y);
+        printf("%f\n",  plane->xyz.z);
+        printf("\n norm vec\n");
+        printf("%f\n", plane->norm_vec.x);
+        printf("%f\n",  plane->norm_vec.y);
+        printf("%f\n",  plane->norm_vec.z);
+        printf("\nplane color\n");
+        printf("%f\n", plane->color.r);
+        printf("%f\n",  plane->color.g);
+        printf("%f\n",  plane->color.b);
+        scene_data->plane_list = scene_data->plane_list->next;
+    }
+	printf("---------------------------------");
+    while (scene_data->cy_list)
+    {
+        t_cy *cy = scene_data->cy_list->content; 
+        printf("\n cy point xyz\n");
+        printf("%f\n", cy->xyz.x);
+        printf("%f\n",  cy->xyz.y);
+        printf("%f\n",  cy->xyz.z);
+        printf("\n norm vec\n");
+        printf("%f\n", cy->norm_vec.x);
+        printf("%f\n",  cy->norm_vec.y);
+        printf("%f\n",  cy->norm_vec.z);
+        printf("\ncy color\n");
+        printf("%f\n", cy->color.r);
+        printf("%f\n",  cy->color.g);
+        printf("%f\n",  cy->color.b);
+      printf("\ncy diameter\n");
+        printf("%f\n", cy->diameter);
+            printf("\ncy height\n");
+        printf("%f\n", cy->height);
+        scene_data->cy_list = scene_data->cy_list->next;
+    }
 	printf("---------------------------------");
 }
 
@@ -100,43 +100,6 @@ void setup_mlx(t_data *scene_data)
     scene_data->mlx.win_ptr = mlx_new_window(scene_data->mlx.mlx_ptr,WIDTH, HEIGHT, "minirt");                       
 }
 
-unsigned int perpixel(t_tuple coord)
-{
-    t_tuple origin;
-
-    origin.x = 0.0;
-    origin.y = 0.0;
-    origin.z = -5;
-
-    t_tuple direction;
-
-    direction.x = coord.x;
-    direction.y = coord.y;
-    direction.z = -1.0;
-
-    double radius = 0.5;
-
-    double a;
-    double b;
-    double c;
-
-    a = dot(direction, direction);
-    b = 2.0 * dot(origin, direction);;
-    c = dot(origin, origin) - radius * radius;
-    
-    double disc;
-
-    disc = b * b - 4.0 * a * c ;
-
-    /// printf ("dis = %f\n", disc);
-
-    if (disc >= 0.0)
-		return 234242342;
-
-	return 0;
-
-}
-
 // int	rgb_to_int(t_color rgb)
 // {
 // 	return(rgb.r << 16 | rgb.g << 8 | rgb.b);
@@ -148,6 +111,9 @@ void init_scence_data(t_data *scene_data)
     scene_data->total_sphere_count = 0;
     scene_data->total_plane_count = 0;
     scene_data->total_cylinder_count = 0;
+    scene_data->sphere_list = NULL;
+    scene_data->plane_list  =NULL;
+    scene_data->cy_list = NULL;
 }
 
 int main (int argc, char **argv) {
@@ -155,6 +121,7 @@ int main (int argc, char **argv) {
     
     if (argc != 2)
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
+    init_scence_data(&scene_data);
     parse_scene(argv[1], &scene_data);
     print_parsed_values(&scene_data);
     exit (0);
