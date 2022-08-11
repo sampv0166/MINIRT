@@ -75,6 +75,7 @@ t_intersect	local_intersect_sphere(t_ray r)
 	inter.t[1] = (-b + sqrt(d)) / (2 * a);
 	return (inter);
 }
+
 int chec_approx_zero(double a)
 {
 	double temp = fabs(a - 0);
@@ -94,6 +95,8 @@ t_intersect local_intersect_cylinder(t_ray r)
 	double		c;
 	double		d;
 
+	r.direction =  normalize(r.direction);
+
 	a = (r.direction.x * r.direction.x)  + (r.direction.z * r.direction.z);
 
 	if (chec_approx_zero(a))
@@ -105,7 +108,9 @@ t_intersect local_intersect_cylinder(t_ray r)
 	}
 
 	b = 2 * r.origin.x * r.direction.x  + 2 * r.origin.z * r.direction.z;
+
 	c = r.origin.x * r.origin.x + r.origin.z * r.origin.z - 1;
+
 	d = b * b - 4 * a * c;
 
 	if (d < 0)

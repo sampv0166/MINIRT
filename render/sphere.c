@@ -9,6 +9,11 @@ t_vector		local_normal_at_plane()
 	return (vector(0, 1 ,0));
 }
 
+t_vector		local_normal_at_cylinder(t_point vec)
+{
+	return (vector(vec.x, 0 ,vec.y));
+}
+
 t_vector	normal_at(t_shape s, t_point p)
 {
 	t_vector	obj_normal;
@@ -32,6 +37,8 @@ t_vector	normal_at(t_shape s, t_point p)
 		obj_normal = local_normal_at_sphere(obj_point, point);
 	if (!ft_strncmp(s.shape_name, "pl", 2))
 		obj_normal = local_normal_at_plane(obj_point, point);
+	if (!ft_strncmp(s.shape_name, "cy", 2))
+		obj_normal = local_normal_at_cylinder(obj_point);	
 	tp3 = vector_tp(obj_normal);
 	tp4 = matrix_multi_tp(transpose(inverse(s.transform, 4)), tp3);
 	world_normal.x = tp4.x;
