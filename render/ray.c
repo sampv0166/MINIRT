@@ -104,9 +104,10 @@ t_intersect local_intersect_cylinder(t_ray r)
 		return (inter);
 	}
 
-	b = 2 * r.origin.x * r.direction.x + 2 * r.origin.z * r.direction.z;
-	c = (r.origin.x * r.origin.x) + (r.origin.z * r.origin.z) - 1;
-	d = (b * b) - 4 * a * c;
+	b = 2 * r.origin.x * r.direction.x  + 2 * r.origin.z * r.direction.z;
+	c = r.origin.x * r.origin.x + r.origin.z * r.origin.z - 1;
+	d = b * b - 4 * a * c;
+
 	if (d < 0)
 	{
 		inter.count = 0;

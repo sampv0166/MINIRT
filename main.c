@@ -134,8 +134,22 @@ int main (int argc, char **argv) {
     vector(1, 1, 1) | */
 
 
-    r.origin = point(0, 0, -5);
-    r.direction = vector(1, 1, 1);
+    // RAY HIts SPHERE
+    /*Examples:
+    | origin
+    | point(1, 0, 0)
+    | point(0, 0, 0)
+    | point(0, 0, -5)
+
+    direction
+    |
+    vector(0, 1, 0) |
+    vector(0, 1, 0) |
+    vector(1, 1, 1) | */
+
+    r.origin = point(0.5, 0, -5);
+    r.direction = vector(0.1, 1, 1);
+    r.direction =  normalize(r.direction);
     inter  =  local_intersect_cylinder(r);
 
     printf("\n%f %f\n", inter.t[0], inter.t[1]);
