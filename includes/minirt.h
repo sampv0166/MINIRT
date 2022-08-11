@@ -13,8 +13,8 @@
 # define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define EPSILON 0.00001
 # define	PI 4.0 * atan(1.0)
-# define HEIGHT 300
-# define WIDTH 300
+# define HEIGHT 200
+# define WIDTH 200
 //KEYS
 # define KEY_ESC 53
 # define TRUE 1
@@ -59,6 +59,8 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
+
+
 //matrices
 
 typedef struct s_mat
@@ -99,8 +101,8 @@ typedef struct s_light
 
 typedef struct s_camera
 {
-    t_tuple pos;
-    t_tuple norm_vector;
+    t_point pos;
+    t_vector norm_vector;
     double fov;
 
 }               t_camera;
@@ -156,23 +158,22 @@ typedef struct s_sphere
 	int			id;
 	t_point		sp_center;
 	double		radius;
-	t_color		color;
-	double		**transform;
-	t_material	material;
+	t_color color;
 
 }		       t_sphere;
 
 typedef struct s_plane
 {
-	t_tuple xyz;
-    t_tuple norm_vec;
+	t_point xyz;
+    t_vector norm_vec;
     t_color color;
 }		       t_plane;
 
+
 typedef struct s_cy
 {
-	t_tuple xyz;
-    t_tuple norm_vec;
+	t_point xyz;
+    t_vector norm_vec;
     t_color color;
 
     double diameter;
@@ -181,11 +182,16 @@ typedef struct s_cy
 
 typedef struct s_shape
 {
+	t_point		position;
 	double		**transform;
 	t_material  material;
-	
-
+	t_color		color;
+	t_ray		ray_in_obj_space;
+	t_vector	norm_vector;
+	void*		shape;
+	char*		shape_name;
 }			   t_shape;
+
 
 
 typedef struct sobj_list
@@ -199,7 +205,7 @@ typedef	struct s_intersection
 {
 	int			count;
 	double		t;
-	t_sphere	object;
+	t_shape	   object;
 }	t_intersection;
 
 
@@ -215,18 +221,17 @@ typedef struct s_intersect
 // 	int			obj_type;
 // }	t_obj;
 
-
-
 typedef struct s_world
 {
-	t_sphere	s[2];
+	t_shape		*s;
 	t_light		l;
+	int         shape_count;
 }	t_world;
 
 typedef	struct s_comps
 {
 	double			t;
-	t_sphere		object;
+	t_shape		object;
 	t_point			point;
 	t_point			over_point;
 	t_vector		eyev;
@@ -262,6 +267,12 @@ typedef struct s_data
     double  amb_ratio;
     int     amb_set;
 
+	int 	total_shape_count;
+	int 	total_sphere_count;
+	int 	total_plane_count;
+	int		total_cylinder_count;
+
+
     // screen info
     int width;
     int height;
@@ -295,6 +306,7 @@ void parse_sphere(char **info, t_data *scene_data);
 void parse_plane(char **info, t_data *scene_data);
 void parse_cylinder(char **info, t_data *scene_data);
 
+
 //FREE FUNCTIONS
 void free_scene_data();
 
@@ -308,7 +320,7 @@ void print_error_msg_and_exit(char *error_msg, t_data *scene_data);
 int get_2darray_size(char **arr);
 double parse_double(char *str);
 void parse_color(char *str, t_data *scene_data, t_color *colors);
-
+int skip_dot_verify_digits(char *str);
 void print_tuple_sam(char *str,t_tuple *tp);
 void print_point(char *str,t_point *tp);
 void print_vector(char *str,t_vector *tp);
@@ -370,15 +382,16 @@ t_tuple		shearing(t_tuple tp, double *coord);
 //Ray
 t_ray		ray(t_point p, t_vector v);
 t_point		position(t_ray r, float num);
-t_sphere	sphere(void);
-t_intersect	intersect(t_sphere s, t_ray r);
-t_intersection	intersection(double value, t_sphere object);
+t_sphere	*sphere();
+t_intersect	intersect(t_shape s, t_ray r);
+t_intersection	intersection(double value, t_shape object, int count);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);
 t_intersection	*intersections2(int n, ...);
 t_intersection	hit(t_intersection *xs);
 t_ray		transform(t_ray r, double **m);
-void		set_transform(t_sphere *s, double **t);
-t_vector		normal_at(t_sphere s, t_point p);
+void		set_transform(t_shape *s, double **t);
+t_vector		normal_at(t_shape s, t_point p);
+
 t_vector	reflect(t_vector vec, t_vector normal);
 
 //Scene and lights
@@ -387,7 +400,7 @@ t_material	material(void);
 t_color		lighting(t_material m, t_light l, t_point pos,
 	t_vector eyev, t_vector normalv, t_bool in_shadow);
 t_world		world(void);
-t_world		default_world(void);
+t_world		default_world(t_data *scene_data);
 t_intersection	*intersect_world(t_world w, t_ray r);
 t_comps	prepare_computations(t_intersection i, t_ray r);
 t_color	shade_hit(t_world w, t_comps comps);
@@ -407,4 +420,9 @@ t_world	world(void);
 void  render(t_camera2, t_world, t_data *scene_data);
 
 
+
+t_intersect	local_intersect_sphere(t_ray r);
+t_vector		local_normal_at_sphere(t_point obj_point, t_point point);
+t_intersect local_intersect_plane(t_ray r);
+t_intersect local_intersect_cylinder(t_ray r);
 #endif

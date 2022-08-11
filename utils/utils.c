@@ -1,5 +1,35 @@
 #include "../includes/minirt.h"
 
+int skip_dot_verify_digits(char *str)
+{
+    int i;
+    int dot_count;
+    
+    i = 0;
+    dot_count = 0;
+    while (i < str[i])
+    {
+        if (str[i] == '.')
+        {
+            dot_count++;
+            i++;
+            continue;
+        }
+        if(!ft_isdigit(str[i]))
+            return (1);
+        i++;
+    }
+    if (ft_strlen(str) == 1 && *str == '.')
+    {
+        return (1);
+    }
+    if (dot_count > 1)
+    {
+        return (1);
+    }
+    return (0);        
+}
+
 int get_2darray_size(char **arr)
 {
     int i;
@@ -33,9 +63,8 @@ double parse_double(char *str)
 {
     double res;
     int sign;
-
-    res = (double) atoi(str);
     
+    res = (double) ft_atoi(str);
     sign = 1;
     if (res < 0  || *str == '-')
     {
@@ -78,12 +107,19 @@ void parse_color(char *str, t_data *scene_data, t_color *colors)
 {
     char **rgb;
     double c[3];
+    int     i;
 
+    i = 0;
     rgb = ft_split(str, ',');
     if (get_2darray_size(rgb) != 3)
-        print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);
-    if (is_str_not_digit(rgb[0]) || is_str_not_digit(rgb[1]) || is_str_not_digit(rgb[1])){
-        print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);
+        print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);    
+    while (i < 3)
+    {
+        if(skip_dot_verify_digits(rgb[i]))
+        {
+            print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);      
+        }
+        i++;
     }
     c[0] = parse_double(rgb[0]);
     c[1] = parse_double(rgb[1]);
@@ -122,5 +158,3 @@ void print_vector(char *str,t_vector *tp)
     printf("vec y = %f\n", tp->y);
     printf("vec z = %f\n", tp->z);
 }
-
-

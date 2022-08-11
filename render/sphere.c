@@ -1,6 +1,15 @@
 #include "../includes/minirt.h"
+t_vector		local_normal_at_sphere(t_point obj_point, t_point point)
+{
+	return (subtract_points(obj_point, point));
+}
 
-t_vector	normal_at(t_sphere s, t_point p)
+t_vector		local_normal_at_plane()
+{
+	return (vector(0, 1 ,0));
+}
+
+t_vector	normal_at(t_shape s, t_point p)
 {
 	t_vector	obj_normal;
 	t_vector	world_normal;
@@ -19,12 +28,16 @@ t_vector	normal_at(t_sphere s, t_point p)
 	point.x = 0;
 	point.y = 0;
 	point.z = 0;
-	obj_normal = subtract_points(obj_point, point);
+	if (!ft_strncmp(s.shape_name, "sp", 2))
+		obj_normal = local_normal_at_sphere(obj_point, point);
+	if (!ft_strncmp(s.shape_name, "pl", 2))
+		obj_normal = local_normal_at_plane(obj_point, point);
 	tp3 = vector_tp(obj_normal);
 	tp4 = matrix_multi_tp(transpose(inverse(s.transform, 4)), tp3);
 	world_normal.x = tp4.x;
 	world_normal.y = tp4.y;
 	world_normal.z = tp4.z;
+
 	return (normalize(world_normal));
 }
 
@@ -52,7 +65,7 @@ t_light	point_light(t_point pos, t_color intensity)
 	return (l);
 }
 
-t_material	material(void)
+t_material	material()
 {
 	t_material	m;
 
@@ -60,6 +73,7 @@ t_material	material(void)
 	m.color.g = 1;
 	m.color.b = 1;
 	m.ambient = 0.1;
+	
 	m.diffuse = 0.9;
 	m.specular = 0.9;
 	m.shininess = 200.0;

@@ -21,68 +21,130 @@ t_point	position(t_ray r, float num)
 	return (p);
 }
 
-t_sphere	sphere(void)
+t_sphere	*sphere()
 {
-	t_sphere	sp;
-	t_point		center;
-	static int	id;
+	t_sphere	*sp;
 
+	sp = malloc(sizeof(t_sphere));
+	static int	id;
+	
 	if (!id)
 		id = 0;
-	center.x = 0;
-	center.y = 0;
-	center.z = 0;
-	sp.sp_center = center;
-	sp.radius = 4.0;
-	sp.id = id++;
-	sp.transform = identity_matrix();
-	sp.material = material();
+	sp->id = id++;
 	return (sp);
 }
 
-t_intersect	intersect(t_sphere s, t_ray r)
+t_intersect	local_intersect_sphere(t_ray r)
 {
 	t_intersect	inter;
 	t_vector	sphere_to_ray;
 	t_tuple		tp1;
 	t_tuple		tp2;
-	t_ray		r2;
+
+	t_point		origin;
 	double		a;
 	double		b;
 	double		c;
 	double		d;
 
-	r2 = transform(r, inverse(s.transform, 4));
-	sphere_to_ray = subtract_points(r2.origin, point(0, 0, 0));
-	tp1 = vector_tp(r2.direction);
+	origin = point(0, 0, 0);
+	sphere_to_ray = subtract_points(r.origin, origin);
+	tp1 = vector_tp(r.direction);
 	a = dot(tp1, tp1);
 	tp2 = vector_tp(sphere_to_ray);
 	b = 2 * dot(tp1, tp2);
 	c = dot(tp2, tp2) - 1;
-	d = (b * b) - (4 * a * c);
+	d = pow(b, 2) - 4 * a * c;
+	
+	// printf("d: %lf\n", d);
 	if (d < 0)
 	{
-		printf("\nhere\n");
 		inter.count = 0;
 		inter.t[0] = 0;
 		inter.t[1] = 0;
 		return (inter);
+	}
+	else if (d == 0)
+	{
+		inter.count = 2;
+		inter.t[0] = (-b - sqrt(d)) / (2 * a);
+		inter.t[1] = 0;
 	}
 	inter.count = 2;
 	inter.t[0] = (-b - sqrt(d)) / (2 * a);
 	inter.t[1] = (-b + sqrt(d)) / (2 * a);
 	return (inter);
 }
+int chec_approx_zero(double a)
+{
+	double temp = fabs(a - 0);
 
-t_intersection	intersection(double value, t_sphere object)
+	if(temp < EPSILON)
+	{
+		return 1;
+	}
+	return 0;
+}
+
+t_intersect local_intersect_cylinder(t_ray r)
+{
+	t_intersect	inter;
+	double		a;
+	double		b;
+	double		c;
+	double		d;
+
+	a = (r.direction.x * r.direction.x)  + (r.direction.z * r.direction.z);
+
+	if (chec_approx_zero(a))
+	{
+		inter.count = 0;
+		inter.t[0] = 0;
+		inter.t[1] = 0;
+		return (inter);
+	}
+
+	b = 2 * r.origin.x * r.direction.x + 2 * r.origin.z * r.direction.z;
+	c = (r.origin.x * r.origin.x) + (r.origin.z * r.origin.z) - 1;
+	d = (b * b) - 4 * a * c;
+	if (d < 0)
+	{
+		inter.count = 0;
+		inter.t[0] = 0;
+		inter.t[1] = 0;
+		return (inter);
+	}
+	
+	inter.count = 2;
+	inter.t[0] = (-b - sqrt(d)) / (2 * a);
+	inter.t[1] = (-b + sqrt(d)) / (2 * a);
+	return (inter);
+}
+
+t_intersect local_intersect_plane(t_ray r)
+{
+	t_intersect	inter;
+
+	if (fabs(r.direction.y) < EPSILON)
+	{
+		inter.count = 0;
+		inter.t[0] = 0;
+		inter.t[1] = 0;
+		return (inter);
+	}
+	inter.count = 2;
+	inter.t[0] = -r.origin.y / r.direction.y ;
+	inter.t[1] = 0; 
+	return (inter);
+}
+
+t_intersection	intersection(double value, t_shape object, int count)
 {
 	t_intersection	i;
-	//static int		c;
 
-	// i->object = malloc(sizeof(typeof(object)));
-	// if (!c)
-	// 	c = 1;
-	i.count = 0;
+	//i = malloc(sizeof(t_intersection));
+
+	i.count = count;
 	i.t = value;
 	i.object = object;
 	return (i);
@@ -159,8 +221,10 @@ t_intersection	hit(t_intersection *xs)
 			i++;
 		}
 	}
+	//printf("\nitss here\n");
 	inter.count = 0;
 	inter.t = 0;
+	//inter.object = xs->object;
 	return (inter);
 }
 
@@ -185,7 +249,7 @@ t_ray	transform(t_ray r, double **m)
 	return (ret);
 }
 
-void	set_transform(t_sphere *s, double **t)
+void	set_transform(t_shape *s, double **t)
 {
 	s->transform = t;
 }

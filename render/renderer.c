@@ -34,20 +34,19 @@ void render(t_camera2 cam, t_world wrld, t_data *scene_data)
     dst = NULL;
     h = 0; 
     w = 0;
-
     while (h < HEIGHT - 1)
     {
         w = 0;
         while(w < WIDTH - 1)
         {
             r = ray_for_pixel(cam, w, h);
-            color = color_at(wrld, r);
+            color = color_at(wrld, r);;
             write_pixel(dst,w, h, color, scene_data);
             w++;
         }
         h++;
     }
 
-   
+printf("\nhere\n");   
 }
 
