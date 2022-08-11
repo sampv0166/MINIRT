@@ -424,4 +424,5 @@ void  render(t_camera2, t_world, t_data *scene_data);
 t_intersect	local_intersect_sphere(t_ray r);
 t_vector		local_normal_at_sphere(t_point obj_point, t_point point);
 t_intersect local_intersect_plane(t_ray r);
+t_intersect local_intersect_cylinder(t_ray r);
 #endif

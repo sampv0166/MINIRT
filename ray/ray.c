@@ -55,6 +55,7 @@ t_intersect	local_intersect_sphere(t_ray r)
 	b = 2 * dot(tp1, tp2);
 	c = dot(tp2, tp2) - 1;
 	d = pow(b, 2) - 4 * a * c;
+	
 	// printf("d: %lf\n", d);
 	if (d < 0)
 	{
@@ -63,6 +64,58 @@ t_intersect	local_intersect_sphere(t_ray r)
 		inter.t[1] = 0;
 		return (inter);
 	}
+	else if (d == 0)
+	{
+		inter.count = 2;
+		inter.t[0] = (-b - sqrt(d)) / (2 * a);
+		inter.t[1] = 0;
+	}
+	inter.count = 2;
+	inter.t[0] = (-b - sqrt(d)) / (2 * a);
+	inter.t[1] = (-b + sqrt(d)) / (2 * a);
+	return (inter);
+}
+
+int chec_approx_zero(double a)
+{
+	double temp = abs(a - 0);
+
+	if(temp < EPSILON)
+	{
+		return 1;
+	}
+	return 0;
+}
+
+t_intersect local_intersect_cylinder(t_ray r)
+{
+	t_intersect	inter;
+	double		a;
+	double		b;
+	double		c;
+	double		d;
+
+	a = (r.direction.x * r.direction.x)  + (r.direction.z * r.direction.z);
+
+	if (chec_approx_zero(a))
+	{
+		inter.count = 0;
+		inter.t[0] = 0;
+		inter.t[1] = 0;
+		return (inter);
+	}
+
+	b = 2 * r.origin.x * r.direction.x + 2 * r.origin.z * r.direction.z;
+	c = (r.origin.x * r.origin.x) + (r.origin.z * r.origin.z) - 1;
+	d = (b * b) - 4 * a * c;
+	if (d < 0)
+	{
+		inter.count = 0;
+		inter.t[0] = 0;
+		inter.t[1] = 0;
+		return (inter);
+	}
+	
 	inter.count = 2;
 	inter.t[0] = (-b - sqrt(d)) / (2 * a);
 	inter.t[1] = (-b + sqrt(d)) / (2 * a);
@@ -82,7 +135,7 @@ t_intersect local_intersect_plane(t_ray r)
 	}
 	inter.count = 2;
 	inter.t[0] = -r.origin.y / r.direction.y ;
-	inter.t[1] = -r.origin.y / r.direction.y ; 
+	inter.t[1] = 0; 
 	return (inter);
 }
 

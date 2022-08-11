@@ -91,7 +91,7 @@ void print_parsed_values(t_data *scene_data)
 
 void setup_mlx(t_data *scene_data)
 {
-    scene_data->mlx.mlx_ptr= malloc(sizeof(*scene_data->mlx.mlx_ptr));
+    scene_data->mlx.mlx_ptr = malloc(sizeof(*scene_data->mlx.mlx_ptr));
     scene_data->mlx.mlx_ptr = mlx_init();
     scene_data->img.img_ptr = mlx_new_image(scene_data->mlx.mlx_ptr, WIDTH, HEIGHT);
     scene_data->img.data = (unsigned char*)mlx_get_data_addr(scene_data->img.img_ptr, \

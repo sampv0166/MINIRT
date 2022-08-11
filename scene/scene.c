@@ -149,9 +149,8 @@ t_intersect	intersect(t_shape s, t_ray r)
 		return (local_intersect_sphere(s.ray_in_obj_space));
 	else if(!ft_strncmp(s.shape_name, "pl", 2))
 		return(local_intersect_plane(s.ray_in_obj_space));
-	
-	// printf("\nnever here\n");
-	// exit(0);
+	else if (!ft_strncmp(s.shape_name, "cy",2))
+		return(local_intersect_cylinder(s.ray_in_obj_space));
 	return (local_intersect_sphere(s.ray_in_obj_space));		
 }
 
@@ -168,7 +167,6 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 	count = 0;
 	while (i < w.shape_count)
 	{
-		printf("\n%d\n", i);
 		inter1 = intersect(w.s[i], r);
 		if (inter1.count > 0)
 		{
@@ -195,6 +193,7 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 				tmp[j++] = intersection(inter1.t[0],w.s[i], count + 2);
 				tmp[j++] = intersection(inter1.t[1],w.s[i], count + 2);
 				count += 2;
+				free(xs);
 				xs = tmp;
 			}
 		}
@@ -229,7 +228,6 @@ t_color	shade_hit(t_world w, t_comps comps)
 {
 	t_color	c;
 	t_bool	shadowed;
-	
 	shadowed = is_shadowed(w, comps.over_point);
 	c = lighting(comps.object.material, w.l, comps.over_point, comps.eyev, 
 	comps.normalv, shadowed);
