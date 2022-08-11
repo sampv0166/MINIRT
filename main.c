@@ -117,6 +117,30 @@ void init_scence_data(t_data *scene_data)
 }
 
 int main (int argc, char **argv) {
+
+    t_ray r;
+    t_intersect inter;
+    // RAY MISSES SPHERE
+    /*Examples:
+    | origin
+    | point(1, 0, 0)
+    | point(0, 0, 0)
+    | point(0, 0, -5)
+
+    direction
+    |
+    vector(0, 1, 0) |
+    vector(0, 1, 0) |
+    vector(1, 1, 1) | */
+
+
+    r.origin = point(0, 0, -5);
+    r.direction = vector(1, 1, 1);
+    inter  =  local_intersect_cylinder(r);
+
+    printf("\n%f %f\n", inter.t[0], inter.t[1]);
+
+    exit(0);
     t_data scene_data;
     
     if (argc != 2)

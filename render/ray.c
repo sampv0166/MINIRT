@@ -114,7 +114,7 @@ t_intersect local_intersect_cylinder(t_ray r)
 		inter.t[1] = 0;
 		return (inter);
 	}
-	
+
 	inter.count = 2;
 	inter.t[0] = (-b - sqrt(d)) / (2 * a);
 	inter.t[1] = (-b + sqrt(d)) / (2 * a);

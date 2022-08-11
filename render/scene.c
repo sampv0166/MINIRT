@@ -25,12 +25,12 @@ t_plane	*plane(void)
 	return (pl);
 }
 
-t_plane	*cylinder(void)
+t_cy	*cylinder(void)
 {
-	t_plane	*pl;
+	t_cy	*cy;
 
-	pl = malloc(sizeof(t_plane));
-	return (pl);
+	cy = malloc(sizeof(t_cy));
+	return (cy);
 }
 
 t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
