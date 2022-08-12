@@ -153,16 +153,20 @@ int main (int argc, char **argv) {
     // inter  =  local_intersect_cylinder(r);
 
     // printf("\n%f %f\n", inter.t[0], inter.t[1]);
+    t_vector v;
+    v =  local_normal_at_cylinder(point(-1,1,0));
 
-    // exit(0);
+    print_vector("local",&v);
+    
+    exit(0);
     t_data scene_data;
     
     if (argc != 2)
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
     init_scence_data(&scene_data);
     parse_scene(argv[1], &scene_data);
-//     print_parsed_values(&scene_data);
-//    exit(0);
+    //     print_parsed_values(&scene_data);
+    //    exit(0);
     setup_mlx(&scene_data);
 
     t_world w;

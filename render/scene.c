@@ -25,11 +25,13 @@ t_plane	*plane(void)
 	return (pl);
 }
 
-t_cy	*cylinder(void)
+t_cy	*cylinder(t_cy *c)
 {
 	t_cy	*cy;
 
 	cy = malloc(sizeof(t_cy));
+	cy->height = c->height;
+	cy->diameter = c->diameter;
 	return (cy);
 }
 
@@ -85,13 +87,24 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 	if (!ft_strncmp(shape_name, "cy", 2))
 	{
 		cy = (t_cy *) shape;
+		
 		shp.material = material();
 		shp.material.ambient = scene_data->amb_ratio;
-		shp.material.color = cy->color;
-		shp.shape = cylinder();
+		shp.material.color.r = cy->color.r / 255;
+		shp.material.color.g = cy->color.g / 255;
+		shp.material.color.b = cy->color.b / 255;
+
+		// printf("\n%f\n",shp.material.color.r);
+		// printf("\n%f\n",shp.material.color.g);
+		// printf("\n%f\n",shp.material.color.b);
+
+		shp.material.diffuse = 0.7;
+		shp.material.specular = 0.2;
+		shp.shape = cylinder(cy);
+		//printf("%f", cy->height);
 		shp.shape_name = "cy";
 		shp.norm_vector = cy->norm_vec;
-
+		
 		set_transform(&shp, matrix_multi(rotation_x(cy->norm_vec.x), rotation_y(cy->norm_vec.y)));
 		set_transform(&shp, matrix_multi(shp.transform, rotation_z(cy->norm_vec.z)));
 		set_transform(&shp, scaling(tuple(cy->diameter, cy->diameter,cy->diameter, 1)));
@@ -150,7 +163,7 @@ t_intersect	intersect(t_shape s, t_ray r)
 	else if(!ft_strncmp(s.shape_name, "pl", 2))
 		return(local_intersect_plane(s.ray_in_obj_space));
 	else if (!ft_strncmp(s.shape_name, "cy",2))
-		return(local_intersect_cylinder(s.ray_in_obj_space));
+		return(local_intersect_cylinder(s.shape ,s.ray_in_obj_space));
 	
 	return (local_intersect_sphere(s.ray_in_obj_space));		
 }

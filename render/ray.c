@@ -87,9 +87,17 @@ int chec_approx_zero(double a)
 	return 0;
 }
 
-t_intersect local_intersect_cylinder(t_ray r)
+t_intersect local_intersect_cylinder(void *shape, t_ray r)
 {
 	t_intersect	inter;
+	inter.t[0] = 0 ; 
+	inter.t[1] = 0;
+	inter.count = 0;
+	t_cy *cy;
+	cy = (t_cy *) shape;
+
+	//(void ) cy;
+
 	double		a;
 	double		b;
 	double		c;
@@ -120,10 +128,46 @@ t_intersect local_intersect_cylinder(t_ray r)
 		inter.t[1] = 0;
 		return (inter);
 	}
-
+	double t1;
+	double t2;
 	inter.count = 2;
-	inter.t[0] = (-b - sqrt(d)) / (2 * a);
-	inter.t[1] = (-b + sqrt(d)) / (2 * a);
+	t1 = (-b - sqrt(d)) / (2 * a);
+	t2 = (-b + sqrt(d)) / (2 * a);
+	// inter.t[0] = t1;
+	// inter.t[1] = t2;
+	// inter.count = 2;
+	// return (inter);
+	double temp;
+	if (t1 > t2)
+	{
+		temp = t1;
+		t1 = t2;
+		t2 = temp;
+	}
+	double max;
+	double min;
+	
+	max = cy->height/ 2.0;
+	min = -1.0 * max;
+
+	double y0;
+	double y1;
+
+	y0 = r.origin.y + t1 * r.direction.y;
+
+	if (min < y0 && y0 < max)
+	{
+		inter.count++;
+		inter.t[0] = t1;
+	}
+
+	y1 = r.origin.y + t2 * r.direction.y;
+
+	if (min < y1 && y1 < max)
+	{
+		inter.count++;
+		inter.t[1] = t2;	
+	}
 	return (inter);
 }
 

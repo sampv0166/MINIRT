@@ -11,7 +11,7 @@ t_vector		local_normal_at_plane()
 
 t_vector		local_normal_at_cylinder(t_point vec)
 {
-	return (vector(vec.x, 0 ,vec.y));
+	return (vector(vec.x, 0 ,vec.z));
 }
 
 t_vector	normal_at(t_shape s, t_point p)
