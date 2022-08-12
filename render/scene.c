@@ -105,9 +105,9 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 		shp.shape_name = "cy";
 		shp.norm_vector = cy->norm_vec;
 		
-		set_transform(&shp, matrix_multi(rotation_x(cy->norm_vec.x), rotation_y(cy->norm_vec.y)));
-		set_transform(&shp, matrix_multi(shp.transform, rotation_z(cy->norm_vec.z)));
-		set_transform(&shp, scaling(tuple(cy->diameter, cy->diameter,cy->diameter, 1)));
+		// set_transform(&shp, matrix_multi(rotation_x(cy->norm_vec.x), rotation_y(cy->norm_vec.y)));
+		// set_transform(&shp, matrix_multi(shp.transform, rotation_z(cy->norm_vec.z)));
+		set_transform(&shp, matrix_multi(shp.transform, scaling(tuple(cy->diameter, cy->diameter,cy->diameter, 1))));
 		set_transform(&shp, matrix_multi(shp.transform, translation(tuple(cy->xyz.x,cy->xyz.y,cy->xyz.z,1))));
 	}	
 	return (shp);

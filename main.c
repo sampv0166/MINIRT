@@ -118,8 +118,8 @@ void init_scence_data(t_data *scene_data)
 
 int main (int argc, char **argv) {
 
-    // t_ray r;
-    // t_intersect inter;
+    t_ray r;
+    t_intersect inter;
     // RAY MISSES SPHERE
     /*Examples:
     | origin
@@ -147,18 +147,84 @@ int main (int argc, char **argv) {
     vector(0, 1, 0) |
     vector(1, 1, 1) | */
 
-    // r.origin = point(0.5, 0, -5);
-    // r.direction = vector(0.1, 1, 1);
-    // r.direction =  normalize(r.direction);
-    // inter  =  local_intersect_cylinder(r);
 
-    // printf("\n%f %f\n", inter.t[0], inter.t[1]);
-    t_vector v;
-    v =  local_normal_at_cylinder(point(-1,1,0));
 
-    print_vector("local",&v);
+    // tests 1
+    r.origin = point(0, 1.5, 0);
+    r.direction = vector(0.1, 1, 0);
+
+    r.direction =  normalize(r.direction);
+
+    t_cy cy;
+
+    inter  =  local_intersect_cylinder( &cy, r);
+
+    printf("\n%d\n", inter.count);
+
+    // test 2
+    r.origin = point(0, 3, -5);
+    r.direction = vector(0, 0, 1);
+
+    r.direction =  normalize(r.direction);
+
+
+    inter  =  local_intersect_cylinder( &cy, r);
+
+    printf("\n%d\n", inter.count);
+
+
+    // test 3
+    r.origin = point(0, 0, -5);
+    r.direction = vector(0, 0, 1);
+
+    r.direction =  normalize(r.direction);
+
+
+    inter  =  local_intersect_cylinder( &cy, r);
+
+    printf("\n%d\n", inter.count);
+
+    // test 4
+    r.origin = point(0, 2, -5);
+    r.direction = vector(0, 0, 1);
+
+    r.direction =  normalize(r.direction);
+
+
+    inter  =  local_intersect_cylinder( &cy, r);
+
+    printf("\n%d\n", inter.count);
+
+
+    // test 5
+    r.origin = point(0, 1, -5);
+    r.direction = vector(0, 0, 1);
+
+    r.direction =  normalize(r.direction);
+
+
+    inter  =  local_intersect_cylinder( &cy, r);
+
+    printf("\n%d\n", inter.count);
+
+    // test 6
+    r.origin = point(0, 1.5, -2);
+    r.direction = vector(0, 0, 1);
+
+    r.direction =  normalize(r.direction);
+
+
+    inter  =  local_intersect_cylinder(&cy, r);
+
+    printf("\n%d\n", inter.count);
+    // t_vector v;
+    // v =  local_normal_at_cylinder(point(-1,1,0));
+
+    // print_vector("local",&v);
     
+
     exit(0);
+
     t_data scene_data;
     
     if (argc != 2)
