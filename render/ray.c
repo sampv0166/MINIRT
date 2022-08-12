@@ -96,7 +96,7 @@ t_intersect local_intersect_cylinder(void *shape, t_ray r)
 	t_cy *cy;
 	cy = (t_cy *) shape;
 
-	(void ) cy;
+	// (void ) cy;
 
 	double		a;
 	double		b;
@@ -144,8 +144,8 @@ t_intersect local_intersect_cylinder(void *shape, t_ray r)
 	double max;
 	double min;
 	
-	max = 2;
-	min = 1;
+	max = cy->height / 2.0;
+	min = -1.0 * max;
 
 	double y0;
 	double y1;
@@ -167,6 +167,7 @@ t_intersect local_intersect_cylinder(void *shape, t_ray r)
 	}
 	return (inter);
 }
+
 
 t_intersect local_intersect_plane(t_ray r)
 {

@@ -45,7 +45,9 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 	shp.transform = identity_matrix();
 	if (!ft_strncmp(shape_name, "sp", 2))
 	{
+
 		sp = (t_sphere *) shape;
+		shp.transform = identity_matrix();
 		shp.material = material();
 		shp.material.ambient = scene_data->amb_ratio;
 		shp.material.color.r = sp->color.r/ 255;
@@ -64,6 +66,7 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 	{
 		pl = (t_plane *) shape;
 		shp.material = material();
+		shp.transform = identity_matrix();
 		shp.material.ambient = scene_data->amb_ratio;
 		shp.material.color.r = pl->color.r/ 255;
 		shp.material.color.g = pl->color.g/ 255;
@@ -89,6 +92,7 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 		cy = (t_cy *) shape;
 		
 		shp.material = material();
+		shp.transform = identity_matrix();
 		shp.material.ambient = scene_data->amb_ratio;
 		shp.material.color.r = cy->color.r / 255;
 		shp.material.color.g = cy->color.g / 255;
@@ -104,10 +108,11 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 		//printf("%f", cy->height);
 		shp.shape_name = "cy";
 		shp.norm_vector = cy->norm_vec;
+
 		
 		// set_transform(&shp, matrix_multi(rotation_x(cy->norm_vec.x), rotation_y(cy->norm_vec.y)));
 		// set_transform(&shp, matrix_multi(shp.transform, rotation_z(cy->norm_vec.z)));
-		set_transform(&shp, matrix_multi(shp.transform, scaling(tuple(cy->diameter, cy->diameter,cy->diameter, 1))));
+		set_transform(&shp, scaling(tuple(cy->diameter,cy->height,1, 1)));
 		set_transform(&shp, matrix_multi(shp.transform, translation(tuple(cy->xyz.x,cy->xyz.y,cy->xyz.z,1))));
 	}	
 	return (shp);
