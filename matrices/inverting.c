@@ -49,6 +49,7 @@ double	**submatrix(double **mat, int size, int row, int col)
 		i++;
 	}
 	res = create_matrix(elem, size - 1);
+	free(elem);
 	return (res);
 }
 
@@ -59,6 +60,16 @@ double	minor(double **mat, int size, int row, int col)
 
 	submat = submatrix(mat, size, row, col);
 	det = determinant(submat, size - 1);
+
+	int i;
+	i =0 ;
+	while ( i < size - 1)
+	{
+		free(submat[i]);
+		i++;
+	}
+	if (submat)
+		free(submat);
 	return (det);
 }
 

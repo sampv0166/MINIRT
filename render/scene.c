@@ -161,8 +161,12 @@ t_world	default_world(t_data *scene_data)
 t_intersect	intersect(t_shape s, t_ray r)
 {
 	//t_ray local_ray;
+	double **invrs;
 
-	s.ray_in_obj_space = transform(r, inverse(s.transform, 4));
+
+	invrs = inverse(s.transform, 4);
+	s.ray_in_obj_space = transform(r, invrs);
+	free_2d_array(invrs, 4);
 	if (!ft_strncmp(s.shape_name, "sp", 2))
 		return (local_intersect_sphere(s.ray_in_obj_space));
 	else if(!ft_strncmp(s.shape_name, "pl", 2))
@@ -264,7 +268,11 @@ t_color	color_at(t_world w, t_ray r)
 	h = hit(i);
 	//printf("\n%f\n", h.t);
 	if (h.count == 0)
-		return (color(1, 1, 1));
+	{
+		free(i);
+		return (color(0, 0, 0));
+	}
 	comps = prepare_computations(h, r);
+	free(i);
 	return (shade_hit(w, comps));
 }
