@@ -260,9 +260,9 @@ int main (int argc, char **argv) {
     c.transform = view_transform(from, to, up);
     
 
-    print_matrix(c.transform, 4);
+    //print_matrix(c.transform, 4);
     c.transform = inverse(c.transform, 4);
-    print_matrix(c.transform, 4);
+  //  print_matrix(c.transform, 4);
     render(c, w, &scene_data);
     
     //printf("here stop");
