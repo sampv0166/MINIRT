@@ -45,6 +45,9 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 	shp.transform = identity_matrix();
 	if (!ft_strncmp(shape_name, "sp", 2))
 	{
+		double	**translate;
+		double	**scale;
+		double	**transform;
 
 		sp = (t_sphere *) shape;
 		shp.transform = identity_matrix();
@@ -59,8 +62,14 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 		shp.shape_name = "sp";
 		shp.position = sp->sp_center;
 		
-		set_transform(&shp, scaling(tuple(sp->radius, sp->radius,sp->radius, 1)));
-		set_transform(&shp, matrix_multi(shp.transform, translation(tuple(sp->sp_center.x,sp->sp_center.y,sp->sp_center.z,1))));
+		translate = translation(tuple( sp->sp_center.x,
+		sp->sp_center.y, sp->sp_center.z, 1));
+		scale = scaling( tuple (sp->radius, sp->radius, sp->radius, 1));
+
+		transform = matrix_multi(scale, translate);
+		shp.transform = transform;
+		// set_transform(&shp, matrix_multi(shp.transform, translation(tuple(sp->sp_center.x,sp->sp_center.y,sp->sp_center.z,1))));
+		// set_transform(&shp, scaling(tuple(sp->radius, sp->radius,sp->radius, 1)));
 	}
 	if (!ft_strncmp(shape_name, "pl", 2))
 	{
@@ -109,11 +118,15 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 		shp.shape_name = "cy";
 		shp.norm_vector = cy->norm_vec;
 
-		
-		// set_transform(&shp, matrix_multi(rotation_x(cy->norm_vec.x), rotation_y(cy->norm_vec.y)));
-		// set_transform(&shp, matrix_multi(shp.transform, rotation_z(cy->norm_vec.z)));
+		if (cy->norm_vec.x != 0)
+			shp.transform = rotation_x(cy->norm_vec.x);
+		if (cy->norm_vec.y != 0)
+			set_transform(&shp, matrix_multi(shp.transform , rotation_y(cy->norm_vec.y)));
+		if (cy->norm_vec.z != 0)
+			set_transform(&shp, matrix_multi(shp.transform, rotation_z(pl->norm_vec.z)));
 		set_transform(&shp, scaling(tuple(cy->diameter,cy->height,1, 1)));
 		set_transform(&shp, matrix_multi(shp.transform, translation(tuple(cy->xyz.x,cy->xyz.y,cy->xyz.z,1))));
+
 	}	
 	return (shp);
 }

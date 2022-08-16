@@ -118,8 +118,7 @@ void init_scence_data(t_data *scene_data)
 
 int main (int argc, char **argv) {
 
-    // t_ray r;
-    // t_intersect inter;
+
     // // RAY MISSES SPHERE
     // /*Examples:
     // | origin
@@ -147,11 +146,12 @@ int main (int argc, char **argv) {
     // vector(0, 1, 0) |
     // vector(1, 1, 1) | */
 
-
+    // t_ray r;
+    // t_intersect inter;
 
     // // tests 1
-    // r.origin = point(0, 1.5, 0);
-    // r.direction = vector(0.1, 1, 0);
+    // r.origin = point(0, 3, 0);
+    // r.direction = vector(0, -1, 0);
 
     // r.direction =  normalize(r.direction);
 
@@ -162,8 +162,8 @@ int main (int argc, char **argv) {
     // printf("\n%d\n", inter.count);
 
     // // test 2
-    // r.origin = point(0, 3, -5);
-    // r.direction = vector(0, 0, 1);
+    // r.origin = point(0, 3, -2);
+    // r.direction = vector(0, -1, 2);
 
     // r.direction =  normalize(r.direction);
 
@@ -174,8 +174,8 @@ int main (int argc, char **argv) {
 
 
     // // test 3
-    // r.origin = point(0, 0, -5);
-    // r.direction = vector(0, 0, 1);
+    // r.origin = point(0, 4, -2);
+    // r.direction = vector(0, -1, 1);
 
     // r.direction =  normalize(r.direction);
 
@@ -185,8 +185,8 @@ int main (int argc, char **argv) {
     // printf("\n%d\n", inter.count);
 
     // // test 4
-    // r.origin = point(0, 2, -5);
-    // r.direction = vector(0, 0, 1);
+    // r.origin = point(0, 0, -2);
+    // r.direction = vector(0, 1, 2);
 
     // r.direction =  normalize(r.direction);
 
@@ -197,8 +197,8 @@ int main (int argc, char **argv) {
 
 
     // // test 5
-    // r.origin = point(0, 1, -5);
-    // r.direction = vector(0, 0, 1);
+    // r.origin = point(0, -1, -2);
+    // r.direction = vector(0, 1, 1);
 
     // r.direction =  normalize(r.direction);
 
@@ -208,15 +208,15 @@ int main (int argc, char **argv) {
     // printf("\n%d\n", inter.count);
 
     // // test 6
-    // r.origin = point(0, 1.5, -2);
-    // r.direction = vector(0, 0, 1);
+    // // r.origin = point(0, 1.5, -2);
+    // // r.direction = vector(0, 0, 1);
 
-    // r.direction =  normalize(r.direction);
+    // // r.direction =  normalize(r.direction);
 
 
-    // inter  =  local_intersect_cylinder(&cy, r);
+    // // inter  =  local_intersect_cylinder(&cy, r);
 
-    // printf("\n%d\n", inter.count);
+    // // printf("\n%d\n", inter.count);
     // // t_vector v;
     // // v =  local_normal_at_cylinder(point(-1,1,0));
 
@@ -242,6 +242,10 @@ int main (int argc, char **argv) {
     w = default_world(&scene_data);
     w.shape_count = scene_data.total_shape_count;
     c = camera(HEIGHT, WIDTH , (scene_data.camera.fov * (PI/180)));
+    //  // c = camera(HEIGHT, WIDTH , ((scene_data.camera.fov * 180) /M_PI ));
+
+    // printf("%f\n", scene_data.camera.fov * (PI/180));
+	// exit(0);  
     t_point		from;
 	t_point		to;
     t_vector	up;
@@ -249,12 +253,16 @@ int main (int argc, char **argv) {
 
 	from = scene_data.camera.pos;
 
-	to = point(scene_data.camera.norm_vector.x, scene_data.camera.norm_vector.y, scene_data.camera.norm_vector.z);
+	to = point(0,3,-7);
 	
-    up = vector(0, 1, 0);
+    up = scene_data.camera.norm_vector;
 
     c.transform = view_transform(from, to, up);
-   
+    
+
+    print_matrix(c.transform, 4);
+    c.transform = inverse(c.transform, 4);
+    print_matrix(c.transform, 4);
     render(c, w, &scene_data);
     
     //printf("here stop");

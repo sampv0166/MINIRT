@@ -34,7 +34,7 @@ t_camera2	camera(double hsize, double vsize, double field_of_view)
 	c.hsize = hsize;
 	c.vsize = vsize;
 	c.field_of_view = field_of_view;
-	c.transform = identity_matrix();
+	//c.transform = identity_matrix();
 	half_view = tan(c.field_of_view / 2);
 	aspect = c.hsize / c.vsize;
 	if (aspect >= 1)
@@ -88,6 +88,7 @@ t_ray	ray_for_pixel(t_camera2 camera, double x, double y)
 	pixel = point(multi1.x, multi1.y, multi1.z);
 	multi2 = matrix_multi_tp(invrs, tuple(0, 0, 0, 1));
 	origin = point(multi2.x, multi2.y, multi2.z);
+	//print_point("origin",&origin);
 	direction = normalize(subtract_points(pixel, origin));
 	free_2d_array(invrs, 4);
 	return (ray(origin, direction));

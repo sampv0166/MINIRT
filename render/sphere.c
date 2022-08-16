@@ -9,9 +9,29 @@ t_vector		local_normal_at_plane()
 	return (vector(0, 1 ,0));
 }
 
-t_vector		local_normal_at_cylinder(t_point vec)
+t_vector		local_normal_at_cylinder(void *shape,  t_point pnt)
 {
-	return (vector(vec.x, 0 ,vec.z));
+	double max;
+	double min;
+	t_cy *cy;
+	cy = (t_cy *) shape;
+
+	max = cy->height / 2.0;
+	min = -1.0 * max;
+
+
+	// max = 2.0;
+	// min = 1.0;
+
+	double dist;
+
+	dist = pow(pnt.x, 2) + pow(pnt.z, 2);
+	if (dist < 1 && pnt.y >= max - EPSILON)
+		return vector(0, 1, 0);
+	else if (dist < 1 && pnt.y <= min + EPSILON)
+		return vector(0, -1, 0);
+	else
+	return (vector(pnt.x, 0 ,pnt.z));
 }
 
 t_vector	normal_at(t_shape s, t_point p)
@@ -41,7 +61,7 @@ t_vector	normal_at(t_shape s, t_point p)
 	if (!ft_strncmp(s.shape_name, "pl", 2))
 		obj_normal = local_normal_at_plane(obj_point, point);
 	if (!ft_strncmp(s.shape_name, "cy", 2))
-		obj_normal = local_normal_at_cylinder(obj_point);	
+		obj_normal = local_normal_at_cylinder(s.shape,obj_point);	
 	tp3 = vector_tp(obj_normal);
 
 	trnspose = transpose(invrs);

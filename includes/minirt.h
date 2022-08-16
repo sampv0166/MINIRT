@@ -425,7 +425,7 @@ t_intersect	local_intersect_sphere(t_ray r);
 t_vector	local_normal_at_sphere(t_point obj_point, t_point point);
 t_intersect local_intersect_plane(t_ray r);
 t_intersect local_intersect_cylinder(void *cy, t_ray r);
-t_vector		local_normal_at_cylinder(t_point vec);
+t_vector		local_normal_at_cylinder(void *shape,  t_point pnt);
 t_cy	*cylinder(t_cy *c);
 
 void free_2d_array(double **arr, int size);
