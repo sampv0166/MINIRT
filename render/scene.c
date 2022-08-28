@@ -131,43 +131,76 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 	return (shp);
 }
 
+int create_all_spheres(t_world *w, t_data *scene_data, int j)
+{
+	int i;
+	t_list *temp;
+
+	i = j;
+	while (i < scene_data->total_sphere_count)
+	{
+		w->s[i]	= create_shape("sp",scene_data->sphere_list->content,scene_data);
+		temp = scene_data->sphere_list->next;
+		free(scene_data->sphere_list);
+		scene_data->sphere_list = temp;
+		i++;
+	}
+	return (i);
+}
+
+int create_all_planes(t_world *w, t_data *scene_data, int j)
+{
+	int i;
+	int k;
+	t_list *temp;
+
+	i = j;
+	k = 0;
+	while (k < scene_data->total_plane_count)
+	{
+		w->s[i] = create_shape("pl",scene_data->plane_list->content,scene_data);
+		temp = scene_data->plane_list->next;
+		free(scene_data->plane_list);
+		scene_data->plane_list = temp;
+		i++;
+		k++;
+	}
+	return (i);
+}
+
+int create_all_cylinders(t_world *w, t_data *scene_data, int j)
+{
+	int i;
+	int k;
+	t_list *temp;
+
+	i = j;
+	k = 0;
+	while (k < scene_data->total_cylinder_count)
+	{
+		w->s[i] = create_shape("cy", scene_data->cy_list->content,scene_data);
+		temp = scene_data->cy_list->next;
+		free(scene_data->cy_list);
+		scene_data->cy_list = temp;
+		i++;
+		k++;
+	}
+	return (i);
+}
+
 t_world	default_world(t_data *scene_data)
 {
 	t_world		w;
 	int			i;
-	int			j;
 	t_light light;
 
-	j = 0;
 	i = 0;
-	//w.l = scene_data->light_src;
-	
 	light = point_light(scene_data->light_src.pos, (color(scene_data->light_src.ratio,scene_data->light_src.ratio,scene_data->light_src.ratio)) );
-	
 	w.l = light;
 	w.s = malloc (sizeof (t_shape) * scene_data->total_shape_count);
-	while (i < scene_data->total_sphere_count)
-	{
-		w.s[i]	= create_shape("sp",scene_data->sphere_list->content,scene_data);
-		scene_data->sphere_list = scene_data->sphere_list->next;
-		i++;
-	}
-	//
-	while (j < scene_data->total_plane_count)
-	{
-		w.s[i] = create_shape("pl",scene_data->plane_list->content,scene_data);
-		scene_data->plane_list = scene_data->plane_list->next;
-		i++;
-		j++;
-	}
-	j = 0;	
-	while (j < scene_data->total_cylinder_count)
-	{
-		w.s[i] = create_shape("cy", scene_data->cy_list->content,scene_data);
-		scene_data->cy_list = scene_data->cy_list->next;
-		i++;
-		j++;
-	}
+	i = create_all_spheres(&w, scene_data, i);
+	i = create_all_planes(&w, scene_data, i);
+	i = create_all_cylinders(&w, scene_data, i);
 	return (w);
 }
 

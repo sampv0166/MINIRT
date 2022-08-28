@@ -65,6 +65,7 @@ static void parse_current_line(char *line, t_data *scene_data)
     info_split = NULL;
     replace_tabs_and_newline(line);
     info_split = ft_split(line, ' ');
+    
     if (ft_strlen(info_split[0]) == 1 && info_split[0][0] == 'A')
     {
         parse_ambient_lighting(info_split, scene_data);
@@ -106,6 +107,7 @@ void parse_scene(char *file_name, t_data *scene_data)
 {
     char *line;
     int fd;
+    scene_data->amb_set = 0;
 
     if (check_file_name(file_name))
         print_error_msg_and_exit("FILE EXTENTION IS INCORRECT", scene_data);
@@ -115,7 +117,7 @@ void parse_scene(char *file_name, t_data *scene_data)
     while (1)
     {
         line = get_next_line(fd);
-        if (line && *line != '#')
+        if (line && *line != '#' && *line != '\n')
             parse_current_line(line, scene_data);
         else
         {

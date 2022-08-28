@@ -158,3 +158,18 @@ void print_vector(char *str,t_vector *tp)
     printf("vec y = %f\n", tp->y);
     printf("vec z = %f\n", tp->z);
 }
+
+void free_2d_char_array(char **arr)
+{
+    int i;
+    i = 0;
+
+    while (arr[i])
+    {
+        free_memmory(&arr[i]);
+        i++;
+    }
+    free_memmory(arr);
+}
+
+

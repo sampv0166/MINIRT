@@ -13,8 +13,8 @@
 # define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define EPSILON 0.00001
 # define	PI 4.0 * atan(1.0)
-# define HEIGHT 500
-# define WIDTH 500
+# define HEIGHT 200
+# define WIDTH 200
 //KEYS
 # define KEY_ESC 53
 # define TRUE 1
@@ -429,4 +429,5 @@ t_vector		local_normal_at_cylinder(void *shape,  t_point pnt);
 t_cy	*cylinder(t_cy *c);
 
 void free_2d_array(double **arr, int size);
+void free_2d_char_array(char **arr);
 #endif

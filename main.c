@@ -1,5 +1,5 @@
 #include "./includes/minirt.h"
-
+// !remove this later
 void print_parsed_values(t_data *scene_data)
 {
 	printf("\nAMBIENCE RATIO\n");
@@ -100,11 +100,6 @@ void setup_mlx(t_data *scene_data)
     scene_data->mlx.win_ptr = mlx_new_window(scene_data->mlx.mlx_ptr,WIDTH, HEIGHT, "minirt");                       
 }
 
-// int	rgb_to_int(t_color rgb)
-// {
-// 	return(rgb.r << 16 | rgb.g << 8 | rgb.b);
-// }
-
 void init_scence_data(t_data *scene_data)
 {
     scene_data->total_shape_count = 0;
@@ -117,157 +112,29 @@ void init_scence_data(t_data *scene_data)
 }
 
 int main (int argc, char **argv) {
-
-
-    // // RAY MISSES SPHERE
-    // /*Examples:
-    // | origin
-    // | point(1, 0, 0)
-    // | point(0, 0, 0)
-    // | point(0, 0, -5)
-
-    // direction
-    // |
-    // vector(0, 1, 0) |
-    // vector(0, 1, 0) |
-    // vector(1, 1, 1) | */
-
-
-    // // RAY HIts SPHERE
-    // /*Examples:
-    // | origin
-    // | point(1, 0, 0)
-    // | point(0, 0, 0)
-    // | point(0, 0, -5)
-
-    // direction
-    // |
-    // vector(0, 1, 0) |
-    // vector(0, 1, 0) |
-    // vector(1, 1, 1) | */
-
-    // t_ray r;
-    // t_intersect inter;
-
-    // // tests 1
-    // r.origin = point(0, 3, 0);
-    // r.direction = vector(0, -1, 0);
-
-    // r.direction =  normalize(r.direction);
-
-    // t_cy cy;
-
-    // inter  =  local_intersect_cylinder( &cy, r);
-
-    // printf("\n%d\n", inter.count);
-
-    // // test 2
-    // r.origin = point(0, 3, -2);
-    // r.direction = vector(0, -1, 2);
-
-    // r.direction =  normalize(r.direction);
-
-
-    // inter  =  local_intersect_cylinder( &cy, r);
-
-    // printf("\n%d\n", inter.count);
-
-
-    // // test 3
-    // r.origin = point(0, 4, -2);
-    // r.direction = vector(0, -1, 1);
-
-    // r.direction =  normalize(r.direction);
-
-
-    // inter  =  local_intersect_cylinder( &cy, r);
-
-    // printf("\n%d\n", inter.count);
-
-    // // test 4
-    // r.origin = point(0, 0, -2);
-    // r.direction = vector(0, 1, 2);
-
-    // r.direction =  normalize(r.direction);
-
-
-    // inter  =  local_intersect_cylinder( &cy, r);
-
-    // printf("\n%d\n", inter.count);
-
-
-    // // test 5
-    // r.origin = point(0, -1, -2);
-    // r.direction = vector(0, 1, 1);
-
-    // r.direction =  normalize(r.direction);
-
-
-    // inter  =  local_intersect_cylinder( &cy, r);
-
-    // printf("\n%d\n", inter.count);
-
-    // // test 6
-    // // r.origin = point(0, 1.5, -2);
-    // // r.direction = vector(0, 0, 1);
-
-    // // r.direction =  normalize(r.direction);
-
-
-    // // inter  =  local_intersect_cylinder(&cy, r);
-
-    // // printf("\n%d\n", inter.count);
-    // // t_vector v;
-    // // v =  local_normal_at_cylinder(point(-1,1,0));
-
-    // // print_vector("local",&v);
-    
-
-    // exit(0);
-
     t_data scene_data;
+    t_world w;
+    t_camera2 c;
+    t_point		from;
+	t_point		to;
+    t_vector	up;
     
     if (argc != 2)
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
     init_scence_data(&scene_data);
     parse_scene(argv[1], &scene_data);
-    //     print_parsed_values(&scene_data);
-    //    exit(0);
+    // !UNCOMMMENT THIS AFTER
     setup_mlx(&scene_data);
-
-    t_world w;
-    t_camera2 c;
-    
-
     w = default_world(&scene_data);
+    //exit(0);
     w.shape_count = scene_data.total_shape_count;
     c = camera(HEIGHT, WIDTH , (scene_data.camera.fov * (PI/180)));
-    //  // c = camera(HEIGHT, WIDTH , ((scene_data.camera.fov * 180) /M_PI ));
-
-    // printf("%f\n", scene_data.camera.fov * (PI/180));
-	// exit(0);  
-    t_point		from;
-	t_point		to;
-    t_vector	up;
-
-
 	from = scene_data.camera.pos;
-
 	to = point(0,3,-7);
-	
     up = scene_data.camera.norm_vector;
-
     c.transform = view_transform(from, to, up);
-    
-
-    //print_matrix(c.transform, 4);
     c.transform = inverse(c.transform, 4);
-  //  print_matrix(c.transform, 4);
     render(c, w, &scene_data);
-    
-    //printf("here stop");
-
-    //render_scene(&scene_data);
     // ! uncomment this to check all the parsed values
 	//print_parsed_values(&scene_data);
     mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr, scene_data.img.img_ptr, 0, 0);                 
