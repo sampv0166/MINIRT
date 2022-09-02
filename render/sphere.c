@@ -90,6 +90,14 @@ t_vector	reflect(t_vector vec, t_vector normal)
 	return (ret);
 }
 
+// if (pl->norm_vec.x != 0)
+// 	shp.transform = rotation_x(pl->norm_vec.x);
+// if (pl->norm_vec.y != 0)
+// 	set_transform(&shp, matrix_multi(shp.transform , rotation_y(pl->norm_vec.y)));
+// if (pl->norm_vec.z != 0)
+// 	set_transform(&shp, matrix_multi(shp.transform, rotation_z(pl->norm_vec.z)));
+
+
 t_light	point_light(t_point pos, t_color intensity)
 {
 	t_light	l;
@@ -102,14 +110,6 @@ t_light	point_light(t_point pos, t_color intensity)
 t_material	material()
 {
 	t_material	m;
-
-	m.color.r = 1;
-	m.color.g = 1;
-	m.color.b = 1;
-	m.ambient = 0.1;
-	
-	m.diffuse = 0.9;
-	m.specular = 0.9;
 	m.shininess = 200.0;
 	return (m);
 }

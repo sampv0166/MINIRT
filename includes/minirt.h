@@ -13,8 +13,8 @@
 # define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define EPSILON 0.00001
 # define	PI 4.0 * atan(1.0)
-# define HEIGHT 200
-# define WIDTH 200
+# define HEIGHT 500
+# define WIDTH 500
 //KEYS
 # define KEY_ESC 53
 # define TRUE 1

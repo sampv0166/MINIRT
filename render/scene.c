@@ -35,6 +35,95 @@ t_cy	*cylinder(t_cy *c)
 	return (cy);
 }
 
+void appply_transformations_to_sphere(t_shape *shp, t_sphere *sp)
+{
+	double	**translate;
+	double	**scale;
+	double	**transform;
+
+	translate = translation(tuple(sp->sp_center.x,sp->sp_center.y, sp->sp_center.z, 1));
+	scale = scaling(tuple (sp->radius, sp->radius, sp->radius, 1));
+	transform = matrix_multi(scale, translate);
+	free_2d_array(shp->transform, 4);
+	shp->transform = transform;
+	// set_transform(&shp, matrix_multi(shp.transform, translation(tuple(sp->sp_center.x,sp->sp_center.y,sp->sp_center.z,1))));
+	// set_transform(&shp, scaling(tuple(sp->radius, sp->radius,sp->radius, 1)));
+	free_2d_array(translate, 4);
+	free_2d_array(scale, 4);
+	//free_2d_array(transform, 4);
+}
+
+void construct_sphere_with_parsed_values(t_shape *shp, t_data *scene_data,t_sphere *sp)
+{
+	shp->shape = sp;
+	shp->material.ambient = scene_data->amb_ratio;
+	shp->material.color.r = sp->color.r/ 255;
+	shp->material.color.g = sp->color.g/ 255;
+	shp->material.color.b = sp->color.b/ 255;
+	shp->material.diffuse = 0.7;
+	shp->material.specular = 0.2;
+	shp->material.shininess = 200;
+	shp->shape_name = "sp";
+	shp->position = sp->sp_center;
+}
+
+
+void appply_transformations_to_plane(t_shape *shp, t_plane *pl)
+{
+	// I DID THE CHAINING TRANSFORRMATION LIKE THIS, IF U HAVE BETTER OPTIONS,
+	// PLEASE CHANGE IT.. BECAUSE IT INVLOVES MALLOC I HAD TO FIND A WAY TO FREE 
+	// THE MATRICES
+
+	double	**translate;
+	double	**transform;
+	double  **rotation;
+	
+	if (pl->norm_vec.x > 0)
+	{
+		rotation = rotation_x(pl->norm_vec.x);
+		transform = matrix_multi(shp->transform, rotation);
+		shp->transform = transform;
+		free_2d_array(rotation, 4);
+		free_2d_array(transform, 4);
+		rotation = rotation_y(pl->norm_vec.y);
+		transform = matrix_multi(shp->transform, rotation);
+		shp->transform = transform;
+		free_2d_array(rotation, 4);
+		free_2d_array(transform, 4);
+		rotation = rotation_z(pl->norm_vec.z);
+		transform = matrix_multi(shp->transform, rotation);
+		shp->transform = transform;
+		free_2d_array(rotation, 4);
+		free_2d_array(transform, 4);
+		shp->transform = transform;
+	}
+	
+	// if (pl->norm_vec.y > 0)
+	// {
+	// 	rotation = rotation_y(pl->norm_vec.y);
+	// 	transform = matrix_multi(shp->transform, rotation);
+	// 	free_2d_array(rotation, 4);
+	// 	free_2d_array(shp->transform, 4);
+	// 	shp->transform = transform;
+	// }
+
+	// if (pl->norm_vec.z > 0)
+	// {
+	// 	rotation = rotation_z(pl->norm_vec.z);
+	// 	transform = matrix_multi(shp->transform, rotation);
+	// 	free_2d_array(rotation, 4);
+	// 	free_2d_array(shp->transform, 4);
+	// 	shp->transform = transform;
+	// }
+
+	translate = translation(tuple(pl->xyz.x,pl->xyz.y,pl->xyz.z,1));
+	transform = matrix_multi( translate,shp->transform);
+	//exit(0);
+	free_2d_array(shp->transform, 4);
+	shp->transform = transform;
+	free_2d_array(translate, 4);
+}
+
 t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 {
 	t_shape shp;
@@ -45,37 +134,14 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 	shp.transform = identity_matrix();
 	if (!ft_strncmp(shape_name, "sp", 2))
 	{
-		double	**translate;
-		double	**scale;
-		double	**transform;
-
 		sp = (t_sphere *) shape;
-		shp.transform = identity_matrix();
-		shp.material = material();
-		shp.material.ambient = scene_data->amb_ratio;
-		shp.material.color.r = sp->color.r/ 255;
-		shp.material.color.g = sp->color.g/ 255;
-		shp.material.color.b = sp->color.b/ 255;
-		shp.material.diffuse = 0.7;
-		shp.material.specular = 0.2;
-		shp.shape = sphere(shape);
-		shp.shape_name = "sp";
-		shp.position = sp->sp_center;
-		
-		translate = translation(tuple( sp->sp_center.x,
-		sp->sp_center.y, sp->sp_center.z, 1));
-		scale = scaling( tuple (sp->radius, sp->radius, sp->radius, 1));
-
-		transform = matrix_multi(scale, translate);
-		shp.transform = transform;
-		// set_transform(&shp, matrix_multi(shp.transform, translation(tuple(sp->sp_center.x,sp->sp_center.y,sp->sp_center.z,1))));
-		// set_transform(&shp, scaling(tuple(sp->radius, sp->radius,sp->radius, 1)));
+		construct_sphere_with_parsed_values(&shp, scene_data, sp);
+		appply_transformations_to_sphere(&shp, sp);
 	}
 	if (!ft_strncmp(shape_name, "pl", 2))
 	{
 		pl = (t_plane *) shape;
 		shp.material = material();
-		shp.transform = identity_matrix();
 		shp.material.ambient = scene_data->amb_ratio;
 		shp.material.color.r = pl->color.r/ 255;
 		shp.material.color.g = pl->color.g/ 255;
@@ -86,22 +152,14 @@ t_shape create_shape(char *shape_name, void *shape,t_data *scene_data)
 		shp.shape_name = "pl";
 		shp.position = pl->xyz;
 		shp.norm_vector = pl->norm_vec;
-		if (pl->norm_vec.x != 0)
-			shp.transform = rotation_x(pl->norm_vec.x);
-		if (pl->norm_vec.y != 0)
-			set_transform(&shp, matrix_multi(shp.transform , rotation_y(pl->norm_vec.y)));
-		if (pl->norm_vec.z != 0)
-			set_transform(&shp, matrix_multi(shp.transform, rotation_z(pl->norm_vec.z)));
-		
-		set_transform(&shp, matrix_multi(shp.transform, translation(tuple(pl->xyz.x,pl->xyz.y,pl->xyz.z,1))));
-	
+
+		appply_transformations_to_plane(&shp, pl);
 	}
 	if (!ft_strncmp(shape_name, "cy", 2))
 	{
 		cy = (t_cy *) shape;
 		
 		shp.material = material();
-		shp.transform = identity_matrix();
 		shp.material.ambient = scene_data->amb_ratio;
 		shp.material.color.r = cy->color.r / 255;
 		shp.material.color.g = cy->color.g / 255;
@@ -206,9 +264,7 @@ t_world	default_world(t_data *scene_data)
 
 t_intersect	intersect(t_shape s, t_ray r)
 {
-	//t_ray local_ray;
 	double **invrs;
-
 
 	invrs = inverse(s.transform, 4);
 	s.ray_in_obj_space = transform(r, invrs);
@@ -219,10 +275,8 @@ t_intersect	intersect(t_shape s, t_ray r)
 		return(local_intersect_plane(s.ray_in_obj_space));
 	else if (!ft_strncmp(s.shape_name, "cy",2))
 		return(local_intersect_cylinder(s.shape ,s.ray_in_obj_space));
-	
 	return (local_intersect_sphere(s.ray_in_obj_space));		
 }
-
 
 t_intersection	*intersect_world(t_world w, t_ray r)
 {
