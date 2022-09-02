@@ -125,8 +125,10 @@ int main (int argc, char **argv) {
     parse_scene(argv[1], &scene_data);
     // !UNCOMMMENT THIS AFTER
     setup_mlx(&scene_data);
+    
     w = default_world(&scene_data);
-    //exit(0);
+    exit(0);
+  
     w.shape_count = scene_data.total_shape_count;
     c = camera(HEIGHT, WIDTH , (scene_data.camera.fov * (PI/180)));
 	from = scene_data.camera.pos;

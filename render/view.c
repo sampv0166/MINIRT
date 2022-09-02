@@ -64,6 +64,7 @@ void free_2d_array(double **arr, int size)
 	//free(arr);
 }
 
+// !REDUCE TO 25 LINES  - IMRAN
 t_ray	ray_for_pixel(t_camera2 camera, double x, double y)
 {
 	double		xoffset;

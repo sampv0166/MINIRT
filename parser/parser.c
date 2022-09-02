@@ -58,6 +58,8 @@ static int check_file_name(char *file_name)
 //     return (0);
 // }
 
+
+// !REDUCE TO 25 LINES  - SAMAD
 static void parse_current_line(char *line, t_data *scene_data)
 {
     char **info_split;

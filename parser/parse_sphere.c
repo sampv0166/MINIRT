@@ -16,6 +16,7 @@ static int verify_digits( char **pnt_split, char **color_split ,char **info)
     return(1);
 }
 
+// !REDUCE TO 25 LINES  - SAMAD
 void parse_sphere(char **info, t_data *scene_data)
 {
     t_list *new;

@@ -38,6 +38,7 @@ static int verify_digits(char **nrm_vec_split, char **pnt_split, char **color_sp
     return(1);
 }
 
+// !REDUCE TO 25 LINES  - SAMAD
 void parse_cylinder(char **info, t_data *scene_data)
 {
     char **point_split;

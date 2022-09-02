@@ -33,6 +33,7 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     ft_lstadd_back(&scene_data->plane_list, new);
 }
 
+// !REDUCE TO 25 LINES  - SAMAD
 void parse_plane(char **info, t_data *scene_data)
 {
     char **point_split;

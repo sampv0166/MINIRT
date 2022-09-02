@@ -19,6 +19,8 @@ static int verify_digits(char **pnt_split, char **color_split ,char **info, t_da
     return(1);
 }
 
+
+// !REDUCE TO 25 LINES  - SAMAD
 void parse_light(char **info, t_data *scene_data)
 {
     char **point_split;
