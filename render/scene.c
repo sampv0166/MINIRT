@@ -309,51 +309,47 @@ t_intersect	intersect(t_shape s, t_ray r)
 	return (local_intersect_sphere(s.ray_in_obj_space));		
 }
 
+
+// return all intersection for the ray
 t_intersection	*intersect_world(t_world w, t_ray r)
 {
-	t_intersection	*xs;
-	t_intersect		inter1;
-
+	t_list *xs;
+	t_list *temp;
+	t_intersect inter;
+	t_intersection *intersection1;
+	t_intersection *intersection2;
 	int i;
 	int count;
-	xs = NULL;
+
 	i = 0;
 	count = 0;
 	while (i < w.shape_count)
 	{
-		inter1 = intersect(w.s[i], r);
-		if (inter1.count > 0)
+		inter = intersect(w.s[i], r);
+		if (inter.count > 0)
 		{
-			if (count == 0)
+			intersection1 = malloc (sizeof (t_intersection));
+			intersection2 = malloc (sizeof (t_intersection));
+
+			intersection1->object = w.s[i];
+			intersection1->t = inter.t[0];
+
+			intersection2->object = w.s[i];
+			intersection2->t = inter.t[1];
+			if (i == 0)
 			{
-				xs = malloc (sizeof(t_intersection) * (2));
-				xs[0] = intersection(inter1.t[0],w.s[i], count + 2 );
-				xs[1] = intersection(inter1.t[1],w.s[i], count + 2 );
-				count += 2;
+				xs = ft_lstnew(intersection1);
+				ft_lstadd_back(xs, ft_lstnew(intersection2));
 			}
 			else
 			{
-				t_intersection *tmp;
-				tmp = malloc (sizeof(t_intersection) * (count + 2));
-				int j;
-				j = 0;
-				while (j < count)
-				{
-					tmp[j] = xs[j];
-					tmp[j].count = count + 2;
-					j++;
-				}
-				j = count ;
-				tmp[j++] = intersection(inter1.t[0],w.s[i], count + 2);
-				tmp[j++] = intersection(inter1.t[1],w.s[i], count + 2);
-				count += 2;
-				free(xs);
-				xs = tmp;
+				ft_lstadd_back(xs, ft_lstnew(intersection1));
+				ft_lstadd_back(xs, ft_lstnew(intersection2));
 			}
+			count = count + inter.count;
 		}
 		i++;
 	}
-	return (xs);
 }
 
 t_comps	prepare_computations(t_intersection i, t_ray r)
