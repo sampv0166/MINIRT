@@ -314,6 +314,7 @@ t_intersection	hit(t_intersection *xs)
 	{
 		sort_intersections(xs);
 		while (xs && i < xs[i].count)
+		
 		{
 			if (xs[i].t > 0.0)
 				return(xs[i]);
