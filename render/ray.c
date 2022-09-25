@@ -259,29 +259,58 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2)
 	return (ret);
 }
 
-void	sort_intersections(t_intersection *xs)
+void	sort_intersections(t_list *xs)
 {
-	int				i;
-	int				j;
-	t_intersection	a;
-
-	i = 0;
-	// printf("count : %d\n", xs[0].count);
-	while (xs && i < xs[0].count)
+	t_list *temp1;
+	t_list *temp2;
+	temp1 = xs;
+	temp2 = xs;
+	t_intersection *intersection1;
+	t_intersection *intersection2;
+	t_intersection *tempinter;
+	while (temp1)
 	{
-		j = i + 1;
-		while (j < xs[0].count)
+		intersection1 = temp1->content;
+		temp2 = xs;
+		while(temp2)
 		{
-			if (xs[i].t > xs[j].t)
+			intersection2 = temp2->content;
+			if (intersection1->t > intersection2->t)
 			{
-				a = xs[i];
-				xs[i] = xs[j];
-				xs[j] = a;
+				tempinter = intersection1;
+				intersection1 = intersection2;
+				intersection2 = tempinter; 
 			}
-			j++;
+			temp2 = temp2->next;
 		}
-		i++;
+		temp1= temp1->next ;
 	}
+	// int				i;
+	// int				j;
+	// t_intersection	*a;
+
+	// i = 0;
+	// a = xs->content;
+	// // printf("count : %d\n", xs[0].count);
+	// while (xs && i < a->count)
+	// {
+	// 	j = i + 1;
+	// 	while (j < a->count)
+	// 	{
+	// 		if (xs[i].t > xs[j].t)
+	// 		{
+	// 			a = xs[i];
+	// 			xs[i] = xs[j];
+	// 			xs[j] = a;
+	// 		}
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+
+
+
+
 }
 
 t_intersection	*intersections2(int n, ...)
@@ -304,28 +333,31 @@ t_intersection	*intersections2(int n, ...)
 	return (ret);
 }
 
-t_intersection	hit(t_intersection *xs)
+t_intersection	hit(t_list *xs)
 {
 	int				i;
-	t_intersection	inter;
+	t_intersection	*inter;
+	t_intersection	inter2;
+	t_list *temp;
+
+	temp  = xs;
 
 	i = 0;
 	if (xs)
 	{
 		sort_intersections(xs);
-		while (xs && i < xs[i].count)
-		
+		while (temp)
 		{
-			if (xs[i].t > 0.0)
-				return(xs[i]);
+			inter = temp->content;
+			if (inter->t > 0.0)
+				return(*inter);
 			i++;
+			temp = temp->next;
 		}
-	}
-	//printf("\nitss here\n");
-	inter.count = 0;
-	inter.t = 0;
-	//inter.object = xs->object;
-	return (inter);
+	}	
+	inter2.count = 0;
+	inter2.t = 0;
+	return (inter2);
 }
 
 t_ray	transform(t_ray r, double **m)

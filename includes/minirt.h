@@ -387,7 +387,7 @@ t_intersect	intersect(t_shape s, t_ray r);
 t_intersection	intersection(double value, t_shape object, int count);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);
 t_intersection	*intersections2(int n, ...);
-t_intersection	hit(t_intersection *xs);
+t_intersection	hit(t_list *xs);
 t_ray		transform(t_ray r, double **m);
 void		set_transform(t_shape *s, double **t);
 t_vector		normal_at(t_shape s, t_point p);
@@ -401,13 +401,13 @@ t_color		lighting(t_material m, t_light l, t_point pos,
 	t_vector eyev, t_vector normalv, t_bool in_shadow);
 t_world		world(void);
 t_world		default_world(t_data *scene_data);
-t_intersection	*intersect_world(t_world w, t_ray r);
+t_list	*intersect_world(t_world w, t_ray r);
 t_comps	prepare_computations(t_intersection i, t_ray r);
 t_color	shade_hit(t_world w, t_comps comps);
 t_color	color_at(t_world w, t_ray r);
 
 //Utility
-void	sort_intersections(t_intersection *xs);
+void	sort_intersections(t_list *xs);
 
 //View transformation
 double	**view_transform(t_point from, t_point to, t_vector up);

@@ -311,10 +311,10 @@ t_intersect	intersect(t_shape s, t_ray r)
 
 
 // return all intersection for the ray
-t_intersection	*intersect_world(t_world w, t_ray r)
+t_list	*intersect_world(t_world w, t_ray r)
 {
 	t_list *xs;
-	t_list *temp;
+	
 	t_intersect inter;
 	t_intersection *intersection1;
 	t_intersection *intersection2;
@@ -323,6 +323,8 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 
 	i = 0;
 	count = 0;
+	xs = NULL;
+		
 	while (i < w.shape_count)
 	{
 		inter = intersect(w.s[i], r);
@@ -339,17 +341,36 @@ t_intersection	*intersect_world(t_world w, t_ray r)
 			if (i == 0)
 			{
 				xs = ft_lstnew(intersection1);
-				ft_lstadd_back(xs, ft_lstnew(intersection2));
+				ft_lstadd_back(&xs, ft_lstnew(intersection2));
 			}
 			else
 			{
-				ft_lstadd_back(xs, ft_lstnew(intersection1));
-				ft_lstadd_back(xs, ft_lstnew(intersection2));
+				ft_lstadd_back(&xs, ft_lstnew(intersection1));
+				ft_lstadd_back(&xs, ft_lstnew(intersection2));
 			}
+			// intersection1 = (t_intersection *) xs->content;
+			// printf("\n%f\n",intersection1->t);
+			// intersection1 = (t_intersection *) xs->next->content;
+			// printf("\n%f\n",intersection1->t);
+			// 	printf("\n%f\n",intersection1->t);
 			count = count + inter.count;
 		}
 		i++;
 	}
+
+	t_list *lst;
+	lst = xs;
+
+	while (lst)
+	{
+		intersection1 = (t_intersection *) lst->content;
+		// printf("%d" , intersection1->count);  
+		intersection1->count = count;
+		lst = lst->next;
+	}
+	
+	// exit(0);
+	return (xs);
 }
 
 t_comps	prepare_computations(t_intersection i, t_ray r)
@@ -387,19 +408,21 @@ t_color	shade_hit(t_world w, t_comps comps)
 
 t_color	color_at(t_world w, t_ray r)
 {
-	t_intersection	*i;
+	t_list	*i;
 	t_intersection	h;
 	t_comps			comps;
 
 	i = intersect_world(w, r);
+
+	 
 	h = hit(i);
-	//printf("\n%f\n", h.t);
 	if (h.count == 0)
 	{
 		free(i);
 		return (color(0, 0, 0));
 	}
 	comps = prepare_computations(h, r);
+		
 	free(i);
 	return (shade_hit(w, comps));
 }

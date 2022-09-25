@@ -6,15 +6,17 @@ t_bool	is_shadowed(t_world w, t_point p)
 	double			distance;
 	t_vector		direction;
 	t_ray			r;
-	t_intersection	*xs;
+	t_list	*xs;
 	t_intersection	h;
 
+	xs = NULL;
 	v = subtract_points(w.l.pos, p);
 	distance = magnitude(v);
 	direction = normalize(v);
 	r = ray(p, direction);
 	xs = intersect_world(w, r);
 	h = hit(xs);
+	 
 	if (xs)
 	{
 		if (h.t && h.t < distance)
